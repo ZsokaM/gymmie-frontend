@@ -30,11 +30,16 @@ function MyApp({ Component, pageProps, apollo }) {
 // withData, then we are going to wait and fetch it - this is for Apollo/Nextjs setup
 MyApp.getInitialProps = async function ({ Component, ctx }) {
   let pageProps = {};
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
+  try{
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+    pageProps.query = ctx.query;
+    return { pageProps };
+  } catch(err){
+    console.log(err)
   }
-  pageProps.query = ctx.query;
-  return { pageProps };
+  
 };
 
 export default withData(MyApp);
