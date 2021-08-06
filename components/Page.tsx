@@ -85,9 +85,8 @@ const GlobalStyles = createGlobalStyle`
 `
 
 const InnerStyles = styled.div`
-  max-width: var(--maxWidth);
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
 `
 
 const lightTheme = {
