@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
-import Header from './Header'
+import Header from './Navigation/Header'
+import Sidebar from './Navigation/Sidebar'
 
 export default function Page({ children }) {
-  const [theme, setTheme] = useState('light')
-  const themeMode = theme === 'light' ? 'dark' : 'light'
+  const [theme, setTheme] = useState('dark')
+  const [isOpen, setIsOpen] = useState(false)
 
+  //theme related
+  const themeMode = theme === 'light' ? 'dark' : 'light'
   const toggleTheme = () => {
     localStorage.setItem('theme', themeMode)
     setTheme(themeMode)
@@ -16,14 +19,19 @@ export default function Page({ children }) {
     localTheme && setTheme(localTheme)
   }, [])
 
+  //navigation sidebar related
+  const toggleSidebar = () => {
+    setIsOpen((prevState) => !prevState)
+  }
   return (
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <Header />
+        <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
+        <Header toggle={toggleSidebar} />
         <InnerStyles>
-          <button onClick={toggleTheme}>Light/Dark</button>
           {children}
+          <button onClick={toggleTheme}>Light/Dark</button>
         </InnerStyles>
       </ThemeProvider>
     </>
@@ -64,12 +72,11 @@ const GlobalStyles = createGlobalStyle`
 
   a{
     text-decoration: none;
-    color: ${({ theme }) => theme.text.secondary};
+    color: ${({ theme }) => theme.text.primary};
   }
 
   a:hover{
-    text-decoration: underline;
-    color: ${({ theme }) => theme.text.tertiary};
+    text-decoration: none
   }
 
   button {
@@ -93,7 +100,7 @@ const lightTheme = {
   text: {
     primary: '#0C0032',
     secondary: '#190061',
-    ternary: '#240090',
+    tertiary: '#240090',
     quarternary: '#3500d3',
   },
 }
@@ -107,8 +114,8 @@ const darkTheme = {
   },
   text: {
     primary: '#ffffff',
-    secondary: '#7ed0e1',
-    tertiary: '#f5f5f5',
+    secondary: '#3500d3',
+    tertiary: '#7ed0e1',
     quarternary: '#525560',
   },
 }
