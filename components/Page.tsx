@@ -59,7 +59,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     font-size: 1.5rem;
     line-height: 1;
-    background-color: ${({ theme }) => theme.bg.primary};;
+    background-color: ${({ theme }) => theme.bg.primary};
   }
 
   a{
