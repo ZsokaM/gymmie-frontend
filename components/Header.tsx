@@ -24,9 +24,10 @@ const Logo = styled.h1`
 
 const HeaderStyles = styled.header`
   .navbar {
-    border-bottom: 3px solid var(--darkest-color);
+    border-bottom: 3px solid ${({ theme }) => theme.bg.quarternary};
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: ${({ theme }) => theme.bg.primary};
   }
 `;
