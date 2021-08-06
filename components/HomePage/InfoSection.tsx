@@ -99,7 +99,7 @@ const ImgWrap = styled.div`
 `
 
 const Img = styled.img`
-  width: 50%;
+  width: 60%;
   margin: 0 0 10px 0;
   padding-right: 0;
 `

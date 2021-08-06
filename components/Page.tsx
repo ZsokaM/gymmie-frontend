@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import Footer from './Footer'
 import Header from './Navigation/Header'
 import Sidebar from './Navigation/Sidebar'
 
@@ -29,10 +30,8 @@ export default function Page({ children }) {
         <GlobalStyles />
         <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
         <Header toggle={toggleSidebar} />
-        <InnerStyles>
-          {children}
-          <button onClick={toggleTheme}>Light/Dark</button>
-        </InnerStyles>
+        <InnerStyles>{children}</InnerStyles>
+        <Footer toggleTheme={toggleTheme} />
       </ThemeProvider>
     </>
   )

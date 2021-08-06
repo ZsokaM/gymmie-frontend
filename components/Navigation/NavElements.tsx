@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
 
+//add conditions, if on home page use links ad scroll links, otherwise use them as links to components
 export default function NavElements() {
   return (
     <>
