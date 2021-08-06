@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from "react";
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import Header from './Header';
+import React, { useState, useEffect } from 'react'
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import Header from './Header'
 
 export default function Page({ children }) {
-  const [theme, setTheme] = useState('light');
-  const themeMode = theme === "light" ? "dark" : "light";
+  const [theme, setTheme] = useState('light')
+  const themeMode = theme === 'light' ? 'dark' : 'light'
 
   const toggleTheme = () => {
-    localStorage.setItem("theme", themeMode); 
-    setTheme(themeMode);
-  };
+    localStorage.setItem('theme', themeMode)
+    setTheme(themeMode)
+  }
 
   useEffect(() => {
-    const localTheme = localStorage.getItem("theme");
-    localTheme && setTheme(localTheme);
-  }, []);
+    const localTheme = localStorage.getItem('theme')
+    localTheme && setTheme(localTheme)
+  }, [])
 
   return (
     <>
-      <ThemeProvider theme={theme == 'light' ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-          <Header />
-          <InnerStyles>
-            <button onClick={toggleTheme}>Light/Dark</button>
-            {children}
-          </InnerStyles>
+        <Header />
+        <InnerStyles>
+          <button onClick={toggleTheme}>Light/Dark</button>
+          {children}
+        </InnerStyles>
       </ThemeProvider>
-
     </>
-  );
+  )
 }
 
 const GlobalStyles = createGlobalStyle`
@@ -76,13 +75,13 @@ const GlobalStyles = createGlobalStyle`
   button {
     font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
-`;
+`
 
 const InnerStyles = styled.div`
   max-width: var(--maxWidth);
   margin: 0 auto;
   padding: 2rem;
-`;
+`
 
 const lightTheme = {
   bg: {
@@ -95,8 +94,8 @@ const lightTheme = {
     primary: '#0C0032',
     secondary: '#190061',
     ternary: '#240090',
-    quarternary: '#3500d3'
-}
+    quarternary: '#3500d3',
+  },
 }
 
 const darkTheme = {
@@ -104,12 +103,12 @@ const darkTheme = {
     primary: '#0C0032',
     secondary: '#190061',
     tertiary: '#240090',
-    quarternary: '#3500d3'
+    quarternary: '#3500d3',
   },
   text: {
     primary: '#ffffff',
     secondary: '#7ed0e1',
     tertiary: '#f5f5f5',
     quarternary: '#525560',
-}
+  },
 }
