@@ -15,6 +15,7 @@ export default function NavElements() {
       <Link href="/login">Login</Link>
       <Link href="/signup">Sign up</Link>
       <Link href="/account">Account</Link>
+      <Link href="/admin">Admin</Link>
       <ScrollLink to="contact" smooth duration={500} spy exact offset={-80}>
         Contact Us
       </ScrollLink>
