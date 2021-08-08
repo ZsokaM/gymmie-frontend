@@ -7,3 +7,6 @@ node_modules/
 .next
 .vscode
 .next/**/*
+
+config.ts
+next-env.d.ts
