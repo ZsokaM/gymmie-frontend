@@ -46,7 +46,7 @@ export default function CreateClass() {
     day: '',
     startTime: '8',
     teacher: '',
-    duration: '60 min',
+    duration: 60,
   })
 
   //function that fires the mutations and what we get back from it
