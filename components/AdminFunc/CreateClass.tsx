@@ -3,14 +3,15 @@ import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import useForm from '../FormElements/useForm'
-import getWeek from '../../lib/getWeek'
+import { getWeek, days, classHours } from '../../lib/dateHelpers'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
   mutation CREATE_SPORTCLASS_MUTATION(
     $name: String!
     $freeSpots: Int!
-    $status: String!
+    $available: Boolean
+    $year: Int!
     $week: Int!
     $day: String!
     $startTime: String!
@@ -21,7 +22,8 @@ const CREATE_SPORTCLASS_MUTATION = gql`
       data: {
         name: $name
         freeSpots: $freeSpots
-        status: $status
+        available: $available
+        year: $year
         week: $week
         day: $day
         startTime: $startTime
@@ -38,10 +40,11 @@ export default function CreateClass() {
   const { inputs, handleChange, clearForm } = useForm({
     name: '',
     freeSpots: 10,
-    status: 'AVAILABLE',
+    available: true,
+    year: new Date().getFullYear(),
     week: getWeek(),
     day: '',
-    startTime: '08:00',
+    startTime: '8',
     teacher: '',
     duration: '60 min',
   })
@@ -92,25 +95,25 @@ export default function CreateClass() {
         </label>
         <div>
           <input
-            type="radio"
-            id="status"
-            name="status"
+            type="checkbox"
+            id="available"
+            name="available"
             onChange={handleChange}
-            value="AVAILABLE"
-            required
+            value={inputs.available}
           />
-          <label htmlFor="status">Available</label>
-          <input
-            type="radio"
-            id="status"
-            name="status"
-            onChange={handleChange}
-            value="NOT AVAILABLE"
-            required
-          />
-          <label htmlFor="status">Not available</label>
+          <label htmlFor="available">Available</label>
         </div>
-
+        <label htmlFor="year">
+          Year:
+          <input
+            type="number"
+            id="year"
+            name="year"
+            value={inputs.year}
+            onChange={handleChange}
+            required
+          />
+        </label>
         <label htmlFor="week">
           Week of the Year
           <input
@@ -126,13 +129,11 @@ export default function CreateClass() {
           Day
           <select id="day" name="day" onChange={handleChange} required>
             <option value="">-- Pick one --</option>
-            <option value="Monday">Monday</option>
-            <option value="Tuesday">Tuesday</option>
-            <option value="Wednesday">Wednesday</option>
-            <option value="Thursday">Thursday</option>
-            <option value="Friday">Friday</option>
-            <option value="Saturday">Saturday</option>
-            <option value="Sunday">Sunday</option>
+            {days.map((d, idx) => (
+              <option key={idx} value={idx}>
+                {d}
+              </option>
+            ))}
           </select>
         </label>
         <label htmlFor="startTime">
@@ -144,25 +145,21 @@ export default function CreateClass() {
             required
           >
             <option value="">-- Pick one --</option>
-            <option value="08:00">08:00</option>
-            <option value="09:00">09:00</option>
-            <option value="10:00">10:00</option>
-            <option value="11:00">11:00</option>
-            <option value="12:00">12:00</option>
-            <option value="13:00">13:00</option>
-            <option value="14:00">14:00</option>
-            <option value="15:00">15:00</option>
-            <option value="16:00">16:00</option>
-            <option value="17:00">17:00</option>
-            <option value="18:00">18:00</option>
-            <option value="19:00">19:00</option>
-            <option value="20:00">20:00</option>
+            {classHours().map((h) => (
+              <option value={h.toString()}>{h}</option>
+            ))}
           </select>
         </label>
         {/* todo if there's time: add teacher schema and use map for options, add CRUD */}
         <label htmlFor="teacher">
           Teacher
-          <select id="teacher" name="teacher" onChange={handleChange} required>
+          <select
+            id="teacher"
+            name="teacher"
+            onChange={handleChange}
+            value={inputs.teacher}
+            required
+          >
             <option value="">-- Pick one --</option>
             <option value="Sam">Sam</option>
             <option value="Michael">Michael</option>
@@ -181,8 +178,8 @@ export default function CreateClass() {
             required
           >
             <option value="">-- Pick one --</option>
-            <option value="45 min">45 min</option>
-            <option value="60 min">60 min</option>
+            <option value="45">45 min</option>
+            <option value="60">60 min</option>
           </select>
         </label>
 

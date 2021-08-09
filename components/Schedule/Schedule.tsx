@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
-import getWeek from '../../lib/getWeek'
+import { getWeek } from '../../lib/dateHelpers'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -11,7 +11,7 @@ export const ALL_CLASSES_QUERY = gql`
       id
       name
       freeSpots
-      status
+      available
       week
       day
       startTime
@@ -32,11 +32,11 @@ export default function Schedule() {
     setWeek(getWeek())
   }, [])
 
-  const FilterClassToDay = (dayName) => {
+  const FilterClassToDay = (dayNumber) => {
     return data.allSportClasses
       .filter(
         (sportClass) =>
-          (sportClass.week === week && sportClass.day) === dayName,
+          sportClass.week === week && sportClass.day === dayNumber.toString(),
       )
       .map((sportClass) => (
         <SportClassCard key={sportClass.id} classData={sportClass} />
@@ -63,13 +63,13 @@ export default function Schedule() {
         </TableHeader>
         <tbody>
           <TableRow>
-            <TableField>{FilterClassToDay('Monday')}</TableField>
-            <TableField>{FilterClassToDay('Tuesday')}</TableField>
-            <TableField>{FilterClassToDay('Wednesday')}</TableField>
-            <TableField>{FilterClassToDay('Thursday')}</TableField>
-            <TableField>{FilterClassToDay('Friday')}</TableField>
-            <TableField>{FilterClassToDay('Saturday')}</TableField>
-            <TableField>{FilterClassToDay('Sunday')}</TableField>
+            <TableField>{FilterClassToDay(1)}</TableField>
+            <TableField>{FilterClassToDay(2)}</TableField>
+            <TableField>{FilterClassToDay(3)}</TableField>
+            <TableField>{FilterClassToDay(4)}</TableField>
+            <TableField>{FilterClassToDay(5)}</TableField>
+            <TableField>{FilterClassToDay(6)}</TableField>
+            <TableField>{FilterClassToDay(7)}</TableField>
           </TableRow>
         </tbody>
       </TableContainer>

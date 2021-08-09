@@ -4,9 +4,13 @@ export default function SportClassCard({ classData }) {
   return (
     <ClassCardContainer>
       <div>{classData.name}</div>
-      <div>{classData.startTime}</div>
+      <div>
+        {classData.startTime < 12
+          ? classData.startTime + 'AM'
+          : classData.startTime + 'PM'}
+      </div>
       <div>{classData.teacher}</div>
-      <div>{classData.duration}</div>
+      <div>{classData.duration} min</div>
     </ClassCardContainer>
   )
 }
@@ -20,9 +24,9 @@ const ClassCardContainer = styled.div`
   background-color: lightcoral;
   margin: 5px;
   box-shadow: 3px 3px 2px 1px lightblue;
+  transition: transform 0.2s ease-in-out;
   &:hover {
     transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
     cursor: pointer;
   }
 `
