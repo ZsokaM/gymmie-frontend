@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import useForm from '../FormElements/useForm'
-import getWeek from '../../lib/getWeek'
+import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/client'
+import useForm from '../FormElements/useForm'
+import getWeek from '../../lib/getWeek'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
@@ -90,14 +90,27 @@ export default function CreateClass() {
             required
           />
         </label>
-        <label htmlFor="status">
-          Status
-          <select id="status" name="status" onChange={handleChange} required>
-            <option value="">-- Pick one --</option>
-            <option value="AVAILABLE">Available</option>
-            <option value="NOT AVAILABLE">Not available</option>
-          </select>
-        </label>
+        <div>
+          <input
+            type="radio"
+            id="status"
+            name="status"
+            onChange={handleChange}
+            value="AVAILABLE"
+            required
+          />
+          <label htmlFor="status">Available</label>
+          <input
+            type="radio"
+            id="status"
+            name="status"
+            onChange={handleChange}
+            value="NOT AVAILABLE"
+            required
+          />
+          <label htmlFor="status">Not available</label>
+        </div>
+
         <label htmlFor="week">
           Week of the Year
           <input

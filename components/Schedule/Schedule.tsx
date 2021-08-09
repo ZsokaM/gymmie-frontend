@@ -38,7 +38,9 @@ export default function Schedule() {
         (sportClass) =>
           (sportClass.week === week && sportClass.day) === dayName,
       )
-      .map((sportClass) => <SportClassCard classData={sportClass} />)
+      .map((sportClass) => (
+        <SportClassCard key={sportClass.id} classData={sportClass} />
+      ))
   }
 
   return (

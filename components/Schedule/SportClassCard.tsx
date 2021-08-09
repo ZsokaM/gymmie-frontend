@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export default function SportClassCard({ classData }) {
   return (
-    <ClassCardContainer key={classData.id}>
+    <ClassCardContainer>
       <div>{classData.name}</div>
       <div>{classData.startTime}</div>
       <div>{classData.teacher}</div>
