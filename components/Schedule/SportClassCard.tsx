@@ -5,9 +5,7 @@ export default function SportClassCard({ classData }) {
     <ClassCardContainer>
       <div>{classData.name}</div>
       <div>
-        {classData.startTime < 12
-          ? classData.startTime + 'AM'
-          : classData.startTime + 'PM'}
+        {classData.startTime} {classData.startTime < 12 ? 'AM' : 'PM'}
       </div>
       <div>{classData.teacher}</div>
       <div>{classData.duration} min</div>
