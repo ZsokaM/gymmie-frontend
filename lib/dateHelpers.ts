@@ -1,4 +1,4 @@
-export const days = [
+export const weekDayNames = [
   'monday',
   'tuesday',
   'wednesday',
@@ -8,9 +8,11 @@ export const days = [
   'sunday',
 ]
 
+const firstClass = 8
+const lastClass = 20
 export function classHours() {
   let hoursArray = []
-  for (let i = 8; i <= 20; i++) {
+  for (let i = firstClass; i <= lastClass; i++) {
     hoursArray.push(i + 0.5)
   }
   return hoursArray

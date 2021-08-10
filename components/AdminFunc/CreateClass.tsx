@@ -1,9 +1,8 @@
-import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import useForm from '../FormElements/useForm'
-import { getWeek, days, classHours } from '../../lib/dateHelpers'
+import { getWeek, weekDayNames, classHours } from '../../lib/dateHelpers'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
@@ -129,9 +128,9 @@ export default function CreateClass() {
           Day
           <select id="day" name="day" onChange={handleChange} required>
             <option value="">-- Pick one --</option>
-            {days.map((d, idx) => (
-              <option key={idx} value={idx}>
-                {d}
+            {weekDayNames.map((weekday, idx) => (
+              <option key={weekday} value={weekDayNames[idx]}>
+                {weekday}
               </option>
             ))}
           </select>
@@ -145,8 +144,8 @@ export default function CreateClass() {
             required
           >
             <option value="">-- Pick one --</option>
-            {classHours().map((h) => (
-              <option value={h.toString()}>{h}</option>
+            {classHours().map((hour) => (
+              <option value={hour.toString()}>{hour}</option>
             ))}
           </select>
         </label>
