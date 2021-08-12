@@ -41,7 +41,7 @@ const CREATE_SPORTCLASS_MUTATION = gql`
 `
 
 export default function CreateClass() {
-  const { inputs, handleChange, clearForm } = useForm({
+  const { inputs, handleChange, clearForm, resetForm } = useForm({
     name: '',
     freeSpots: 10,
     available: true,
@@ -67,6 +67,7 @@ export default function CreateClass() {
 
     await createSportClass()
     clearForm()
+    resetForm()
   }
 
   //todo: export form elements into separate reusable components + style

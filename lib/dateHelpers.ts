@@ -28,3 +28,9 @@ export function getWeek() {
 }
 
 export const currentYear = new Date().getFullYear()
+
+export function decimalToTime(decimal) {
+  const min = Math.floor(Math.abs(decimal))
+  const sec = Math.floor((Math.abs(decimal) * 60) % 60)
+  return (min < 10 ? '0' : '') + min + ':' + (sec < 10 ? '0' : '') + sec
+}

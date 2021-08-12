@@ -23,23 +23,29 @@ export const ALL_CLASSES_QUERY = gql`
 `
 
 export default function Schedule() {
-  const [weekOfTheYear, setWeekOfTheYear] = useState(0)
+  const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
+  const [weekToDisplay, setWeekToDisplay] = useState(currentWeekOfTheYear)
 
   //todo: adjust dependency to update when pagination buttons are hit
-  useEffect(() => {
-    setWeekOfTheYear(getWeek())
-  }, [])
+  // useEffect(() => {
+  //   setCurrentWeekOfTheYear(getWeek())
+  // }, [])
 
   let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
+  const changeWeek = (direction) => {
+    direction === 'previous'
+      ? setWeekToDisplay((prevState) => prevState - 1)
+      : setWeekToDisplay((prevState) => prevState + 1)
+  }
   const FilterClassToDay = (dayNumber) => {
     return data.allSportClasses
       .filter(
         (sportClass) =>
           sportClass.year === currentYear &&
-          sportClass.week === weekOfTheYear &&
+          sportClass.week === weekToDisplay &&
           sportClass.day === dayNumber,
       )
       .map((sportClass) => (
@@ -49,10 +55,23 @@ export default function Schedule() {
 
   return (
     <>
-      <div>{getWeek()}</div>
+      <div>{currentWeekOfTheYear}</div>
+      <div>{weekToDisplay}</div>
       {/* todo: add functionality to buttons */}
-      <button>Previous Week</button>
-      <button>Next Week</button>
+      <button
+        type="button"
+        onClick={() => changeWeek('previous')}
+        disabled={weekToDisplay < currentWeekOfTheYear - 1}
+      >
+        Previous Week
+      </button>
+      <button
+        type="button"
+        onClick={() => changeWeek('next')}
+        disabled={weekToDisplay > currentWeekOfTheYear + 1}
+      >
+        Next Week
+      </button>
       <TableContainer>
         <TableHeader>
           <tr>

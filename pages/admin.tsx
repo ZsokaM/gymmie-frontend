@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import Head from 'next/head'
 import CreateClass from '../components/AdminFunc/CreateClass'
 import UpdateClass from '../components/AdminFunc/UpdateClass'
+import AllClasses from '../components/AdminFunc/AllClasses'
 
 export default function admin({ query }) {
   return (
@@ -19,6 +20,7 @@ export default function admin({ query }) {
           <UpdateClass id={query.id} />
         </section>
       </Wrapper>
+      <AllClasses />
     </>
   )
 }
