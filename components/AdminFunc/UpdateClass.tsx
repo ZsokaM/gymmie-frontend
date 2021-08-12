@@ -1,12 +1,29 @@
-import { useMutation } from '@apollo/client'
-import styled from 'styled-components'
 import gql from 'graphql-tag'
+import { useMutation, useQuery } from '@apollo/client'
+import styled from 'styled-components'
 import useForm from '../FormElements/useForm'
-import { getWeek, weekDayNames, classHours } from '../../lib/dateHelpers'
-import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 
-const CREATE_SPORTCLASS_MUTATION = gql`
-  mutation CREATE_SPORTCLASS_MUTATION(
+import { getWeek, weekDayNames, classHours } from '../../lib/dateHelpers'
+
+export const SINGLE_SPORTCLASS_QUERY = gql`
+  query SINGLE_SPORTCLASS_QUERY($id: ID!) {
+    SportClass(where: { id: $id }) {
+      name
+      freeSpots
+      available
+      year
+      week
+      day
+      startTime
+      teacher
+      duration
+    }
+  }
+`
+
+const UPDATE_SPORTCLASS_MUTATION = gql`
+  mutation UPDATE_SPORTCLASS_MUTATION(
+    $id: ID!
     $name: String!
     $freeSpots: Int!
     $available: Boolean
@@ -17,7 +34,8 @@ const CREATE_SPORTCLASS_MUTATION = gql`
     $teacher: String!
     $duration: Int!
   ) {
-    createSportClass(
+    updateSportClass(
+      id: $id
       data: {
         name: $name
         freeSpots: $freeSpots
@@ -31,39 +49,48 @@ const CREATE_SPORTCLASS_MUTATION = gql`
       }
     ) {
       id
+      name
+      freeSpots
+      available
+      year
+      week
+      day
+      startTime
+      teacher
+      duration
     }
   }
 `
-
-export default function CreateClass() {
-  const { inputs, handleChange, clearForm } = useForm({
-    name: '',
-    freeSpots: 10,
-    available: true,
-    year: new Date().getFullYear(),
-    week: getWeek(),
-    day: '',
-    startTime: '8',
-    teacher: '',
-    duration: 60,
+export default function UpdateClass({ id }) {
+  const { data, loading, error } = useQuery(SINGLE_SPORTCLASS_QUERY, {
+    variables: { id },
   })
 
-  //function that fires the mutations and what we get back from it
-  const [createSportClass, { data, loading, error }] = useMutation(
-    CREATE_SPORTCLASS_MUTATION,
-    {
-      variables: inputs,
-      refetchQueries: [{ query: ALL_CLASSES_QUERY }],
-    },
-  )
+  const [
+    updateSportClass,
+    { data: updateData, loading: updateLoading, error: updateError },
+  ] = useMutation(UPDATE_SPORTCLASS_MUTATION)
+
+  const { inputs, handleChange } = useForm(data?.SportClass)
 
   const onSubmit = async (e) => {
     e.preventDefault()
-
-    await createSportClass()
-    clearForm()
+    const res = await updateSportClass({
+      variables: {
+        id,
+        name: inputs.name,
+        freeSpots: inputs.freeSpots,
+        available: inputs.available,
+        year: inputs.year,
+        week: inputs.week,
+        day: inputs.day,
+        startTime: inputs.startTime,
+        teacher: inputs.teacher,
+        duration: inputs.duration,
+      },
+    })
   }
-
+  if (updateLoading) return <p>loading...</p>
   //todo: export form elements into separate reusable components + style
   return (
     <form onSubmit={onSubmit}>

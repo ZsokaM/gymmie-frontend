@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
-import { getWeek, weekDayNames } from '../../lib/dateHelpers'
+import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -12,6 +12,7 @@ export const ALL_CLASSES_QUERY = gql`
       name
       freeSpots
       available
+      year
       week
       day
       startTime
@@ -22,22 +23,24 @@ export const ALL_CLASSES_QUERY = gql`
 `
 
 export default function Schedule() {
-  let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
-
   const [weekOfTheYear, setWeekOfTheYear] = useState(0)
+
   //todo: adjust dependency to update when pagination buttons are hit
   useEffect(() => {
     setWeekOfTheYear(getWeek())
   }, [])
 
+  let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error: {error.message}</p>
+
   const FilterClassToDay = (dayNumber) => {
     return data.allSportClasses
       .filter(
         (sportClass) =>
+          sportClass.year === currentYear &&
           sportClass.week === weekOfTheYear &&
-          sportClass.day === dayNumber.toString(),
+          sportClass.day === dayNumber,
       )
       .map((sportClass) => (
         <SportClassCard key={sportClass.id} classData={sportClass} />
@@ -54,14 +57,14 @@ export default function Schedule() {
         <TableHeader>
           <tr>
             {weekDayNames.map((day) => (
-              <th>{day}</th>
+              <th key={day}>{day}</th>
             ))}
           </tr>
         </TableHeader>
         <tbody>
           <TableRow>
             {weekDayNames.map((_, index) => (
-              <TableField>{FilterClassToDay(index + 1)}</TableField>
+              <TableField key={index}>{FilterClassToDay(index)}</TableField>
             ))}
           </TableRow>
         </tbody>

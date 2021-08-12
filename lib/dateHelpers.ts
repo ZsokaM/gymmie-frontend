@@ -26,3 +26,5 @@ export function getWeek() {
   )
   return Math.ceil((currentDate.getDay() + 1 + numberOfDays) / 7)
 }
+
+export const currentYear = new Date().getFullYear()

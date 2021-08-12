@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 
 export default function SportClassCard({ classData }) {
@@ -9,6 +10,17 @@ export default function SportClassCard({ classData }) {
       </div>
       <div>{classData.teacher}</div>
       <div>{classData.duration} min</div>
+      {/* @TODO: make it only visible for admin */}
+      <Link
+        href={{
+          pathname: 'admin',
+          query: {
+            id: classData.id,
+          },
+        }}
+      >
+        Edit
+      </Link>
     </ClassCardContainer>
   )
 }
@@ -26,5 +38,13 @@ const ClassCardContainer = styled.div`
   &:hover {
     transform: scale(1.05);
     cursor: pointer;
+  }
+
+  a {
+    color: purple;
+  }
+  a:hover {
+    color: blue;
+    text-decoration: underline;
   }
 `
