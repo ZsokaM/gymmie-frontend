@@ -2,7 +2,12 @@ import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import useForm from '../FormElements/useForm'
-import { getWeek, weekDayNames, classHours } from '../../lib/dateHelpers'
+import {
+  getWeek,
+  weekDayNames,
+  classHours,
+  currentYear,
+} from '../../lib/dateHelpers'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
@@ -40,7 +45,7 @@ export default function CreateClass() {
     name: '',
     freeSpots: 10,
     available: true,
-    year: new Date().getFullYear(),
+    year: currentYear,
     week: getWeek(),
     day: '',
     startTime: '8',
