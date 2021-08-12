@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
-import { getWeek, weekDayNames } from '../../lib/dateHelpers'
+import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -12,6 +12,7 @@ export const ALL_CLASSES_QUERY = gql`
       name
       freeSpots
       available
+      year
       week
       day
       startTime
@@ -22,22 +23,30 @@ export const ALL_CLASSES_QUERY = gql`
 `
 
 export default function Schedule() {
+  const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
+  const [weekToDisplay, setWeekToDisplay] = useState(currentWeekOfTheYear)
+
+  //todo: adjust dependency to update when pagination buttons are hit
+  // useEffect(() => {
+  //   setCurrentWeekOfTheYear(getWeek())
+  // }, [])
+
   let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
-  const [weekOfTheYear, setWeekOfTheYear] = useState(0)
-  //todo: adjust dependency to update when pagination buttons are hit
-  useEffect(() => {
-    setWeekOfTheYear(getWeek())
-  }, [])
-
+  const changeWeek = (direction) => {
+    direction === 'previous'
+      ? setWeekToDisplay((prevState) => prevState - 1)
+      : setWeekToDisplay((prevState) => prevState + 1)
+  }
   const FilterClassToDay = (dayNumber) => {
     return data.allSportClasses
       .filter(
         (sportClass) =>
-          sportClass.week === weekOfTheYear &&
-          sportClass.day === dayNumber.toString(),
+          sportClass.year === currentYear &&
+          sportClass.week === weekToDisplay &&
+          sportClass.day === dayNumber,
       )
       .map((sportClass) => (
         <SportClassCard key={sportClass.id} classData={sportClass} />
@@ -46,22 +55,35 @@ export default function Schedule() {
 
   return (
     <>
-      <div>{getWeek()}</div>
+      <div>{currentWeekOfTheYear}</div>
+      <div>{weekToDisplay}</div>
       {/* todo: add functionality to buttons */}
-      <button>Previous Week</button>
-      <button>Next Week</button>
+      <button
+        type="button"
+        onClick={() => changeWeek('previous')}
+        disabled={weekToDisplay < currentWeekOfTheYear - 1}
+      >
+        Previous Week
+      </button>
+      <button
+        type="button"
+        onClick={() => changeWeek('next')}
+        disabled={weekToDisplay > currentWeekOfTheYear + 1}
+      >
+        Next Week
+      </button>
       <TableContainer>
         <TableHeader>
           <tr>
             {weekDayNames.map((day) => (
-              <th>{day}</th>
+              <th key={day}>{day}</th>
             ))}
           </tr>
         </TableHeader>
         <tbody>
           <TableRow>
             {weekDayNames.map((_, index) => (
-              <TableField>{FilterClassToDay(index + 1)}</TableField>
+              <TableField key={index}>{FilterClassToDay(index)}</TableField>
             ))}
           </TableRow>
         </tbody>

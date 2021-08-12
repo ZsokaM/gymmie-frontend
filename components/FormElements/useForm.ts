@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 export default function useForm(initial = {}) {
   const [inputs, setInputs] = useState(initial)
+  //we watch the values in the object changing, Object.values gives us an array of values
   const initialValues = Object.values(initial).join('')
 
   useEffect(() => {
@@ -14,6 +15,12 @@ export default function useForm(initial = {}) {
     let { value, name, type } = e.target
     if (type === 'number') {
       value = parseInt(value)
+    }
+    if (name === 'duration' || name === 'day') {
+      value = parseInt(value)
+    }
+    if (name === 'available') {
+      value === 'true' ? (value = true) : (value = false)
     }
 
     setInputs({

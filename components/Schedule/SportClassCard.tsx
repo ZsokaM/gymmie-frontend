@@ -1,12 +1,11 @@
 import styled from 'styled-components'
+import { decimalToTime } from '../../lib/dateHelpers'
 
 export default function SportClassCard({ classData }) {
   return (
     <ClassCardContainer>
       <div>{classData.name}</div>
-      <div>
-        {classData.startTime} {classData.startTime < 12 ? 'AM' : 'PM'}
-      </div>
+      <div>{decimalToTime(classData.startTime)}</div>
       <div>{classData.teacher}</div>
       <div>{classData.duration} min</div>
     </ClassCardContainer>
@@ -26,5 +25,13 @@ const ClassCardContainer = styled.div`
   &:hover {
     transform: scale(1.05);
     cursor: pointer;
+  }
+
+  a {
+    color: purple;
+  }
+  a:hover {
+    color: blue;
+    text-decoration: underline;
   }
 `

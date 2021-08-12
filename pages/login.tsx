@@ -1,3 +1,12 @@
+import Head from 'next/head'
+
 export default function LoginPage() {
-  return <div>login</div>;
+  return (
+    <>
+      <Head>
+        <title> gymmie | Login</title>
+      </Head>
+      <div>login</div>
+    </>
+  )
 }
