@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button } from './styles/ButtonStyle'
+import { Button } from '../styles/ButtonStyle'
 
 export default function Footer({ toggleTheme }) {
   return (

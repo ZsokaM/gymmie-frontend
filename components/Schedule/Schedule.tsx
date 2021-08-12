@@ -26,11 +26,6 @@ export default function Schedule() {
   const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
   const [weekToDisplay, setWeekToDisplay] = useState(currentWeekOfTheYear)
 
-  //todo: adjust dependency to update when pagination buttons are hit
-  // useEffect(() => {
-  //   setCurrentWeekOfTheYear(getWeek())
-  // }, [])
-
   let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
