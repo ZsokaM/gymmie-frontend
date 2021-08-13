@@ -26,7 +26,7 @@ const UPDATE_SPORTCLASS_MUTATION = gql`
     $id: ID!
     $name: String!
     $freeSpots: Int!
-    $available: Boolean
+    $available: Int!
     $year: Int!
     $week: Int!
     $day: Int!
@@ -130,8 +130,8 @@ export default function UpdateClass({ id }) {
               required
             >
               <option value="">-- Pick one --</option>
-              <option value={true}>Available</option>
-              <option value={false}>Not available</option>
+              <option value="1">Available</option>
+              <option value="0">Not available</option>
             </select>
           </label>
         </div>

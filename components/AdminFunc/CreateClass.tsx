@@ -14,7 +14,7 @@ const CREATE_SPORTCLASS_MUTATION = gql`
   mutation CREATE_SPORTCLASS_MUTATION(
     $name: String!
     $freeSpots: Int!
-    $available: Boolean
+    $available: Int!
     $year: Int!
     $week: Int!
     $day: Int!
@@ -44,7 +44,7 @@ export default function CreateClass() {
   const { inputs, handleChange, clearForm, resetForm } = useForm({
     name: '',
     freeSpots: 10,
-    available: true,
+    available: 1,
     year: currentYear,
     week: getWeek(),
     day: '',
@@ -109,8 +109,8 @@ export default function CreateClass() {
               required
             >
               <option value="">-- Pick one --</option>
-              <option value={true}>Available</option>
-              <option value={false}>Not available</option>
+              <option value="1">Available</option>
+              <option value="0">Not available</option>
             </select>
           </label>
         </div>

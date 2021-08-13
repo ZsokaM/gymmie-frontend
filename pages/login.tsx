@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import Login from '../components/UserAuth/Login'
+import RequestReset from '../components/UserAuth/RequestReset'
 
 export default function LoginPage() {
   return (
@@ -6,7 +8,8 @@ export default function LoginPage() {
       <Head>
         <title> gymmie | Login</title>
       </Head>
-      <div>login</div>
+      <Login />
+      <RequestReset />
     </>
   )
 }

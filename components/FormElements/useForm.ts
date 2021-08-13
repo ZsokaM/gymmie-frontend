@@ -12,20 +12,13 @@ export default function useForm(initial = {}) {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) {
-    let { value, name, type } = e.target
-    if (type === 'number') {
-      value = parseInt(value)
-    }
-    if (name === 'duration' || name === 'day') {
-      value = parseInt(value)
-    }
-    if (name === 'available') {
-      value === 'true' ? (value = true) : (value = false)
-    }
+    const { value, name, type } = e.target
+    const numbersAccepted = ['duration', 'day', 'available']
+    const isNumber = numbersAccepted.includes(name) || type === 'number'
 
     setInputs({
       ...inputs,
-      [name]: value,
+      [name]: isNumber ? +value : value,
     })
   }
 

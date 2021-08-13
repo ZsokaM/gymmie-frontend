@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import { Link as ScrollLink } from 'react-scroll'
 import { Button } from '../styles/ButtonStyle'
 
 export default function Hero() {
@@ -14,6 +15,32 @@ export default function Hero() {
         <Button>
           <Link href="/schedule">BOOK NOW</Link>
         </Button>
+        <ScrollWrapper>
+          <Button>
+            <ScrollLink
+              to="class-types"
+              smooth
+              duration={500}
+              spy
+              exact="true"
+              offset={-80}
+            >
+              Class Types
+            </ScrollLink>
+          </Button>
+          <Button>
+            <ScrollLink
+              to="prices"
+              smooth
+              duration={500}
+              spy
+              exact="true"
+              offset={-80}
+            >
+              Prices
+            </ScrollLink>
+          </Button>
+        </ScrollWrapper>
       </HeroText>
     </HeroContainer>
   )
@@ -76,4 +103,7 @@ const HeroSubline = styled.p`
   @media (max-width: 700px) {
     font-size: 18px;
   }
+`
+const ScrollWrapper = styled.div`
+  display: flex;
 `
