@@ -1,9 +1,39 @@
+import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
+import gql from 'graphql-tag'
 import { decimalToTime } from '../../lib/dateHelpers'
+import { CURRENT_USER_QUERY } from '../UserAuth/User'
+import { useUser } from '../UserAuth/User'
+
+const ADD_TO_BOOKINGS_MUTATION = gql`
+  mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
+    addToBookings(sportClassId: $id) {
+      id
+    }
+  }
+`
 
 export default function SportClassCard({ classData }) {
+  const [addToBookings, { data, error, loading }] = useMutation(
+    ADD_TO_BOOKINGS_MUTATION,
+    {
+      variables: { id: classData.id },
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    },
+  )
+  //@TODO: replace with nice modals
+  const user = useUser()
+  const handleClick = () => {
+    if (!user) return null
+    if (classData.freeSpots === 0) return alert('This class is full')
+    if (confirm('Confirm booking')) {
+      addToBookings()
+      alert('Booking was a success')
+    }
+  }
+
   return (
-    <ClassCardContainer>
+    <ClassCardContainer onClick={handleClick}>
       <div>{classData.name}</div>
       <div>{decimalToTime(classData.startTime)}</div>
       <div>{classData.teacher}</div>
