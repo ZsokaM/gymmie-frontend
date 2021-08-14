@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import styled from 'styled-components'
 import SignUp from '../components/UserAuth/SignUp'
 export default function SignUpPage() {
   return (
@@ -6,7 +7,14 @@ export default function SignUpPage() {
       <Head>
         <title> gymmie | Signup</title>
       </Head>
-      <SignUp />
+      <Wrapper>
+        <SignUp />
+      </Wrapper>
     </>
   )
 }
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  width: 60%;
+`

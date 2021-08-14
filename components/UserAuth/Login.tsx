@@ -5,6 +5,14 @@ import Link from 'next/link'
 import Router from 'next/router'
 import useForm from '../FormElements/useForm'
 import { CURRENT_USER_QUERY } from './User'
+import {
+  FieldSetStyle,
+  FormHeader,
+  FormStyle,
+  InputStyle,
+  LabelStyle,
+  FormButton,
+} from '../FormElements/formElementsStyle'
 
 export const LOGIN_MUTATION = gql`
   mutation LOGIN_MUTATION($email: String!, $password: String!) {
@@ -47,13 +55,12 @@ export default function Login() {
 
   return (
     <>
-      <h2>Login</h2>
-
-      <form method="POST" onSubmit={handleSubmit}>
-        <fieldset>
-          <label htmlFor="email">
-            Email
-            <input
+      <FormStyle method="POST" onSubmit={handleSubmit}>
+        <FormHeader>Login</FormHeader>
+        <FieldSetStyle>
+          <LabelStyle htmlFor="email">
+            <span>Email</span>
+            <InputStyle
               type="email"
               name="email"
               placeholder="Email address"
@@ -61,10 +68,10 @@ export default function Login() {
               value={inputs.email}
               onChange={handleChange}
             />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input
+          </LabelStyle>
+          <LabelStyle htmlFor="password">
+            <span>Password</span>
+            <InputStyle
               type="password"
               name="password"
               placeholder="********"
@@ -72,10 +79,10 @@ export default function Login() {
               value={inputs.password}
               onChange={handleChange}
             />
-          </label>
-          <button type="submit">Submit</button>
-        </fieldset>
-      </form>
+          </LabelStyle>
+          <FormButton type="submit">Log me in</FormButton>
+        </FieldSetStyle>
+      </FormStyle>
       <p>You don't have an account yet? </p>
       <Link href="/signup">Sign up!</Link>
     </>

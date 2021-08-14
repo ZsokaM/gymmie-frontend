@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
+import { useUser } from '../UserAuth/User'
 
 const DELETE_BOOKING_MUTATION = gql`
   mutation DELETE_BOOKING_MUTATION($id: ID!) {
@@ -9,15 +10,24 @@ const DELETE_BOOKING_MUTATION = gql`
   }
 `
 
-export default function DeleteBooking({ id }) {
+interface DeleteBookingProps {
+  id: string
+}
+
+function update(cache, payload) {
+  cache.evict(cache.identify(payload.data.deleteSingleBooking))
+}
+
+export default function DeleteBooking({ id }: DeleteBookingProps) {
   const [deleteBooking, { loading }] = useMutation(DELETE_BOOKING_MUTATION, {
     variables: { id },
+    update,
   })
 
   return (
     <button
       type="button"
-      onClick={deleteBooking}
+      onClick={() => deleteBooking()}
       disabled={loading}
       title="cancel this booking"
     >

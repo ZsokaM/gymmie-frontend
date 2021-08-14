@@ -24,7 +24,7 @@ export function getWeek() {
   const numberOfDays = Math.floor(
     (currentDate - oneJanuary) / (24 * 60 * 60 * 1000),
   )
-  return Math.ceil((currentDate.getDay() + 1 + numberOfDays) / 7)
+  return Math.floor((currentDate.getDay() - 2 + numberOfDays) / 7)
 }
 
 export const currentYear = new Date().getFullYear()

@@ -6,6 +6,14 @@ import Router from 'next/router'
 import { LOGIN_MUTATION } from './Login'
 import { CURRENT_USER_QUERY } from './User'
 import useForm from '../FormElements/useForm'
+import {
+  FieldSetStyle,
+  FormHeader,
+  FormStyle,
+  InputStyle,
+  LabelStyle,
+  FormButton,
+} from '../FormElements/formElementsStyle'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -61,12 +69,12 @@ export default function SignUp() {
 
   return (
     <>
-      <h2>Create an account</h2>
-      <form method="POST" onSubmit={handleSubmit}>
-        <fieldset disabled={loading}>
-          <label htmlFor="name">
-            Name
-            <input
+      <FormStyle method="POST" onSubmit={handleSubmit}>
+        <FormHeader>Create an account</FormHeader>
+        <FieldSetStyle disabled={loading}>
+          <LabelStyle htmlFor="name">
+            <span>Name</span>
+            <InputStyle
               type="text"
               name="name"
               placeholder="Name"
@@ -74,10 +82,10 @@ export default function SignUp() {
               autoComplete="name"
               onChange={handleChange}
             />
-          </label>
-          <label htmlFor="email">
-            Email
-            <input
+          </LabelStyle>
+          <LabelStyle htmlFor="email">
+            <span>Email</span>
+            <InputStyle
               type="email"
               name="email"
               placeholder="Email address"
@@ -85,10 +93,10 @@ export default function SignUp() {
               value={inputs.email}
               onChange={handleChange}
             />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input
+          </LabelStyle>
+          <LabelStyle htmlFor="password">
+            <span>Password</span>
+            <InputStyle
               type="password"
               name="password"
               placeholder="********"
@@ -96,10 +104,10 @@ export default function SignUp() {
               value={inputs.password}
               onChange={handleChange}
             />
-          </label>
-          <button type="submit">Submit</button>
-        </fieldset>
-      </form>
+          </LabelStyle>
+          <FormButton type="submit">Get sweaty</FormButton>
+        </FieldSetStyle>
+      </FormStyle>
       <p>Do you already have an account?</p>
       <Link href="/login">Sign in!</Link>
     </>

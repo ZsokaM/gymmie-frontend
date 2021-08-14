@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
@@ -43,6 +43,9 @@ export default function Schedule() {
           sportClass.week === weekToDisplay &&
           sportClass.day === dayNumber,
       )
+      .sort((sportClass1, sportClass2) => {
+        return sportClass1.startTime - sportClass2.startTime
+      })
       .map((sportClass) => (
         <SportClassCard key={sportClass.id} classData={sportClass} />
       ))

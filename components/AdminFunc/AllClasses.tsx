@@ -56,7 +56,7 @@ export default function AllClasses() {
 }
 
 const TableContainer = styled.table`
-  margin: 5rem auto;
+  margin: 0 auto;
 `
 
 const TableHeader = styled.thead`

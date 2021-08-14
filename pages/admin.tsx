@@ -11,21 +11,25 @@ export default function admin({ query }) {
         <title>gymmie | Admin page </title>
       </Head>
       <Wrapper>
-        <section>
-          <h2>Create class</h2>
+        <ItemContainer>
           <CreateClass />
-        </section>
-        <section>
-          <h2>Update class</h2>
+        </ItemContainer>
+        <ItemContainer>
           <UpdateClass id={query.id} />
-        </section>
+        </ItemContainer>
       </Wrapper>
       <AllClasses />
     </>
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: flex;
-  margin: 2rem;
+  padding: 2rem;
+`
+const ItemContainer = styled.article`
+  width: 100%;
+  &:not(:last-child) {
+    margin-right: 3rem;
+  }
 `

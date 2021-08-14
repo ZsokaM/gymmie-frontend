@@ -30,7 +30,7 @@ export default function Bookings() {
                 <div>{decimalToTime(startTime)}</div>
                 <div>{name}</div>
                 <div>{teacher}</div>
-                <DeleteBooking id={id} />
+                <DeleteBooking id={bookedClass.id} />
               </div>
             )
           })}
