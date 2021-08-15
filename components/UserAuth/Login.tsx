@@ -1,10 +1,11 @@
 import { useMutation } from '@apollo/client'
-
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import Router from 'next/router'
 import useForm from '../FormElements/useForm'
-import { CURRENT_USER_QUERY } from './User'
+import DisplayError from '../Layout/ErrorMessage'
+
+import { CURRENT_USER_QUERY, useUser } from './User'
 import {
   FieldSetStyle,
   FormHeader,
@@ -32,32 +33,40 @@ export const LOGIN_MUTATION = gql`
   }
 `
 export default function Login() {
+  const user = useUser()
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
     password: '',
   })
-  const [login, { data, error, loading }] = useMutation(LOGIN_MUTATION, {
+  const [login, { data, loading }] = useMutation(LOGIN_MUTATION, {
     variables: inputs,
     //refetch the currently logged in user
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
 
-  const handleSubmit = async (event) => {
+  const error =
+    data?.authenticateUserWithPassword.__typename ===
+    'UserAuthenticationWithPasswordFailure'
+      ? data.authenticateUserWithPassword
+      : undefined
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     await login()
-    resetForm()
-    Router.push({
-      pathname: '/schedule',
-    })
-  }
+    user &&
+      Router.push({
+        pathname: '/schedule',
+      })
 
-  //@TODO: find out why it results in error if the login actually works
+    resetForm()
+  }
 
   return (
     <>
       <FormStyle method="POST" onSubmit={handleSubmit}>
         <FormHeader>Login</FormHeader>
-        <FieldSetStyle>
+        <DisplayError error={error} />
+        <FieldSetStyle disabled={loading}>
           <LabelStyle htmlFor="email">
             <span>Email</span>
             <InputStyle
@@ -83,8 +92,6 @@ export default function Login() {
           <FormButton type="submit">Log me in</FormButton>
         </FieldSetStyle>
       </FormStyle>
-      <p>You don't have an account yet? </p>
-      <Link href="/signup">Sign up!</Link>
     </>
   )
 }

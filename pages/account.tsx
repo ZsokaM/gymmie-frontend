@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Bookings from '../components/UserAccount/Bookings'
-import { useUser } from '../components/UserAuth/User'
 
 export default function account() {
   return (

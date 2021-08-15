@@ -10,6 +10,7 @@ import {
   FormButton,
 } from '../FormElements/formElementsStyle'
 import useForm from '../FormElements/useForm'
+import DisplayError from '../Layout/ErrorMessage'
 
 const RESET_PASSWORD_MUTATION = gql`
   mutation RESET_PASSWORD_MUTATION(
@@ -42,6 +43,10 @@ export default function ResetPassword({ token }) {
     },
   )
 
+  const successfulError = data?.redeemUserPasswordResetToken?.code
+    ? data?.redeemUserPasswordResetToken
+    : undefined
+
   const handleSubmit = async (event) => {
     event.preventDefault()
     await passwordReset()
@@ -52,13 +57,14 @@ export default function ResetPassword({ token }) {
   return (
     <FormStyle method="POST" onSubmit={handleSubmit}>
       <FormHeader>Reset your password</FormHeader>
+      <DisplayError error={error || successfulError} />
       <FieldSetStyle disabled={loading}>
         {data?.redeemUserPasswordResetToken === null && (
           <p>Success! You can Now sign in</p>
         )}
         <LabelStyle htmlFor="email">
           <span>Email</span>
-          <input
+          <InputStyle
             type="email"
             name="email"
             placeholder="Email address"
@@ -69,7 +75,7 @@ export default function ResetPassword({ token }) {
         </LabelStyle>
         <LabelStyle htmlFor="password">
           <span>New password</span>
-          <input
+          <InputStyle
             type="password"
             name="password"
             placeholder="********"

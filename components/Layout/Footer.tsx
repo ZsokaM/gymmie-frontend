@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 import { Button } from '../styles/ButtonStyle'
 
-export default function Footer({ toggleTheme }) {
+interface FooterProps {
+  toggleTheme: () => void
+}
+export default function Footer({ toggleTheme }: FooterProps) {
   return (
     <FooterContainer id="contact">
       <FooterWrapper>
@@ -14,7 +17,7 @@ export default function Footer({ toggleTheme }) {
 
 const FooterContainer = styled.footer`
   background: ${({ theme }) => theme.bg.secondary};
-  height: 300px;
+  height: 30%;
   color: ${({ theme }) => theme.text.primary};
   margin-top: 2rem;
   padding: 3rem;
@@ -23,7 +26,7 @@ const FooterContainer = styled.footer`
   align-items: center;
   justify-content: center;
 `
-const FooterWrapper = styled.div`
+const FooterWrapper = styled.section`
   display: flex;
   margin: 2rem;
 `

@@ -7,7 +7,7 @@ export const FormStyle = styled.form`
   width: 100%;
 `
 export const FormHeader = styled.h2`
-  font-size: 3rem;
+  font-size: 2rem;
   color: ${({ theme }) => theme.text.primary};
 `
 
@@ -27,7 +27,7 @@ export const LabelStyle = styled.label`
   text-align: right;
   width: 100%;
   color: ${({ theme }) => theme.text.primary};
-  font-size: 1.5em;
+  font-size: 1.5rem;
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -2,7 +2,10 @@ import styled from 'styled-components'
 import { FaBars } from 'react-icons/fa'
 import NavElements from './NavElements'
 
-export default function Nav({ toggle }) {
+interface NavProp {
+  toggle: () => void
+}
+export default function Nav({ toggle }: NavProp) {
   return (
     <>
       <HamburgerIcon onClick={toggle} />
@@ -13,13 +16,13 @@ export default function Nav({ toggle }) {
   )
 }
 
-// todo: add styles
 const NavMenu = styled.nav`
   margin: 0;
   padding: 0;
   display: flex;
   justify-self: end;
   font-size: 2rem;
+
   a,
   button {
     padding: 1rem 3rem;
@@ -31,7 +34,7 @@ const NavMenu = styled.nav`
     background: none;
     border: 0;
     cursor: pointer;
-    @media (max-width: 700px) {
+    ${({ theme }) => theme.mediaQueries.small} {
       font-size: 10px;
       padding: 0 10px;
     }
@@ -45,16 +48,16 @@ const NavMenu = styled.nav`
       &:after {
         width: calc(100% - 60px);
       }
-      @media (max-width: 700px) {
+      ${({ theme }) => theme.mediaQueries.small} {
         width: calc(100% - 10px);
       }
     }
 
-    @media (max-width: 500px) {
+    ${({ theme }) => theme.mediaQueries.medium} {
       display: none;
     }
   }
-  @media (max-width: 1300px) {
+  ${({ theme }) => theme.mediaQueries.large} {
     width: 100%;
     justify-content: center;
     font-size: 1.5rem;
@@ -63,7 +66,7 @@ const NavMenu = styled.nav`
 const HamburgerIcon = styled(FaBars)`
   display: none;
   color: ${({ theme }) => theme.text.primary};
-  @media (max-width: 500px) {
+  ${({ theme }) => theme.mediaQueries.medium} {
     display: block;
     position: absolute;
     top: 0;

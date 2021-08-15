@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import Router from 'next/router'
 import { LOGIN_MUTATION } from './Login'
 import { CURRENT_USER_QUERY } from './User'
@@ -14,6 +13,7 @@ import {
   LabelStyle,
   FormButton,
 } from '../FormElements/formElementsStyle'
+import DisplayError from '../Layout/ErrorMessage'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -40,7 +40,7 @@ export default function SignUp() {
     name: '',
     password: '',
   })
-  const [signup, { data, error, loading }] = useMutation(SIGNUP_MUTATION, {
+  const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
   })
 
@@ -51,7 +51,7 @@ export default function SignUp() {
     },
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     await signup().catch(console.error)
     resetForm()
@@ -71,6 +71,7 @@ export default function SignUp() {
     <>
       <FormStyle method="POST" onSubmit={handleSubmit}>
         <FormHeader>Create an account</FormHeader>
+        <DisplayError error={error} />
         <FieldSetStyle disabled={loading}>
           <LabelStyle htmlFor="name">
             <span>Name</span>
@@ -108,8 +109,6 @@ export default function SignUp() {
           <FormButton type="submit">Get sweaty</FormButton>
         </FieldSetStyle>
       </FormStyle>
-      <p>Do you already have an account?</p>
-      <Link href="/login">Sign in!</Link>
     </>
   )
 }

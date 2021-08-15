@@ -4,8 +4,16 @@ import {
   FormSelect,
 } from '../FormElements/formElementsStyle'
 import { weekDayNames, classHours } from '../../lib/dateHelpers'
+import { InputsProps } from '../../lib/gymmieInterfaces'
 
-export default function CreateUpdateFormFieldset({ inputs, handleChange }) {
+interface ComponentProps {
+  inputs: InputsProps
+  handleChange: React.FormEventHandler<HTMLInputElement | HTMLSelectElement>
+}
+export default function CreateUpdateFormFieldset({
+  inputs,
+  handleChange,
+}: ComponentProps) {
   return (
     <>
       <LabelStyle htmlFor="name">
@@ -63,7 +71,6 @@ export default function CreateUpdateFormFieldset({ inputs, handleChange }) {
           type="number"
           id="week"
           name="week"
-          //the onchange works but display wrong
           value={inputs.week}
           onChange={handleChange}
         />
@@ -95,7 +102,7 @@ export default function CreateUpdateFormFieldset({ inputs, handleChange }) {
           ))}
         </FormSelect>
       </LabelStyle>
-      {/* todo if there's time: add teacher schema and use map for options, add CRUD */}
+
       <LabelStyle htmlFor="teacher">
         <span>Teacher</span>
         <FormSelect

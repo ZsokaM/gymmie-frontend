@@ -1,0 +1,66 @@
+import styled from 'styled-components'
+import React from 'react'
+import PropTypes from 'prop-types'
+
+interface DisplayErrorProps {
+  error: {
+    message: string
+    networkError: {
+      result: {
+        errors: {
+          message: string
+        }[]
+      }
+    }
+  }
+}
+const DisplayError = ({ error }: DisplayErrorProps) => {
+  if (!error || !error.message) return null
+  if (
+    error.networkError &&
+    error.networkError.result &&
+    error.networkError.result.errors.length
+  ) {
+    return error.networkError.result.errors.map((error, i: number) => (
+      <ErrorStyles key={i}>
+        <p data-test="graphql-error">
+          <strong>Oh no!</strong>
+          {error.message.replace('GraphQL error: ', '')}
+        </p>
+      </ErrorStyles>
+    ))
+  }
+  return (
+    <ErrorStyles>
+      <p data-test="graphql-error">
+        <strong>Oh no!</strong>
+        {error.message.replace('GraphQL error: ', '')}
+      </p>
+    </ErrorStyles>
+  )
+}
+
+DisplayError.defaultProps = {
+  error: {},
+}
+
+DisplayError.propTypes = {
+  error: PropTypes.object,
+}
+
+const ErrorStyles = styled.div`
+  padding: 2rem;
+  background: white;
+  margin: 2rem 0;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-left: 5px solid ${({ theme }) => theme.bg.secondary};
+  p {
+    margin: 0;
+    font-weight: 100;
+  }
+  strong {
+    margin-right: 1rem;
+  }
+`
+
+export default DisplayError

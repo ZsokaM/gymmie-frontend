@@ -1,4 +1,3 @@
-import styled from 'styled-components'
 import { useUser } from '../UserAuth/User'
 import { weekDayNames, decimalToTime } from '../../lib/dateHelpers'
 import DeleteBooking from './DeleteBooking'

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
-import { useUser } from '../UserAuth/User'
 
 const DELETE_BOOKING_MUTATION = gql`
   mutation DELETE_BOOKING_MUTATION($id: ID!) {

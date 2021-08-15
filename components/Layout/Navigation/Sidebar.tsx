@@ -2,7 +2,11 @@ import styled from 'styled-components'
 import { FaTimes } from 'react-icons/fa'
 import NavElements from './NavElements'
 
-export default function Sidebar({ isOpen, toggle }) {
+interface SideBarProps {
+  isOpen: boolean
+  toggle?: () => void
+}
+export default function Sidebar({ isOpen, toggle }: SideBarProps) {
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon>
@@ -15,7 +19,7 @@ export default function Sidebar({ isOpen, toggle }) {
   )
 }
 
-const SidebarContainer = styled.aside`
+const SidebarContainer = styled.aside<SideBarProps>`
   position: fixed;
   z-index: 999;
   width: 100%;
@@ -49,14 +53,14 @@ const SidebarWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   text-align: center;
   height: 100%;
   width: 100%;
 
   a,
   button {
-    padding: 1rem 3rem;
+    padding: 1rem 1rem;
     display: flex;
     align-items: center;
     position: relative;

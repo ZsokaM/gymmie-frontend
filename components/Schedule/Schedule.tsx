@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
+import { InputsProps } from '../../lib/gymmieInterfaces'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -30,15 +31,15 @@ export default function Schedule() {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
-  const changeWeek = (direction) => {
+  const changeWeek = (direction: string) => {
     direction === 'previous'
       ? setWeekToDisplay((prevState) => prevState - 1)
       : setWeekToDisplay((prevState) => prevState + 1)
   }
-  const FilterClassToDay = (dayNumber) => {
+  const FilterClassToDay = (dayNumber: number) => {
     return data.allSportClasses
       .filter(
-        (sportClass) =>
+        (sportClass: InputsProps) =>
           sportClass.year === currentYear &&
           sportClass.week === weekToDisplay &&
           sportClass.day === dayNumber,
@@ -53,30 +54,33 @@ export default function Schedule() {
 
   return (
     <>
-      <div>{currentWeekOfTheYear}</div>
-      <div>{weekToDisplay}</div>
-      {/* todo: add functionality to buttons */}
-      <button
-        type="button"
-        onClick={() => changeWeek('previous')}
-        disabled={weekToDisplay < currentWeekOfTheYear - 1}
-      >
-        Previous Week
-      </button>
-      <button
-        type="button"
-        onClick={() => changeWeek('next')}
-        disabled={weekToDisplay > currentWeekOfTheYear + 1}
-      >
-        Next Week
-      </button>
+      <Header>
+        <SmallButton
+          type="button"
+          onClick={() => changeWeek('previous')}
+          disabled={weekToDisplay < currentWeekOfTheYear - 1}
+        >
+          Previous Week
+        </SmallButton>
+        <h2>
+          Week {weekToDisplay} in {currentYear}
+        </h2>
+        <SmallButton
+          type="button"
+          onClick={() => changeWeek('next')}
+          disabled={weekToDisplay > currentWeekOfTheYear + 1}
+        >
+          Next Week
+        </SmallButton>
+      </Header>
+
       <TableContainer>
         <TableHeader>
-          <tr>
+          <TableRow>
             {weekDayNames.map((day) => (
               <th key={day}>{day}</th>
             ))}
-          </tr>
+          </TableRow>
         </TableHeader>
         <tbody>
           <TableRow>
@@ -90,20 +94,59 @@ export default function Schedule() {
   )
 }
 
+const Header = styled.section`
+  margin-top: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+
+  h2 {
+    color: ${({ theme }) => theme.text.primary};
+  }
+`
 const TableContainer = styled.table`
-  margin: 5rem auto;
+  margin: 0 auto;
+  min-height: 800px;
+  width: 95%;
 `
 
 const TableHeader = styled.thead`
   height: 40px;
-  background-color: lightblue;
+  background-color: ${({ theme }) => theme.bg.secondary};
+  color: ${({ theme }) => theme.text.primary};
+  text-transform: capitalize;
 `
 const TableRow = styled.tr`
-  height: 1350px;
+  height: 80%;
 `
 const TableField = styled.td`
   height: 100px;
   width: 200px;
-  background-color: lavender;
+  background-color: ${({ theme }) => theme.bg.quarternary};
   vertical-align: top;
+`
+
+const SmallButton = styled.button`
+  border-radius: 5px;
+  background: ${({ theme }) => theme.bg.secondary};
+  padding: 1rem;
+  color: ${({ theme }) => theme.text.primary};
+  width: 120px;
+  font-size: 1.25rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s ease-in-out;
+  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, .2);
+
+  &:disabled{
+    background: grey;
+    color: darkgray
+  }
+
+  &:hover {
+    background: ${({ theme }) => theme.bg.tertiary}
 `

@@ -2,7 +2,10 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import Nav from './Nav'
 
-export default function Header({ toggle }) {
+interface HeaderProp {
+  toggle: () => void
+}
+export default function Header({ toggle }: HeaderProp) {
   return (
     <HeaderStyles>
       <Logo>
@@ -27,4 +30,6 @@ const HeaderStyles = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.bg.primary};
+  position: sticky;
+  top: 0;
 `

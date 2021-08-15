@@ -3,12 +3,12 @@ import { Link as ScrollLink } from 'react-scroll'
 import LogOut from '../../UserAuth/Logout'
 import { useUser } from '../../UserAuth/User'
 
-//add conditions, if on home page use links ad scroll links, otherwise use them as links to components
 export default function NavElements() {
   const user = useUser()
 
   return (
     <>
+      <Link href="/">Home</Link>
       <Link href="/schedule">Class Schedule</Link>
       {!user && (
         <>

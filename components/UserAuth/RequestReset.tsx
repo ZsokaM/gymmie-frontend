@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client'
-import { useState } from 'react'
 import gql from 'graphql-tag'
 import {
   FieldSetStyle,
@@ -10,6 +9,7 @@ import {
   FormButton,
 } from '../FormElements/formElementsStyle'
 import useForm from '../FormElements/useForm'
+import DisplayError from '../Layout/ErrorMessage'
 
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!) {
@@ -32,7 +32,7 @@ export default function RequestReset() {
     },
   )
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     await requestReset().catch(console.error)
     resetForm()
@@ -41,6 +41,7 @@ export default function RequestReset() {
   return (
     <FormStyle method="POST" onSubmit={handleSubmit}>
       <FormHeader>Request password reset</FormHeader>
+      <DisplayError error={error} />
       <FieldSetStyle disabled={loading}>
         {data?.sendUserPasswordResetLink === null && (
           <p>Success! Check your email for a link!</p>

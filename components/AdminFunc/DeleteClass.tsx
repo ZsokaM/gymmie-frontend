@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
+import { SmallButton } from '../TableElements/ClassTableStyle'
 
 const DELETE_SPORTCLASS_MUTATION = gql`
   mutation DELETE_SPORTCLASS_MUTATION($id: ID!) {
@@ -16,17 +17,18 @@ const update = (cache, payload) => {
   cache.evict(cache.identify(payload.data.deleteSportClass))
 }
 
-export default function DeleteClass({ id, children }) {
-  const [deleteProduct, { data, loading, error }] = useMutation(
-    DELETE_SPORTCLASS_MUTATION,
-    {
-      variables: { id },
-      update: update,
-    },
-  )
+interface DeleteClassProps {
+  id: string
+  children: React.ReactNode
+}
+export default function DeleteClass({ id, children }: DeleteClassProps) {
+  const [deleteProduct, { loading }] = useMutation(DELETE_SPORTCLASS_MUTATION, {
+    variables: { id },
+    update: update,
+  })
 
   return (
-    <button
+    <SmallButton
       type="button"
       disabled={loading}
       onClick={() => {
@@ -37,6 +39,6 @@ export default function DeleteClass({ id, children }) {
       }}
     >
       {children}
-    </button>
+    </SmallButton>
   )
 }

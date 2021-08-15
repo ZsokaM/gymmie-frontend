@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/client'
-import styled from 'styled-components'
 import useForm from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import {
@@ -9,6 +8,7 @@ import {
   FormHeader,
   FieldSetStyle,
 } from '../FormElements/formElementsStyle'
+import DisplayError from '../Layout/ErrorMessage'
 
 export const SINGLE_SPORTCLASS_QUERY = gql`
   query SINGLE_SPORTCLASS_QUERY($id: ID!) {
@@ -66,7 +66,10 @@ const UPDATE_SPORTCLASS_MUTATION = gql`
     }
   }
 `
-export default function UpdateClass({ id }) {
+type IdType = {
+  id: string
+}
+export default function UpdateClass({ id }: IdType) {
   const { data, loading, error } = useQuery(SINGLE_SPORTCLASS_QUERY, {
     variables: { id },
   })
@@ -78,9 +81,9 @@ export default function UpdateClass({ id }) {
 
   const { inputs, handleChange } = useForm(data?.SportClass)
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const res = await updateSportClass({
+    await updateSportClass({
       variables: {
         id,
         name: inputs.name,
@@ -96,10 +99,9 @@ export default function UpdateClass({ id }) {
     })
   }
   if (updateLoading) return <p>loading...</p>
-  //todo: export form elements into separate reusable components + style
+
   return (
     <FormStyle onSubmit={onSubmit}>
-      {/* todo: add Error component in case there is an error during submission etc */}
       <FieldSetStyle disabled={loading}>
         <FormHeader>Update class</FormHeader>
         <CreateUpdateFormFieldset inputs={inputs} handleChange={handleChange} />

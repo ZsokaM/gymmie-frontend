@@ -4,7 +4,12 @@ import CreateClass from '../components/AdminFunc/CreateClass'
 import UpdateClass from '../components/AdminFunc/UpdateClass'
 import AllClasses from '../components/AdminFunc/AllClasses'
 
-export default function admin({ query }) {
+interface adminProp {
+  query: {
+    id: string
+  }
+}
+export default function admin({ query }: adminProp) {
   return (
     <>
       <Head>

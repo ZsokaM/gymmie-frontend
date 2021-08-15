@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client'
-import styled from 'styled-components'
 import gql from 'graphql-tag'
 import {
   FieldSetStyle,
@@ -11,6 +10,7 @@ import useForm from '../FormElements/useForm'
 import { getWeek, currentYear } from '../../lib/dateHelpers'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
+import DisplayError from '../Layout/ErrorMessage'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
   mutation CREATE_SPORTCLASS_MUTATION(
@@ -56,7 +56,7 @@ export default function CreateClass() {
   })
 
   //function that fires the mutations and what we get back from it
-  const [createSportClass, { data, loading, error }] = useMutation(
+  const [createSportClass, { loading, error }] = useMutation(
     CREATE_SPORTCLASS_MUTATION,
     {
       variables: inputs,
@@ -64,7 +64,7 @@ export default function CreateClass() {
     },
   )
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     await createSportClass()
@@ -72,10 +72,9 @@ export default function CreateClass() {
     resetForm()
   }
 
-  //todo: export form elements into separate reusable components + style
   return (
     <FormStyle onSubmit={onSubmit}>
-      {/* todo: add Error component in case there is an error during submission etc */}
+      <DisplayError error={error} />
       <FieldSetStyle disabled={loading}>
         <FormHeader>Create a Class</FormHeader>
         <CreateUpdateFormFieldset inputs={inputs} handleChange={handleChange} />
@@ -84,9 +83,3 @@ export default function CreateClass() {
     </FormStyle>
   )
 }
-
-const Wrapper = styled.div`
-  margin: 0 auto;
-  width: 60%;
-  display: flex;
-`

@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { decimalToTime } from '../../lib/dateHelpers'
 import { CURRENT_USER_QUERY } from '../UserAuth/User'
 import { useUser } from '../UserAuth/User'
+import { useModal } from '../Modals/ModalContext'
 
 const ADD_TO_BOOKINGS_MUTATION = gql`
   mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
@@ -13,7 +14,24 @@ const ADD_TO_BOOKINGS_MUTATION = gql`
   }
 `
 
-export default function SportClassCard({ classData }) {
+interface SportClassCardProp {
+  classData: {
+    id?: string
+    name?: string
+    freeSpots?: number
+    available?: number
+    year?: number
+    week?: number
+    day?: number
+    startTime?: number
+    teacher?: string
+    duration?: number
+    users?: string[]
+  }
+}
+export default function SportClassCard({ classData }: SportClassCardProp) {
+  const user = useUser()
+  const modal = useModal()
   const [addToBookings, { data, error, loading }] = useMutation(
     ADD_TO_BOOKINGS_MUTATION,
     {
@@ -22,13 +40,25 @@ export default function SportClassCard({ classData }) {
     },
   )
   //@TODO: replace with nice modals
-  const user = useUser()
+
   const handleClick = () => {
-    if (!user) return null
-    if (classData.freeSpots === 0) return alert('This class is full')
+    if (!user) {
+      modal.setModalText('You need to log in to book a class')
+      modal.setModalType('error')
+      modal.showModal()
+    }
+
+    if (classData.freeSpots === 0) {
+      modal.setModalText('This class is full')
+      modal.setModalType('error')
+      modal.showModal()
+    }
+
     if (confirm('Confirm booking')) {
+      modal.setModalText('Class was added to your schedule')
+      modal.setModalType('success')
+      modal.showModal()
       addToBookings()
-      alert('Booking was a success')
     }
   }
 
@@ -42,26 +72,22 @@ export default function SportClassCard({ classData }) {
   )
 }
 
-const ClassCardContainer = styled.div`
+const ClassCardContainer = styled.article`
+  width: 90%;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1rem;
   text-transform: uppercase;
   border-radius: 10px;
-  background-color: lightcoral;
+  background-color: ${({ theme }) => theme.bg.secondary};
+  color: ${({ theme }) => theme.text.primary};
+  font-size: 1.2rem;
   margin: 5px;
   box-shadow: 3px 3px 2px 1px lightblue;
   transition: transform 0.2s ease-in-out;
+
   &:hover {
     transform: scale(1.05);
     cursor: pointer;
-  }
-
-  a {
-    color: purple;
-  }
-  a:hover {
-    color: blue;
-    text-decoration: underline;
   }
 `

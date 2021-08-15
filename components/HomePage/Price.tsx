@@ -38,15 +38,16 @@ const PriceContainer = styled.div`
   background: ${({ theme }) => theme.bg.primary};
 `
 const PriceWrapper = styled.div`
-  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
 
-  @media (max-width: 700px) {
+  ${({ theme }) => theme.mediaQueries.small} {
     flex-wrap: wrap;
+    justify-content: center;
   }
 `
 const PriceCard = styled.div`
@@ -64,7 +65,7 @@ const PriceCard = styled.div`
   transition: all 0.2s ease-in-out;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
   }

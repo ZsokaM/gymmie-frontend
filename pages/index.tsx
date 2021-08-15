@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Hero from '../components/HomePage/Hero'
-import HomeScrollMenu from '../components/HomePage/HomeScrollMenu'
 import InfoSection from '../components/HomePage/InfoSection'
 import Price from '../components/HomePage/Price'
 
