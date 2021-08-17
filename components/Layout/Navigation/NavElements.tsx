@@ -19,7 +19,7 @@ export default function NavElements() {
 
       {user && (
         <>
-          <Link href="/account">Account</Link>
+          <Link href="/account">My account</Link>
           <Link href="/admin">Admin</Link>
           <LogOut />
         </>

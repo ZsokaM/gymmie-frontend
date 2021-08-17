@@ -4,12 +4,16 @@ import DeleteClass from '../AdminFunc/DeleteClass'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import { weekDayNames, decimalToTime } from '../../lib/dateHelpers'
 import DisplayError from '../Layout/ErrorMessage'
-import { InputsProps } from '../../lib/gymmieInterfaces'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
+
 import {
   TableContainer,
   TableHeader,
   TableRow,
   TableField,
+  SmallButton,
+  ButtonWrapper,
+  TableTitle,
 } from '../TableElements/ClassTableStyle'
 
 export default function AllClasses() {
@@ -19,7 +23,7 @@ export default function AllClasses() {
 
   return (
     <>
-      <h2>Class list</h2>
+      <TableTitle>Class list</TableTitle>
       <TableContainer>
         <TableHeader>
           <TableRow>
@@ -33,7 +37,7 @@ export default function AllClasses() {
           </TableRow>
         </TableHeader>
         <tbody>
-          {data.allSportClasses.map((sportClass: InputsProps) => (
+          {data.allSportClasses.map((sportClass: SportClassInterface) => (
             <TableRow key={sportClass.id}>
               <TableField>{sportClass.year}</TableField>
               <TableField>{sportClass.week}</TableField>
@@ -42,17 +46,19 @@ export default function AllClasses() {
               <TableField>{sportClass.name}</TableField>
               <TableField>{sportClass.teacher}</TableField>
               <TableField>
-                <Link
-                  href={{
-                    pathname: 'admin',
-                    query: {
-                      id: sportClass.id,
-                    },
-                  }}
-                >
-                  Edit
-                </Link>
-                <DeleteClass id={sportClass.id}>Delete</DeleteClass>
+                <ButtonWrapper>
+                  <Link
+                    href={{
+                      pathname: 'admin',
+                      query: {
+                        id: sportClass.id,
+                      },
+                    }}
+                  >
+                    <SmallButton>Edit</SmallButton>
+                  </Link>
+                  <DeleteClass id={sportClass.id}>Delete</DeleteClass>
+                </ButtonWrapper>
               </TableField>
             </TableRow>
           ))}

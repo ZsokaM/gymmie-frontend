@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const TableTitle = styled.h2`
+  text-align: center;
+`
+
 export const TableContainer = styled.table`
   margin: 0 auto;
   min-height: 100%;
@@ -21,6 +25,7 @@ export const TableField = styled.td`
   width: 200px;
   background-color: ${({ theme }) => theme.bg.quarternary};
   vertical-align: center;
+  text-transform: capitalize;
 `
 
 export const SmallButton = styled.button`
@@ -37,13 +42,19 @@ export const SmallButton = styled.button`
   justify-content: center;
   align-items: center;
   transition: background 0.2s ease-in-out;
-  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, .2);
+  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
 
-  &:disabled{
+  &:disabled {
     background: grey;
-    color: darkgray
+    color: darkgray;
   }
 
   &:hover {
-    background: ${({ theme }) => theme.bg.tertiary}
+    background: ${({ theme }) => theme.bg.tertiary};
+  }
+`
+
+export const ButtonWrapper = styled.section`
+  display: flex;
+  justify-content: space-around;
 `

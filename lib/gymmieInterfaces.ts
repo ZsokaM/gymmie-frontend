@@ -14,6 +14,19 @@ export interface InputsProps {
   password?: string
 }
 
+export interface SportClassInterface {
+  id: string
+  name: string
+  freeSpots: number
+  available: number
+  year: number
+  week: number
+  day: number
+  startTime: number
+  teacher: string
+  duration: number
+}
+
 export interface ModalProps {
   modalIsOpen?: boolean
   setModalIsOpen?: () => void

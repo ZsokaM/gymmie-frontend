@@ -102,6 +102,7 @@ export default function UpdateClass({ id }: IdType) {
 
   return (
     <FormStyle onSubmit={onSubmit}>
+      <DisplayError error={error} />
       <FieldSetStyle disabled={loading}>
         <FormHeader>Update class</FormHeader>
         <CreateUpdateFormFieldset inputs={inputs} handleChange={handleChange} />

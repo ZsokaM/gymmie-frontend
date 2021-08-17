@@ -1,9 +1,7 @@
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import Router from 'next/router'
 import useForm from '../FormElements/useForm'
-import DisplayError from '../Layout/ErrorMessage'
 
 import { CURRENT_USER_QUERY, useUser } from './User'
 import {
@@ -14,6 +12,7 @@ import {
   LabelStyle,
   FormButton,
 } from '../FormElements/formElementsStyle'
+import ErrorComp from '../Layout/ErrorComp'
 
 export const LOGIN_MUTATION = gql`
   mutation LOGIN_MUTATION($email: String!, $password: String!) {
@@ -44,28 +43,26 @@ export default function Login() {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
 
-  const error =
-    data?.authenticateUserWithPassword.__typename ===
-    'UserAuthenticationWithPasswordFailure'
-      ? data.authenticateUserWithPassword
-      : undefined
+  const error = data?.authenticateUserWithPassword.message
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     await login()
-    user &&
+    if (
+      data?.authenticateUserWithPassword.__typename ===
+      'UserAuthenticationWithPasswordSuccess'
+    ) {
       Router.push({
         pathname: '/schedule',
       })
-
-    resetForm()
+    }
   }
 
   return (
     <>
       <FormStyle method="POST" onSubmit={handleSubmit}>
         <FormHeader>Login</FormHeader>
-        <DisplayError error={error} />
+        {error !== undefined && <ErrorComp msg={error} />}
         <FieldSetStyle disabled={loading}>
           <LabelStyle htmlFor="email">
             <span>Email</span>

@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
-import { InputsProps } from '../../lib/gymmieInterfaces'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -27,6 +27,11 @@ export default function Schedule() {
   const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
   const [weekToDisplay, setWeekToDisplay] = useState(currentWeekOfTheYear)
 
+  useEffect(() => {
+    setCurrentWeekOfTheYear(getWeek())
+    console.log(currentWeekOfTheYear)
+  }, [])
+
   let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
@@ -39,15 +44,20 @@ export default function Schedule() {
   const FilterClassToDay = (dayNumber: number) => {
     return data.allSportClasses
       .filter(
-        (sportClass: InputsProps) =>
+        (sportClass: SportClassInterface) =>
           sportClass.year === currentYear &&
           sportClass.week === weekToDisplay &&
           sportClass.day === dayNumber,
       )
-      .sort((sportClass1, sportClass2) => {
-        return sportClass1.startTime - sportClass2.startTime
-      })
-      .map((sportClass) => (
+      .sort(
+        (
+          sportClass1: SportClassInterface,
+          sportClass2: SportClassInterface,
+        ) => {
+          return sportClass1.startTime - sportClass2.startTime
+        },
+      )
+      .map((sportClass: SportClassInterface) => (
         <SportClassCard key={sportClass.id} classData={sportClass} />
       ))
   }

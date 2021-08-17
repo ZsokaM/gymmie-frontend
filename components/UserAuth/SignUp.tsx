@@ -65,8 +65,6 @@ export default function SignUp() {
     })
   }
 
-  if (error) return <p>Error: {error}</p>
-
   return (
     <>
       <FormStyle method="POST" onSubmit={handleSubmit}>

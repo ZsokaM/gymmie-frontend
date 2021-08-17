@@ -5,13 +5,14 @@ import Footer from './Footer'
 import Header from './Navigation/Header'
 import Sidebar from './Navigation/Sidebar'
 import { useModal } from '../Modals/ModalContext'
+import { ModalProps } from '../../lib/gymmieInterfaces'
 
 interface PageProps {
   children: React.ReactNode
 }
 
 export default function Page({ children }: PageProps) {
-  const modal = useModal()
+  const modal: ModalProps = useModal()
   const [theme, setTheme] = useState('dark')
   const [isOpen, setIsOpen] = useState(false)
 
@@ -130,8 +131,8 @@ const darkTheme = {
   bg: {
     primary: '#0C0032',
     secondary: '#190061',
-    tertiary: '#240090',
-    quarternary: '#3500d3',
+    tertiary: '#3500d3',
+    quarternary: '#240090',
   },
   text: {
     primary: '#ffffff',

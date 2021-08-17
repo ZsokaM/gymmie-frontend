@@ -3,7 +3,6 @@ import { InputsProps } from '../../lib/gymmieInterfaces'
 
 export default function useForm(initial = {}) {
   const [inputs, setInputs] = useState<InputsProps>(initial)
-  //we watch the values in the object changing, Object.values gives us an array of values
   const initialValues = Object.values(initial).join('')
 
   useEffect(() => {

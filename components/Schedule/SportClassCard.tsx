@@ -40,25 +40,12 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
     },
   )
   //@TODO: replace with nice modals
-
   const handleClick = () => {
-    if (!user) {
-      modal.setModalText('You need to log in to book a class')
-      modal.setModalType('error')
-      modal.showModal()
-    }
-
-    if (classData.freeSpots === 0) {
-      modal.setModalText('This class is full')
-      modal.setModalType('error')
-      modal.showModal()
-    }
-
+    if (!user) return null
+    if (classData.freeSpots === 0) return alert('This class is full')
     if (confirm('Confirm booking')) {
-      modal.setModalText('Class was added to your schedule')
-      modal.setModalType('success')
-      modal.showModal()
       addToBookings()
+      alert('Booking was a success')
     }
   }
 

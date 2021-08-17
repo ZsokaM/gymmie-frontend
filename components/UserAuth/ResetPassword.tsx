@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client'
-import { useState } from 'react'
 import gql from 'graphql-tag'
 import {
   FieldSetStyle,
@@ -53,7 +52,6 @@ export default function ResetPassword({ token }) {
     resetForm()
   }
 
-  //@TODO: add error handling
   return (
     <FormStyle method="POST" onSubmit={handleSubmit}>
       <FormHeader>Reset your password</FormHeader>

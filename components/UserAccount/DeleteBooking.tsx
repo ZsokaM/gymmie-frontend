@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
+import { SmallButton } from '../TableElements/ClassTableStyle'
 
 const DELETE_BOOKING_MUTATION = gql`
   mutation DELETE_BOOKING_MUTATION($id: ID!) {
@@ -13,6 +14,8 @@ interface DeleteBookingProps {
   id: string
 }
 
+//@TODO: find type for cahce and payload, empty object doesnt do it
+
 function update(cache, payload) {
   cache.evict(cache.identify(payload.data.deleteSingleBooking))
 }
@@ -24,13 +27,13 @@ export default function DeleteBooking({ id }: DeleteBookingProps) {
   })
 
   return (
-    <button
+    <SmallButton
       type="button"
       onClick={() => deleteBooking()}
       disabled={loading}
       title="cancel this booking"
     >
       cancel
-    </button>
+    </SmallButton>
   )
 }

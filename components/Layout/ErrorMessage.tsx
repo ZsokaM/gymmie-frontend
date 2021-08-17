@@ -2,6 +2,11 @@ import styled from 'styled-components'
 import React from 'react'
 import PropTypes from 'prop-types'
 
+//@NOTE: this is the one I wanted to replace, but the more research and trials I do
+//the less likely i will do it. This one just makes sense and covers all possible error
+//types coming back from queries and mutations
+//did my own error messaging in the login
+
 interface DisplayErrorProps {
   error: {
     message: string
@@ -21,8 +26,8 @@ const DisplayError = ({ error }: DisplayErrorProps) => {
     error.networkError.result &&
     error.networkError.result.errors.length
   ) {
-    return error.networkError.result.errors.map((error, i: number) => (
-      <ErrorStyles key={i}>
+    return error.networkError.result.errors.map((error, idx: number) => (
+      <ErrorStyles key={idx}>
         <p data-test="graphql-error">
           <strong>Oh no!</strong>
           {error.message.replace('GraphQL error: ', '')}

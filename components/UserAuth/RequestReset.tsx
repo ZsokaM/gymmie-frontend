@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/client'
+import { useMutation, useLazyQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import {
   FieldSetStyle,
@@ -9,7 +9,6 @@ import {
   FormButton,
 } from '../FormElements/formElementsStyle'
 import useForm from '../FormElements/useForm'
-import DisplayError from '../Layout/ErrorMessage'
 
 const REQUEST_RESET_MUTATION = gql`
   mutation REQUEST_RESET_MUTATION($email: String!) {
@@ -20,28 +19,51 @@ const REQUEST_RESET_MUTATION = gql`
   }
 `
 
+//so apparently it's a security issue if someone can test if an email is the database or not,
+//hence keystone is not checking for valid email.
+//i dont have the heart to delete this yet :D maybe it will come handy
+
+// const FIND_USER_BY_EMAIL_QUERY = gql`
+//   query FIND_USER_BY_EMAIL_QUERY($email: String) {
+//     allUsers(where: { email: $email }) {
+//       id
+//     }
+//   }
+// `
+
 export default function RequestReset() {
   const { inputs, handleChange, resetForm } = useForm({
     email: '',
   })
 
-  const [requestReset, { data, loading, error }] = useMutation(
+  const [requestReset, { data, loading }] = useMutation(
     REQUEST_RESET_MUTATION,
     {
       variables: inputs,
     },
   )
 
+  // const [findEmail, { data: userData }] = useLazyQuery(
+  //   FIND_USER_BY_EMAIL_QUERY,
+  //   {
+  //     variables: inputs,
+  //   },
+  // )
+
+  // const error =
+  //   userData?.allUsers.length === 0
+  //     ? 'This email address is not in our database'
+  //     : undefined
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await requestReset().catch(console.error)
+    await requestReset()
     resetForm()
   }
 
   return (
     <FormStyle method="POST" onSubmit={handleSubmit}>
       <FormHeader>Request password reset</FormHeader>
-      <DisplayError error={error} />
       <FieldSetStyle disabled={loading}>
         {data?.sendUserPasswordResetLink === null && (
           <p>Success! Check your email for a link!</p>

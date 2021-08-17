@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Link from 'next/link'
 
 export const FormStyle = styled.form`
   display: flex;
@@ -15,7 +16,8 @@ export const FieldSetStyle = styled.fieldset`
   margin: 0 auto;
   padding: 1rem;
   width: 100%;
-  box-shadow: 12px 12px 2px 1px ${({ theme }) => theme.bg.tertiary};
+  box-shadow: 6px 6px 1px 1px ${({ theme }) => theme.bg.tertiary};
+  border: none;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -44,7 +46,7 @@ export const LabelStyle = styled.label`
 export const InputStyle = styled.input`
   border: none;
   background-color: ${({ theme }) => theme.bg.quarternary};
-  border-bottom: 2px solid ${({ theme }) => theme.text.tertiary};
+  border-bottom: 1px solid var(--mediumGrey);
   color: ${({ theme }) => theme.text.primary};
   padding: 1rem;
   width: 70%;
@@ -58,18 +60,18 @@ export const FormSelect = styled.select`
   padding: 1rem;
   font-size: 1.5rem;
   border: none;
-  border-bottom: 2px solid ${({ theme }) => theme.text.tertiary};
+  box-shadow: 1px 1px 1px 1px var(--mediumGrey);
   border-radius: 3px;
-  position: relative;
+  color: ${({ theme }) => theme.text.primary};
 `
 
 export const FormButton = styled.button`
 border-radius: 5px;
   background: ${({ theme }) => theme.bg.secondary};
-  padding: 14px 48px;
+  padding: 1rem 2rem;
   color: ${({ theme }) => theme.text.primary};
-  width: 200px;
-  font-size: 2rem;
+  width: 150px;
+  font-size: 1.5rem;
   outline: none;
   border: none;
   cursor: pointer;
