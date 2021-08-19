@@ -56,7 +56,7 @@ export default function AllClasses() {
                   <Link href={`/admin?id=${sportClass.id}`}>
                     <SmallButton>Edit</SmallButton>
                   </Link>
-                  <DeleteClass id={sportClass.id}>Delete</DeleteClass>
+                  <DeleteClass id={sportClass.id} />
                 </ButtonWrapper>
               </TableField>
             </TableRow>

@@ -65,7 +65,7 @@ const HeroHeader = styled.h1`
   }
 
   ${({ theme }) => theme.mediaQueries.small} {
-    font-size: 32px%;
+    font-size: 32px;
   }
 `
 const HeroSubline = styled.p`

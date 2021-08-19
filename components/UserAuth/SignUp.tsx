@@ -80,7 +80,7 @@ export default function SignUp() {
               name="name"
               placeholder="Name"
               value={inputs.name}
-              autoComplete="name"
+              autocomplete="name"
               onChange={handleChange}
             />
           </LabelStyle>
@@ -90,7 +90,7 @@ export default function SignUp() {
               type="email"
               name="email"
               placeholder="Email address"
-              autoComplete="email"
+              autocomplete="email"
               value={inputs.email}
               onChange={handleChange}
             />
@@ -101,7 +101,7 @@ export default function SignUp() {
               type="password"
               name="password"
               placeholder="********"
-              autoComplete="password"
+              autoomplete="password"
               value={inputs.password}
               onChange={handleChange}
             />

@@ -62,7 +62,7 @@ const PriceCard = styled.article`
   padding: 30px;
   margin: 5px;
   box-shadow: 0 1px 3px ${({ theme }) => theme.bg.secondary};
-  transition: scale 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   cursor: pointer;
 
   &:hover {

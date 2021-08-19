@@ -74,7 +74,7 @@ export default function RequestReset() {
             type="email"
             name="email"
             placeholder="Email address"
-            autoComplete="email"
+            autocomplete="email"
             value={inputs.email}
             onChange={handleChange}
           />

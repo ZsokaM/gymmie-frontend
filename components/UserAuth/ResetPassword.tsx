@@ -66,7 +66,7 @@ export default function ResetPassword({ token }) {
             type="email"
             name="email"
             placeholder="Email address"
-            autoComplete="email"
+            autocomplete="email"
             value={inputs.email}
             onChange={handleChange}
           />
@@ -77,7 +77,7 @@ export default function ResetPassword({ token }) {
             type="password"
             name="password"
             placeholder="********"
-            autoComplete="password"
+            autocomplete="password"
             value={inputs.password}
             onChange={handleChange}
           />

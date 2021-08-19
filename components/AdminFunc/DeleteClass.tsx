@@ -19,9 +19,8 @@ const update = (cache, payload) => {
 
 interface DeleteClassProps {
   id: string
-  children: React.ReactNode
 }
-export default function DeleteClass({ id, children }: DeleteClassProps) {
+export default function DeleteClass({ id }: DeleteClassProps) {
   const [deleteProduct, { loading }] = useMutation(DELETE_SPORTCLASS_MUTATION, {
     variables: { id },
     update: update,
@@ -38,7 +37,7 @@ export default function DeleteClass({ id, children }: DeleteClassProps) {
         }
       }}
     >
-      {children}
+      Delete
     </SmallButton>
   )
 }

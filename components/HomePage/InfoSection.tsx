@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface InfoSectionProps {
-  id: string
+  id?: string
   imgStart: boolean
 }
 export default function InfoSection({ id, imgStart }: InfoSectionProps) {
