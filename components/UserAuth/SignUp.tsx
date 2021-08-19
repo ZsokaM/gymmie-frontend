@@ -13,7 +13,7 @@ import {
   LabelStyle,
   FormButton,
 } from '../FormElements/formElementsStyle'
-import DisplayError from '../Layout/ErrorMessage'
+import DisplayError from '../Layout/DisplayError'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -53,16 +53,18 @@ export default function SignUp() {
   })
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await signup().catch(console.error)
+    await signup()
     resetForm()
-    setIsLoggedIn({
-      email: inputs.email,
-      password: inputs.password,
-    })
-    login()
-    Router.push({
-      pathname: '/schedule',
-    })
+    if (!error) {
+      setIsLoggedIn({
+        email: inputs.email,
+        password: inputs.password,
+      })
+      login()
+      Router.push({
+        pathname: '/schedule',
+      })
+    }
   }
 
   return (

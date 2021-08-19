@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 interface InfoSectionProps {
-  id?: string
+  id: string
   imgStart: boolean
 }
 export default function InfoSection({ id, imgStart }: InfoSectionProps) {
@@ -19,7 +19,11 @@ export default function InfoSection({ id, imgStart }: InfoSectionProps) {
             </Column>
             <Column>
               <ImgWrap>
-                <Img src="/shoe.jpeg" />
+                <Img
+                  src="/shoe.jpeg"
+                  alt="shoe section image"
+                  title="shoe on yoga mat"
+                />
               </ImgWrap>
             </Column>
           </InfoRow>
@@ -47,7 +51,7 @@ const InfoWrapper = styled.div`
   margin-left: auto;
   padding: 0 1rem;
 `
-const InfoRow = styled.div<InfoSectionProps>`
+const InfoRow = styled.section<Pick<InfoSectionProps, 'imgStart'>>`
   display: flex;
   flex-direction: ${({ imgStart }) => (imgStart ? 'row' : 'row-reverse')};
   align-items: center;
@@ -91,7 +95,6 @@ const Heading = styled.h2`
 `
 const Subtitle = styled.p`
   color: ${({ theme }) => theme.text.primary};
-  max-width: 440px;
   margin-bottom: 3rem;
   font-size: 2rem;
   line-height: 1.5rem;

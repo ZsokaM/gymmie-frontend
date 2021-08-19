@@ -10,7 +10,7 @@ import useForm from '../FormElements/useForm'
 import { getWeek, currentYear } from '../../lib/dateHelpers'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
-import DisplayError from '../Layout/ErrorMessage'
+import DisplayError from '../Layout/DisplayError'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
   mutation CREATE_SPORTCLASS_MUTATION(

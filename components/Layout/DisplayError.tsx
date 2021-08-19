@@ -45,14 +45,6 @@ const DisplayError = ({ error }: DisplayErrorProps) => {
   )
 }
 
-DisplayError.defaultProps = {
-  error: {},
-}
-
-DisplayError.propTypes = {
-  error: PropTypes.object,
-}
-
 const ErrorStyles = styled.div`
   padding: 2rem;
   background: white;

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
 import useForm from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import {
@@ -8,7 +8,7 @@ import {
   FormHeader,
   FieldSetStyle,
 } from '../FormElements/formElementsStyle'
-import DisplayError from '../Layout/ErrorMessage'
+import DisplayError from '../Layout/DisplayError'
 
 export const SINGLE_SPORTCLASS_QUERY = gql`
   query SINGLE_SPORTCLASS_QUERY($id: ID!) {
@@ -66,10 +66,10 @@ const UPDATE_SPORTCLASS_MUTATION = gql`
     }
   }
 `
-type IdType = {
+type UpdateClassProps = {
   id: string
 }
-export default function UpdateClass({ id }: IdType) {
+export default function UpdateClass({ id }: UpdateClassProps) {
   const { data, loading, error } = useQuery(SINGLE_SPORTCLASS_QUERY, {
     variables: { id },
   })

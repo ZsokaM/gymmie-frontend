@@ -28,15 +28,20 @@ export interface SportClassInterface {
 }
 
 export interface ModalProps {
-  modalIsOpen?: boolean
-  setModalIsOpen?: () => void
-  modalText?: string
-  setModalText?: () => void
-  modalType?: string
-  setModalType?: () => void
-  toggleModal?: () => void
-  showModal?: () => void
-  closeModal?: () => void
-  successMsgModal?: () => void
-  errorMsgModal?: () => void
+  modalIsOpen: boolean
+  setModalIsOpen: () => void
+  modalText: string
+  setModalText: () => void
+  modalType: string
+  setModalType: () => void
+  toggleModal: () => void
+  showModal: () => void
+  closeModal: () => void
+  successMsgModal: () => void
+  errorMsgModal: () => void
+}
+
+export enum Direction {
+  PREVIOUS,
+  NEXT,
 }

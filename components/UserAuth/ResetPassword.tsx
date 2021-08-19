@@ -9,7 +9,7 @@ import {
   FormButton,
 } from '../FormElements/formElementsStyle'
 import useForm from '../FormElements/useForm'
-import DisplayError from '../Layout/ErrorMessage'
+import DisplayError from '../Layout/DisplayError'
 
 const RESET_PASSWORD_MUTATION = gql`
   mutation RESET_PASSWORD_MUTATION(

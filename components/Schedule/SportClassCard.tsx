@@ -4,7 +4,6 @@ import gql from 'graphql-tag'
 import { decimalToTime } from '../../lib/dateHelpers'
 import { CURRENT_USER_QUERY } from '../UserAuth/User'
 import { useUser } from '../UserAuth/User'
-import { useModal } from '../Modals/ModalContext'
 
 const ADD_TO_BOOKINGS_MUTATION = gql`
   mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
@@ -31,7 +30,6 @@ interface SportClassCardProp {
 }
 export default function SportClassCard({ classData }: SportClassCardProp) {
   const user = useUser()
-  const modal = useModal()
   const [addToBookings, { data, error, loading }] = useMutation(
     ADD_TO_BOOKINGS_MUTATION,
     {

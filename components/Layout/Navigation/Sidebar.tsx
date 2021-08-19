@@ -4,7 +4,7 @@ import NavElements from './NavElements'
 
 interface SideBarProps {
   isOpen: boolean
-  toggle?: () => void
+  toggle: () => void
 }
 export default function Sidebar({ isOpen, toggle }: SideBarProps) {
   return (
@@ -19,9 +19,9 @@ export default function Sidebar({ isOpen, toggle }: SideBarProps) {
   )
 }
 
-const SidebarContainer = styled.aside<SideBarProps>`
+const SidebarContainer = styled.aside<Pick<SideBarProps, 'isOpen'>>`
   position: fixed;
-  z-index: 999;
+  z-index: 9;
   width: 100%;
   height: 100%;
   display: flex;
@@ -60,7 +60,7 @@ const SidebarWrapper = styled.div`
 
   a,
   button {
-    padding: 1rem 1rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
     position: relative;

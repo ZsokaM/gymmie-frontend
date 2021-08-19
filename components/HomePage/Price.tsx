@@ -29,7 +29,7 @@ export default function Price() {
   )
 }
 
-const PriceContainer = styled.div`
+const PriceContainer = styled.section`
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@ const PriceWrapper = styled.div`
     justify-content: center;
   }
 `
-const PriceCard = styled.div`
+const PriceCard = styled.article`
   background: ${({ theme }) => theme.bg.secondary};
   color: ${({ theme }) => theme.text.primary};
   display: flex;
@@ -62,12 +62,11 @@ const PriceCard = styled.div`
   padding: 30px;
   margin: 5px;
   box-shadow: 0 1px 3px ${({ theme }) => theme.bg.secondary};
-  transition: all 0.2s ease-in-out;
+  transition: scale 0.2s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.05);
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
   }
 `
 const PriceIcon = styled.img`

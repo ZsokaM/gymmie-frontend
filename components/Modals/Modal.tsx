@@ -33,7 +33,7 @@ export default function Modal({
   )
 }
 
-const Background = styled.div<ModalProps>`
+const Background = styled.div<Pick<ModalProps, 'modalType'>>`
   width: 100%;
   height: 100%;
   background: ${({ modalType }) =>

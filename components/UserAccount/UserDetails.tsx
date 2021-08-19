@@ -5,18 +5,16 @@ import { useUser } from '../UserAuth/User'
 export default function UserDetails() {
   const user = useUser()
   return (
-    <>
-      <UserCard>
-        <UserName>{user.name}</UserName>
-        <Achievements>
-          <UserParag>
-            You attended {user.bookings.length} classes since you joined
-          </UserParag>
-          <Membership>current membership info</Membership>
-        </Achievements>
-        <FormButton>delete account</FormButton>
-      </UserCard>
-    </>
+    <UserCard>
+      <UserName>{user.name}</UserName>
+      <Achievements>
+        <UserParag>
+          You have attended {user.bookings.length} classes since you joined
+        </UserParag>
+        <Membership>current membership info</Membership>
+      </Achievements>
+      <FormButton>delete account</FormButton>
+    </UserCard>
   )
 }
 
@@ -55,7 +53,7 @@ const Achievements = styled.article`
 const UserParag = styled.section`
   font-size: 2rem;
   color: ${({ theme }) => theme.text.primary};
-  :last-child {
+  &:last-child {
     margin-bottom: 2rem;
   }
 `

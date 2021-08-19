@@ -6,7 +6,7 @@ export const TableTitle = styled.h2`
 
 export const TableContainer = styled.table`
   margin: 0 auto;
-  min-height: 100%;
+  height: 100%;
   width: 95%;
 `
 
@@ -30,7 +30,7 @@ export const TableField = styled.td`
 
 export const SmallButton = styled.button`
   border-radius: 5px;
-  background: ${({ theme }) => theme.bg.secondary};
+  background-color: ${({ theme }) => theme.bg.secondary};
   padding: 1rem;
   color: ${({ theme }) => theme.text.primary};
   width: 70px;
@@ -41,7 +41,7 @@ export const SmallButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
 
   &:disabled {

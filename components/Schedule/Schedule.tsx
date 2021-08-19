@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
-import { SportClassInterface } from '../../lib/gymmieInterfaces'
+import { SportClassInterface, Direction } from '../../lib/gymmieInterfaces'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -29,15 +29,14 @@ export default function Schedule() {
 
   useEffect(() => {
     setCurrentWeekOfTheYear(getWeek())
-    console.log(currentWeekOfTheYear)
   }, [])
 
   let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
-  const changeWeek = (direction: string) => {
-    direction === 'previous'
+  const changeWeek = (direction: Direction) => {
+    direction === Direction.PREVIOUS
       ? setWeekToDisplay((prevState) => prevState - 1)
       : setWeekToDisplay((prevState) => prevState + 1)
   }
@@ -67,7 +66,7 @@ export default function Schedule() {
       <Header>
         <SmallButton
           type="button"
-          onClick={() => changeWeek('previous')}
+          onClick={() => changeWeek(Direction.PREVIOUS)}
           disabled={weekToDisplay < currentWeekOfTheYear - 1}
         >
           Previous Week
@@ -77,7 +76,7 @@ export default function Schedule() {
         </h2>
         <SmallButton
           type="button"
-          onClick={() => changeWeek('next')}
+          onClick={() => changeWeek(Direction.NEXT)}
           disabled={weekToDisplay > currentWeekOfTheYear + 1}
         >
           Next Week
@@ -143,7 +142,6 @@ const SmallButton = styled.button`
   color: ${({ theme }) => theme.text.primary};
   width: 120px;
   font-size: 1.25rem;
-  outline: none;
   border: none;
   cursor: pointer;
   display: flex;

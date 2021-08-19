@@ -45,12 +45,6 @@ const NavMenu = styled.nav`
       text-decoration: underline ${({ theme }) => theme.bg.quarternary};
       text-decoration-thickness: 20%;
       text-underline-offset: 0.3em;
-      &:after {
-        width: calc(100% - 60px);
-      }
-      ${({ theme }) => theme.mediaQueries.small} {
-        width: calc(100% - 10px);
-      }
     }
 
     ${({ theme }) => theme.mediaQueries.medium} {

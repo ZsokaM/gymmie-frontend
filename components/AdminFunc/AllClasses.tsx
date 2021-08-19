@@ -3,7 +3,7 @@ import Link from 'next/link'
 import DeleteClass from '../AdminFunc/DeleteClass'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import { weekDayNames, decimalToTime } from '../../lib/dateHelpers'
-import DisplayError from '../Layout/ErrorMessage'
+import DisplayError from '../Layout/DisplayError'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
 import {
@@ -16,8 +16,14 @@ import {
   TableTitle,
 } from '../TableElements/ClassTableStyle'
 
+interface AllClassesInterface {
+  allSportClasses: SportClassInterface[]
+}
+
 export default function AllClasses() {
-  let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
+  let { data, error, loading } = useQuery<AllClassesInterface>(
+    ALL_CLASSES_QUERY,
+  )
   if (loading) return <p>Loading...</p>
   if (error) return <DisplayError error={error} />
 
@@ -37,7 +43,7 @@ export default function AllClasses() {
           </TableRow>
         </TableHeader>
         <tbody>
-          {data.allSportClasses.map((sportClass: SportClassInterface) => (
+          {data?.allSportClasses.map((sportClass) => (
             <TableRow key={sportClass.id}>
               <TableField>{sportClass.year}</TableField>
               <TableField>{sportClass.week}</TableField>
@@ -47,14 +53,7 @@ export default function AllClasses() {
               <TableField>{sportClass.teacher}</TableField>
               <TableField>
                 <ButtonWrapper>
-                  <Link
-                    href={{
-                      pathname: 'admin',
-                      query: {
-                        id: sportClass.id,
-                      },
-                    }}
-                  >
+                  <Link href={`/admin?id=${sportClass.id}`}>
                     <SmallButton>Edit</SmallButton>
                   </Link>
                   <DeleteClass id={sportClass.id}>Delete</DeleteClass>

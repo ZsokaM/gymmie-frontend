@@ -66,7 +66,7 @@ export const FormSelect = styled.select`
 `
 
 export const FormButton = styled.button`
-border-radius: 5px;
+  border-radius: 5px;
   background: ${({ theme }) => theme.bg.secondary};
   padding: 1rem 2rem;
   color: ${({ theme }) => theme.text.primary};

@@ -5,6 +5,7 @@ import {
 } from '../FormElements/formElementsStyle'
 import { weekDayNames, classHours } from '../../lib/dateHelpers'
 import { InputsProps } from '../../lib/gymmieInterfaces'
+import { teachersArray } from '../../lib/generalHelpers'
 
 interface ComponentProps {
   inputs: InputsProps
@@ -79,11 +80,12 @@ export default function CreateUpdateFormFieldset({
         <span>Day</span>
         <FormSelect id="day" name="day" onChange={handleChange} required>
           <option value="">-- Pick one --</option>
-          {weekDayNames.map((weekday, idx) => (
-            <option key={weekday} value={idx}>
-              {weekday}
-            </option>
-          ))}
+          {weekDayNames.length &&
+            weekDayNames.map((weekday, idx) => (
+              <option key={weekday} value={idx}>
+                {weekday}
+              </option>
+            ))}
         </FormSelect>
       </LabelStyle>
       <LabelStyle htmlFor="startTime">
@@ -95,11 +97,12 @@ export default function CreateUpdateFormFieldset({
           required
         >
           <option value="">-- Pick one --</option>
-          {classHours().map((hour) => (
-            <option key={hour} value={hour}>
-              {hour}
-            </option>
-          ))}
+          {classHours().length &&
+            classHours().map((hour) => (
+              <option key={hour} value={hour}>
+                {hour}
+              </option>
+            ))}
         </FormSelect>
       </LabelStyle>
 
@@ -113,12 +116,12 @@ export default function CreateUpdateFormFieldset({
           required
         >
           <option value="">-- Pick one --</option>
-          <option value="Sam">Sam</option>
-          <option value="Michael">Michael</option>
-          <option value="Sophie">Sophie</option>
-          <option value="Mohamud">Mohamud</option>
-          <option value="Irene">Irene</option>
-          <option value="Guido">Guido</option>
+          {teachersArray.length &&
+            teachersArray.map((teacher, idx) => (
+              <option key={idx} value={teacher}>
+                {teacher}
+              </option>
+            ))}
         </FormSelect>
       </LabelStyle>
       <LabelStyle>
