@@ -5,6 +5,7 @@ import { decimalToTime } from '../../lib/dateHelpers'
 import { CURRENT_USER_QUERY } from '../UserAuth/User'
 import { useUser } from '../UserAuth/User'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
+import { centeredItems } from '../styles/HelperStyles'
 
 const ADD_TO_BOOKINGS_MUTATION = gql`
   mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
@@ -48,7 +49,7 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
 
 const ClassCardContainer = styled.article`
   width: 90%;
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
   padding: 1rem;
   text-transform: uppercase;

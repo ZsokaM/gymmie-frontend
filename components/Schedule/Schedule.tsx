@@ -88,14 +88,16 @@ export default function Schedule() {
         <TableHeader>
           <TableRow>
             {weekDayNames.map((day) => (
-              <th key={day}>{day}</th>
+              <TableH key={day}>{day}</TableH>
             ))}
           </TableRow>
         </TableHeader>
         <tbody>
           <TableRow>
-            {weekDayNames.map((_, index) => (
-              <TableField key={index}>{FilterClassToDay(index)}</TableField>
+            {weekDayNames.map((day, index) => (
+              <TableField data-label={day} key={index}>
+                {FilterClassToDay(index)}
+              </TableField>
             ))}
           </TableRow>
         </tbody>
@@ -115,8 +117,11 @@ const Header = styled.section`
 `
 const TableContainer = styled.table`
   margin: 0 auto;
-  min-height: 800px;
-  width: 95%;
+  height: 100%;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.bg.quarternary};
 `
 
 const TableHeader = styled.thead`
@@ -124,15 +129,49 @@ const TableHeader = styled.thead`
   background-color: ${({ theme }) => theme.bg.secondary};
   color: ${({ theme }) => theme.text.primary};
   text-transform: capitalize;
+  vertical-align: center;
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    display: none;
+  }
+`
+
+const TableH = styled.th`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 `
 const TableRow = styled.tr`
   height: 80%;
+  display: flex;
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    flex-direction: column;
+  }
 `
 const TableField = styled.td`
-  height: 100px;
-  width: 200px;
+  height: 100%;
+  width: 100%;
   background-color: ${({ theme }) => theme.bg.quarternary};
   vertical-align: top;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    align-items: center;
+
+    &:before {
+      ${centeredItems}
+      flex-direction: column;
+      text-transform: capitalize;
+      width: 100%;
+      border-bottom: 1px solid ${({ theme }) => theme.bg.secondary};
+      padding: 1rem;
+      content: attr(data-label);
+    }
+  }
 `
 
 const SmallButton = styled.button`
@@ -140,20 +179,21 @@ const SmallButton = styled.button`
   background-color: ${({ theme }) => theme.bg.secondary};
   padding: 1rem;
   color: ${({ theme }) => theme.text.primary};
-  width: 120px;
+  width: 12rem;
   font-size: 1.25rem;
   border: none;
   cursor: pointer;
   ${centeredItems};
   justify-content: center;
   transition: background-color 0.2s ease-in-out;
-  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, .2);
+  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
 
-  &:disabled{
+  &:disabled {
     background-color: grey;
-    color: darkgray
+    color: darkgray;
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.bg.tertiary}
+    background-color: ${({ theme }) => theme.bg.tertiary};
+  }
 `
