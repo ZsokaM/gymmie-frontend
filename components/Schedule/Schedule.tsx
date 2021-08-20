@@ -146,7 +146,7 @@ const SmallButton = styled.button`
   cursor: pointer;
   ${centeredItems};
   justify-content: center;
-  transition: background 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, .2);
 
   &:disabled{

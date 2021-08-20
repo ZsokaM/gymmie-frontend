@@ -45,7 +45,6 @@ export default function NavElements() {
         spy
         exact="true"
         offset={-80}
-        passHref
       >
         <StyledLink>Contact us</StyledLink>
       </ScrollLink>

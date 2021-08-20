@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 
-export const ModalStateContext = createContext({})
+const ModalStateContext = createContext({})
 
 interface ModalInterface {
   children: React.ReactNode
@@ -45,4 +45,4 @@ function useModal() {
   return useContext(ModalStateContext)
 }
 
-export { ModalContextProvider, useModal }
+export { ModalStateContext, ModalContextProvider, useModal }
