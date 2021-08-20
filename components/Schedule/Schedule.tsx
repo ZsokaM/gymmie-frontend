@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
 import { SportClassInterface, Direction } from '../../lib/gymmieInterfaces'
+import { centeredItems } from '../styles/HelperStyles'
 
 export const ALL_CLASSES_QUERY = gql`
   query ALL_CLASSES_QUERY {
@@ -105,8 +106,7 @@ export default function Schedule() {
 
 const Header = styled.section`
   margin-top: 3rem;
-  display: flex;
-  align-items: center;
+  ${centeredItems};
   justify-content: space-evenly;
 
   h2 {
@@ -136,25 +136,24 @@ const TableField = styled.td`
 `
 
 const SmallButton = styled.button`
-  border-radius: 5px;
-  background: ${({ theme }) => theme.bg.secondary};
+  border-radius: var(--borderRadius);
+  background-color: ${({ theme }) => theme.bg.secondary};
   padding: 1rem;
   color: ${({ theme }) => theme.text.primary};
   width: 120px;
   font-size: 1.25rem;
   border: none;
   cursor: pointer;
-  display: flex;
+  ${centeredItems};
   justify-content: center;
-  align-items: center;
   transition: background 0.2s ease-in-out;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, .2);
 
   &:disabled{
-    background: grey;
+    background-color: grey;
     color: darkgray
   }
 
   &:hover {
-    background: ${({ theme }) => theme.bg.tertiary}
+    background-color: ${({ theme }) => theme.bg.tertiary}
 `

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { FaBars } from 'react-icons/fa'
 import NavElements from './NavElements'
+import { centeredItems } from '../../styles/HelperStyles'
 
 interface NavProp {
   toggle: () => void
@@ -26,17 +27,16 @@ const NavMenu = styled.nav`
   a,
   button {
     padding: 1rem 3rem;
-    display: flex;
-    align-items: center;
+    ${centeredItems}
     position: relative;
     font-size: 1.2em;
     font-weight: bold;
-    background: none;
+    background-color: none;
     border: 0;
     cursor: pointer;
     ${({ theme }) => theme.mediaQueries.small} {
-      font-size: 10px;
-      padding: 0 10px;
+      font-size: 1rem;
+      padding: 0 1rem;
     }
 
     &:hover,

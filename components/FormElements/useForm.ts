@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
-import { InputsProps } from '../../lib/gymmieInterfaces'
 
-export default function useForm(initial = {}) {
-  const [inputs, setInputs] = useState<InputsProps>(initial)
+export interface FormProps {
+  [key: string]: string | number
+}
+
+export default function useForm(initial) {
+  const [inputs, setInputs] = useState(initial)
   const initialValues = Object.values(initial).join('')
 
   useEffect(() => {
@@ -28,7 +31,7 @@ export default function useForm(initial = {}) {
 
   function clearForm() {
     const blankState = Object.fromEntries(
-      Object.entries(inputs).map(([key, value]) => [key, '']),
+      Object.entries(inputs).map(([key]) => [key, '']),
     )
     setInputs(blankState)
   }

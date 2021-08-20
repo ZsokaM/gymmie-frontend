@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import Link from 'next/link'
+import { centeredItems } from '../styles/HelperStyles'
 
 export const FormStyle = styled.form`
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
   width: 100%;
 `
 export const FormHeader = styled.h2`
@@ -18,11 +17,10 @@ export const FieldSetStyle = styled.fieldset`
   width: 100%;
   box-shadow: 6px 6px 1px 1px ${({ theme }) => theme.bg.tertiary};
   border: none;
-  border-radius: 5px;
-  display: flex;
+  border-radius: var(--borderRadius);
+  ${centeredItems};
   flex-direction: column;
-  background: ${({ theme }) => theme.bg.quarternary};
-  align-items: center;
+  background-color: ${({ theme }) => theme.bg.quarternary};
 `
 export const LabelStyle = styled.label`
   margin-bottom: 0.5rem;
@@ -30,9 +28,8 @@ export const LabelStyle = styled.label`
   width: 100%;
   color: ${({ theme }) => theme.text.primary};
   font-size: 1.5rem;
-  display: flex;
+  ${centeredItems};
   justify-content: flex-end;
-  align-items: center;
 
   span {
     margin-right: 2rem;
@@ -61,27 +58,6 @@ export const FormSelect = styled.select`
   font-size: 1.5rem;
   border: none;
   box-shadow: 1px 1px 1px 1px var(--mediumGrey);
-  border-radius: 3px;
+  border-radius: var(--borderRadius);
   color: ${({ theme }) => theme.text.primary};
-`
-
-export const FormButton = styled.button`
-  border-radius: 5px;
-  background: ${({ theme }) => theme.bg.secondary};
-  padding: 1rem 2rem;
-  color: ${({ theme }) => theme.text.primary};
-  width: 150px;
-  font-size: 1.5rem;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, .2);
-
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: ${({ theme }) => theme.bg.tertiary}
 `

@@ -30,4 +30,5 @@ export default function LogOut() {
 
 const LogoutButton = styled.button`
   color: ${({ theme }) => theme.text.primary};
+  background-color: transparent;
 `

@@ -2,6 +2,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { useSpring, animated } from 'react-spring'
 import { MdClose } from 'react-icons/md'
 import { ModalProps } from '../../lib/gymmieInterfaces'
+import { centeredItems } from '../styles/HelperStyles'
 
 export default function Modal({
   modalIsOpen,
@@ -19,8 +20,8 @@ export default function Modal({
 
   return (
     <>
-      {modalIsOpen ? (
-        <Background type={modalType}>
+      {modalIsOpen && (
+        <Background modalType={modalType}>
           <animated.div style={animation}>
             <ModalWrapper>
               <ModalContent>{modalText}</ModalContent>
@@ -28,7 +29,7 @@ export default function Modal({
             </ModalWrapper>
           </animated.div>
         </Background>
-      ) : null}
+      )}
     </>
   )
 }
@@ -36,31 +37,28 @@ export default function Modal({
 const Background = styled.div<Pick<ModalProps, 'modalType'>>`
   width: 100%;
   height: 100%;
-  background: ${({ modalType }) =>
+  background-color: ${({ modalType }) =>
     modalType === 'success' ? '#7ECA9C' : '#EFB7B7'};
   position: fixed;
-  display: flex;
+  ${centeredItems}
   justify-content: center;
-  align-items: center;
 `
 
 const ModalWrapper = styled.div`
   width: 300px;
   height: 100px;
-  background: ${({ theme }) => theme.bg.secondary};
-  display: flex;
+  background-color: ${({ theme }) => theme.bg.secondary};
+  ${centeredItems};
   justify-content: center;
-  align-items: center;
   position: relative;
   z-index: 10;
   border-radius: 10px;
 `
 
 const ModalContent = styled.div`
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   line-height: 1.8;
   color: ${({ theme }) => theme.text.primary};
   p {
@@ -68,7 +66,7 @@ const ModalContent = styled.div`
   }
   button {
     padding: 10px 24px;
-    background: ${({ theme }) => theme.bg.quarternary};
+    background-color: ${({ theme }) => theme.bg.quarternary};
     color: ${({ theme }) => theme.text.primary};
     border: none;
   }

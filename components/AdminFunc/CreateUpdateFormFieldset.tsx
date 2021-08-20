@@ -4,11 +4,12 @@ import {
   FormSelect,
 } from '../FormElements/formElementsStyle'
 import { weekDayNames, classHours } from '../../lib/dateHelpers'
-import { InputsProps } from '../../lib/gymmieInterfaces'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
 import { teachersArray } from '../../lib/generalHelpers'
+import { FormProps } from '../FormElements/useForm'
 
 interface ComponentProps {
-  inputs: InputsProps
+  inputs: FormProps
   handleChange: React.FormEventHandler<HTMLInputElement | HTMLSelectElement>
 }
 export default function CreateUpdateFormFieldset({

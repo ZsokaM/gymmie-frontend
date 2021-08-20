@@ -6,8 +6,8 @@ import {
   FormStyle,
   InputStyle,
   LabelStyle,
-  FormButton,
 } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
 import DisplayError from '../Layout/DisplayError'
 
@@ -28,8 +28,11 @@ const RESET_PASSWORD_MUTATION = gql`
   }
 `
 
-export default function ResetPassword({ token }) {
-  const { inputs, handleChange, resetForm } = useForm({
+interface ResetPasswordProps {
+  token: string
+}
+export default function ResetPassword({ token }: ResetPasswordProps) {
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
     password: '',
     token,
@@ -46,10 +49,15 @@ export default function ResetPassword({ token }) {
     ? data?.redeemUserPasswordResetToken
     : undefined
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await passwordReset()
-    resetForm()
+    try {
+      await passwordReset()
+      clearForm()
+      resetForm()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
@@ -66,7 +74,7 @@ export default function ResetPassword({ token }) {
             type="email"
             name="email"
             placeholder="Email address"
-            autocomplete="email"
+            autoComplete="email"
             value={inputs.email}
             onChange={handleChange}
           />
@@ -77,7 +85,7 @@ export default function ResetPassword({ token }) {
             type="password"
             name="password"
             placeholder="********"
-            autocomplete="password"
+            autoComplete="password"
             value={inputs.password}
             onChange={handleChange}
           />

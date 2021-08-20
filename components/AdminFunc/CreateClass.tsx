@@ -4,13 +4,14 @@ import {
   FieldSetStyle,
   FormHeader,
   FormStyle,
-  FormButton,
 } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
 import { getWeek, currentYear } from '../../lib/dateHelpers'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import DisplayError from '../Layout/DisplayError'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
 const CREATE_SPORTCLASS_MUTATION = gql`
   mutation CREATE_SPORTCLASS_MUTATION(
@@ -56,20 +57,22 @@ export default function CreateClass() {
   })
 
   //function that fires the mutations and what we get back from it
-  const [createSportClass, { loading, error }] = useMutation(
-    CREATE_SPORTCLASS_MUTATION,
-    {
-      variables: inputs,
-      refetchQueries: [{ query: ALL_CLASSES_QUERY }],
-    },
-  )
+  const [createSportClass, { loading, error }] = useMutation<
+    SportClassInterface
+  >(CREATE_SPORTCLASS_MUTATION, {
+    variables: inputs,
+    refetchQueries: [{ query: ALL_CLASSES_QUERY }],
+  })
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    await createSportClass()
-    clearForm()
-    resetForm()
+    try {
+      await createSportClass()
+      clearForm()
+      resetForm()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (

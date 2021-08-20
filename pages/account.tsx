@@ -4,12 +4,12 @@ import UserDetails from '../components/UserAccount/UserDetails'
 
 export default function account() {
   return (
-    <div>
+    <>
       <Head>
         <title>gymmie | My account </title>
       </Head>
       <UserDetails />
       <Bookings />
-    </div>
+    </>
   )
 }

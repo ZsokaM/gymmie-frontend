@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Button } from '../styles/ButtonStyle'
+import { centeredItems } from '../styles/HelperStyles'
 
 interface FooterProps {
   toggleTheme: () => void
@@ -16,14 +17,13 @@ export default function Footer({ toggleTheme }: FooterProps) {
 }
 
 const FooterContainer = styled.footer`
-  background: ${({ theme }) => theme.bg.secondary};
+  background-color: ${({ theme }) => theme.bg.secondary};
   height: 30%;
   color: ${({ theme }) => theme.text.primary};
   margin-top: 2rem;
   padding: 3rem;
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 `
 const FooterWrapper = styled.section`

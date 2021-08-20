@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { decimalToTime } from '../../lib/dateHelpers'
 import { CURRENT_USER_QUERY } from '../UserAuth/User'
 import { useUser } from '../UserAuth/User'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
 const ADD_TO_BOOKINGS_MUTATION = gql`
   mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
@@ -14,19 +15,7 @@ const ADD_TO_BOOKINGS_MUTATION = gql`
 `
 
 interface SportClassCardProp {
-  classData: {
-    id?: string
-    name?: string
-    freeSpots?: number
-    available?: number
-    year?: number
-    week?: number
-    day?: number
-    startTime?: number
-    teacher?: string
-    duration?: number
-    users?: string[]
-  }
+  classData: SportClassInterface
 }
 export default function SportClassCard({ classData }: SportClassCardProp) {
   const user = useUser()

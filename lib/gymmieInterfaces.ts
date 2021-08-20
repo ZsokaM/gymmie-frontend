@@ -1,4 +1,4 @@
-export interface InputsProps {
+export interface SportClassInterface {
   id?: string
   name?: string
   freeSpots?: number
@@ -10,21 +10,12 @@ export interface InputsProps {
   teacher?: string
   duration?: number
   users?: string[]
-  email?: string
-  password?: string
 }
 
-export interface SportClassInterface {
-  id: string
-  name: string
-  freeSpots: number
-  available: number
-  year: number
-  week: number
-  day: number
-  startTime: number
-  teacher: string
-  duration: number
+export interface AuthInterface {
+  name?: string
+  email?: string
+  password?: string
 }
 
 export interface ModalProps {

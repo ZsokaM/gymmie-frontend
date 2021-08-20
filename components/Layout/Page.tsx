@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import { DefaultTheme } from 'styled-components'
 import Modal from '../Modals/Modal'
 import Footer from './Footer'
 import Header from './Navigation/Header'
@@ -12,7 +13,7 @@ interface PageProps {
 }
 
 export default function Page({ children }: PageProps) {
-  const modal: ModalProps = useModal()
+  const modal = useModal()
   const [theme, setTheme] = useState('dark')
   const [isOpen, setIsOpen] = useState(false)
 
@@ -35,12 +36,12 @@ export default function Page({ children }: PageProps) {
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <Modal
+        {/* <Modal
           modalIsOpen={modal.modalIsOpen}
           modalType={modal.modalType}
           modalText={modal.modalText}
           closeModal={modal.closeModal}
-        />
+        /> */}
         <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
         <Header toggle={toggleSidebar} />
         <InnerStyles>{children}</InnerStyles>
@@ -61,8 +62,7 @@ const GlobalStyles = createGlobalStyle`
         --lightGrey: #f5f5f5;
         --mediumGrey: #aaabb8;
         --offWhite: #ededed;
-        --maxWidth: 1000px;
-        --bs: 0 12px 24px 0 rgba(0,0,0,0,.09)
+        --borderRadius: 5px;
 }
   html {
     box-sizing: border-box;
@@ -106,8 +106,13 @@ const InnerStyles = styled.div`
   flex-direction: column;
   flex: 1;
 `
+const mediaQueries = {
+  small: `@media screen and (max-width: 768px)`,
+  medium: `@media screen and (max-width: 1024px)`,
+  large: `@media screen and (max-width: 1200px)`,
+}
 
-const lightTheme = {
+const lightTheme: DefaultTheme = {
   bg: {
     primary: '#ffffff',
     secondary: '#7ed0e1',
@@ -120,14 +125,10 @@ const lightTheme = {
     tertiary: '#240090',
     quarternary: '#3500d3',
   },
-  mediaQueries: {
-    small: `@media screen and (max-width: 768px)`,
-    medium: `@media screen and (max-width: 1024px)`,
-    large: `@media screen and (max-width: 1200px)`,
-  },
+  mediaQueries: { ...mediaQueries },
 }
 
-const darkTheme = {
+const darkTheme: DefaultTheme = {
   bg: {
     primary: '#0C0032',
     secondary: '#190061',
@@ -140,9 +141,5 @@ const darkTheme = {
     tertiary: '#7ed0e1',
     quarternary: '#525560',
   },
-  mediaQueries: {
-    small: `@media screen and (max-width: 768px)`,
-    medium: `@media screen and (max-width: 1024px)`,
-    large: `@media screen and (max-width: 1200px)`,
-  },
+  mediaQueries: { ...mediaQueries },
 }

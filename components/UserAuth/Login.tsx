@@ -10,8 +10,8 @@ import {
   FormStyle,
   InputStyle,
   LabelStyle,
-  FormButton,
 } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import ErrorComp from '../Layout/ErrorComp'
 
 export const LOGIN_MUTATION = gql`
@@ -32,14 +32,12 @@ export const LOGIN_MUTATION = gql`
   }
 `
 export default function Login() {
-  const user = useUser()
-  const { inputs, handleChange, resetForm } = useForm({
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
     password: '',
   })
   const [login, { data, loading }] = useMutation(LOGIN_MUTATION, {
     variables: inputs,
-    //refetch the currently logged in user
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
 
@@ -47,48 +45,52 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await login()
-    if (
-      data?.authenticateUserWithPassword.__typename ===
-      'UserAuthenticationWithPasswordSuccess'
-    ) {
-      Router.push({
-        pathname: '/schedule',
-      })
+    try {
+      await login()
+      if (
+        data?.authenticateUserWithPassword.__typename ===
+        'UserAuthenticationWithPasswordSuccess'
+      ) {
+        Router.push({
+          pathname: '/schedule',
+        })
+        clearForm()
+        resetForm()
+      }
+    } catch (err) {
+      console.log(err)
     }
   }
 
   return (
-    <>
-      <FormStyle method="POST" onSubmit={handleSubmit}>
-        <FormHeader>Login</FormHeader>
-        {error !== undefined && <ErrorComp msg={error} />}
-        <FieldSetStyle disabled={loading}>
-          <LabelStyle htmlFor="email">
-            <span>Email</span>
-            <InputStyle
-              type="email"
-              name="email"
-              placeholder="Email address"
-              autocomplete="email"
-              value={inputs.email}
-              onChange={handleChange}
-            />
-          </LabelStyle>
-          <LabelStyle htmlFor="password">
-            <span>Password</span>
-            <InputStyle
-              type="password"
-              name="password"
-              placeholder="********"
-              autocomplete="password"
-              value={inputs.password}
-              onChange={handleChange}
-            />
-          </LabelStyle>
-          <FormButton type="submit">Log me in</FormButton>
-        </FieldSetStyle>
-      </FormStyle>
-    </>
+    <FormStyle method="POST" onSubmit={handleSubmit}>
+      <FormHeader>Login</FormHeader>
+      {error !== undefined && <ErrorComp msg={error} />}
+      <FieldSetStyle disabled={loading}>
+        <LabelStyle htmlFor="email">
+          <span>Email</span>
+          <InputStyle
+            type="email"
+            name="email"
+            placeholder="Email address"
+            autoComplete="email"
+            value={inputs.email}
+            onChange={handleChange}
+          />
+        </LabelStyle>
+        <LabelStyle htmlFor="password">
+          <span>Password</span>
+          <InputStyle
+            type="password"
+            name="password"
+            placeholder="********"
+            autoComplete="password"
+            value={inputs.password}
+            onChange={handleChange}
+          />
+        </LabelStyle>
+        <FormButton type="submit">Log me in</FormButton>
+      </FieldSetStyle>
+    </FormStyle>
   )
 }

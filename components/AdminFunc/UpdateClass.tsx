@@ -3,11 +3,11 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
 import useForm from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import {
-  FormButton,
   FormStyle,
   FormHeader,
   FieldSetStyle,
 } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
 
 export const SINGLE_SPORTCLASS_QUERY = gql`
@@ -74,35 +74,39 @@ export default function UpdateClass({ id }: UpdateClassProps) {
     variables: { id },
   })
 
+  const { inputs, handleChange } = useForm(data?.SportClass)
+
   const [
     updateSportClass,
     { data: updateData, loading: updateLoading, error: updateError },
   ] = useMutation(UPDATE_SPORTCLASS_MUTATION)
 
-  const { inputs, handleChange } = useForm(data?.SportClass)
-
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await updateSportClass({
-      variables: {
-        id,
-        name: inputs.name,
-        freeSpots: inputs.freeSpots,
-        available: inputs.available,
-        year: inputs.year,
-        week: inputs.week,
-        day: inputs.day,
-        startTime: inputs.startTime,
-        teacher: inputs.teacher,
-        duration: inputs.duration,
-      },
-    })
+    try {
+      await updateSportClass({
+        variables: {
+          id,
+          name: inputs.name,
+          freeSpots: inputs.freeSpots,
+          available: inputs.available,
+          year: inputs.year,
+          week: inputs.week,
+          day: inputs.day,
+          startTime: inputs.startTime,
+          teacher: inputs.teacher,
+          duration: inputs.duration,
+        },
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }
   if (updateLoading) return <p>loading...</p>
 
   return (
     <FormStyle onSubmit={onSubmit}>
-      <DisplayError error={error} />
+      <DisplayError error={error | updateError} />
       <FieldSetStyle disabled={loading}>
         <FormHeader>Update class</FormHeader>
         <CreateUpdateFormFieldset inputs={inputs} handleChange={handleChange} />

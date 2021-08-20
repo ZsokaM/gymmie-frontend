@@ -1,13 +1,13 @@
 import styled from 'styled-components'
+import { centeredItems } from '../styles/HelperStyles'
 
 interface InfoSectionProps {
-  id?: string
   imgStart: boolean
 }
-export default function InfoSection({ id, imgStart }: InfoSectionProps) {
+export default function InfoSection({ imgStart }: InfoSectionProps) {
   return (
     <>
-      <InfoContainer id={id}>
+      <InfoContainer>
         <InfoWrapper>
           <InfoRow imgStart={imgStart}>
             <Column>
@@ -36,7 +36,7 @@ export default function InfoSection({ id, imgStart }: InfoSectionProps) {
 const InfoContainer = styled.section`
   padding: 2rem;
   color: ${({ theme }) => theme.text.primary};
-  background: ${({ theme }) => theme.bg.secondary};
+  background-color: ${({ theme }) => theme.bg.secondary};
 
   ${({ theme }) => theme.mediaQueries.small} {
     padding: 1rem;
@@ -51,10 +51,9 @@ const InfoWrapper = styled.div`
   margin-left: auto;
   padding: 0 1rem;
 `
-const InfoRow = styled.section<Pick<InfoSectionProps, 'imgStart'>>`
-  display: flex;
+const InfoRow = styled.section<InfoSectionProps>`
+  ${centeredItems};
   flex-direction: ${({ imgStart }) => (imgStart ? 'row' : 'row-reverse')};
-  align-items: center;
   justify-content: space-between;
   color: ${({ theme }) => theme.text.primary};
 
@@ -67,8 +66,7 @@ const Column = styled.article`
   margin-bottom: 15px;
   padding: 0 15px;
   width: 50%;
-  display: flex;
-  align-items: center;
+  ${centeredItems};
   justify-content: space-around;
 `
 

@@ -6,8 +6,8 @@ import {
   FormStyle,
   InputStyle,
   LabelStyle,
-  FormButton,
 } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
 
 const REQUEST_RESET_MUTATION = gql`
@@ -32,7 +32,7 @@ const REQUEST_RESET_MUTATION = gql`
 // `
 
 export default function RequestReset() {
-  const { inputs, handleChange, resetForm } = useForm({
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
   })
 
@@ -57,8 +57,13 @@ export default function RequestReset() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await requestReset()
-    resetForm()
+    try {
+      await requestReset()
+      clearForm()
+      resetForm()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
@@ -74,7 +79,7 @@ export default function RequestReset() {
             type="email"
             name="email"
             placeholder="Email address"
-            autocomplete="email"
+            autoComplete="email"
             value={inputs.email}
             onChange={handleChange}
           />

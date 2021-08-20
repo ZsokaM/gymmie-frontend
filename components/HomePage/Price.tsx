@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { centeredItems } from '../styles/HelperStyles'
 
 export default function Price() {
   return (
@@ -31,18 +32,16 @@ export default function Price() {
 
 const PriceContainer = styled.section`
   height: 100%;
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.bg.primary};
+  background-color: ${({ theme }) => theme.bg.primary};
 `
 const PriceWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
-  display: flex;
+  ${centeredItems};
   justify-content: space-between;
-  align-items: center;
   padding: 0 50px;
 
   ${({ theme }) => theme.mediaQueries.small} {
@@ -51,12 +50,11 @@ const PriceWrapper = styled.div`
   }
 `
 const PriceCard = styled.article`
-  background: ${({ theme }) => theme.bg.secondary};
+  background-color: ${({ theme }) => theme.bg.secondary};
   color: ${({ theme }) => theme.text.primary};
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
-  border-radius: 3px;
+  border-radius: var(--borderRadius);
   height: 250px;
   width: 250px;
   padding: 30px;
@@ -80,7 +78,7 @@ const PriceHeader = styled.h2`
   margin-top: 3rem;
   margin-bottom: 3rem;
 
-  @media (max-width: 480px) {
+  ${({ theme }) => theme.mediaQueries.medium} {
     font-size: 2rem;
   }
 `

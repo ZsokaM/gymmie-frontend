@@ -11,6 +11,7 @@ import {
 
 export default function Bookings() {
   const activeUser = useUser()
+
   if (!activeUser) return null
 
   return (

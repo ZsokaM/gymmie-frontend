@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { ApolloCache, useMutation } from '@apollo/client'
-import { SmallButton } from '../TableElements/ClassTableStyle'
+import { SmallFormButton } from '../styles/ButtonStyle'
 
 const DELETE_BOOKING_MUTATION = gql`
   mutation DELETE_BOOKING_MUTATION($id: ID!) {
@@ -27,13 +27,13 @@ export default function DeleteBooking({ id }: DeleteBookingProps) {
   })
 
   return (
-    <SmallButton
+    <SmallFormButton
       type="button"
       onClick={() => deleteBooking()}
       disabled={loading}
       title="cancel this booking"
     >
       cancel
-    </SmallButton>
+    </SmallFormButton>
   )
 }

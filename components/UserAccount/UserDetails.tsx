@@ -1,12 +1,17 @@
 import styled from 'styled-components'
-import { FormButton } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import { useUser } from '../UserAuth/User'
+import { centeredItems } from '../styles/HelperStyles'
 
 export default function UserDetails() {
   const user = useUser()
+  if (!user) return null
   return (
     <UserCard>
-      <UserName>{user.name}</UserName>
+      <Circle>
+        <UserName>{user.name}</UserName>
+      </Circle>
+
       <Achievements>
         <UserParag>
           You have attended {user.bookings.length} classes since you joined
@@ -19,9 +24,8 @@ export default function UserDetails() {
 }
 
 const UserCard = styled.article`
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
   width: 70%;
   height: 100%;
   margin: 1rem auto;
@@ -30,22 +34,23 @@ const UserCard = styled.article`
   padding: 1rem;
 `
 
-const UserName = styled.h2`
+const Circle = styled.div`
   border-radius: 50%;
   width: 150px;
   height: 150px;
-  background-color: ${({ theme }) => theme.bg.primary};
-  color: ${({ theme }) => theme.text.primary};
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
-  display: flex;
-  align-items: center;
+  background-color: ${({ theme }) => theme.bg.primary};
+  ${centeredItems};
   justify-content: center;
+`
+const UserName = styled.h2`
+  color: ${({ theme }) => theme.text.primary};
+  font-size: 2rem;
 `
 
 const Achievements = styled.article`
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
   width: 100%;
   justify-content: space-evenly;
   align-content: center;
@@ -61,7 +66,7 @@ const UserParag = styled.section`
 const Membership = styled.div`
   width: 50%;
   height: 100px;
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
   background-color: ${({ theme }) => theme.bg.primary};
   margin: 1rem;

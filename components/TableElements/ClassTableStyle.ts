@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { centeredItems } from '../styles/HelperStyles'
 
 export const TableTitle = styled.h2`
   text-align: center;
@@ -29,7 +30,7 @@ export const TableField = styled.td`
 `
 
 export const SmallButton = styled.button`
-  border-radius: 5px;
+  border-radius: var(--borderRadius);
   background-color: ${({ theme }) => theme.bg.secondary};
   padding: 1rem;
   color: ${({ theme }) => theme.text.primary};
@@ -38,19 +39,18 @@ export const SmallButton = styled.button`
   outline: none;
   border: none;
   cursor: pointer;
-  display: flex;
+  ${centeredItems};
   justify-content: center;
-  align-items: center;
   transition: background-color 0.2s ease-in-out;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
 
   &:disabled {
-    background: grey;
+    background-color: grey;
     color: darkgray;
   }
 
   &:hover {
-    background: ${({ theme }) => theme.bg.tertiary};
+    background-color: ${({ theme }) => theme.bg.tertiary};
   }
 `
 

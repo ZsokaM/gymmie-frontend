@@ -11,8 +11,8 @@ import {
   FormStyle,
   InputStyle,
   LabelStyle,
-  FormButton,
 } from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
 
 const SIGNUP_MUTATION = gql`
@@ -35,7 +35,7 @@ export default function SignUp() {
     password: '',
   })
 
-  const { inputs, handleChange, resetForm } = useForm({
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
     name: '',
     password: '',
@@ -53,17 +53,22 @@ export default function SignUp() {
   })
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await signup()
-    resetForm()
-    if (!error) {
-      setIsLoggedIn({
-        email: inputs.email,
-        password: inputs.password,
-      })
-      login()
-      Router.push({
-        pathname: '/schedule',
-      })
+    try {
+      await signup()
+      clearForm()
+      resetForm()
+      if (!error) {
+        setIsLoggedIn({
+          email: inputs.email,
+          password: inputs.password,
+        })
+        login()
+        Router.push({
+          pathname: '/schedule',
+        })
+      }
+    } catch (err) {
+      console.error(err)
     }
   }
 
@@ -80,7 +85,7 @@ export default function SignUp() {
               name="name"
               placeholder="Name"
               value={inputs.name}
-              autocomplete="name"
+              autoComplete="name"
               onChange={handleChange}
             />
           </LabelStyle>
@@ -90,7 +95,7 @@ export default function SignUp() {
               type="email"
               name="email"
               placeholder="Email address"
-              autocomplete="email"
+              autoComplete="email"
               value={inputs.email}
               onChange={handleChange}
             />

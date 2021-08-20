@@ -20,8 +20,8 @@ interface AllClassesInterface {
   allSportClasses: SportClassInterface[]
 }
 
-export default function AllClasses() {
-  let { data, error, loading } = useQuery<AllClassesInterface>(
+export default function AllClasses({ passClassId }) {
+  const { data, error, loading } = useQuery<AllClassesInterface>(
     ALL_CLASSES_QUERY,
   )
   if (loading) return <p>Loading...</p>
@@ -53,9 +53,23 @@ export default function AllClasses() {
               <TableField>{sportClass.teacher}</TableField>
               <TableField>
                 <ButtonWrapper>
-                  <Link href={`/admin?id=${sportClass.id}`}>
-                    <SmallButton>Edit</SmallButton>
-                  </Link>
+                  {/* <Link
+                    href={{
+                      pathname: 'admin',
+                      query: {
+                        id: sportClass.id,
+                      },
+                    }}
+                  > */}
+                  <SmallButton
+                    type="button"
+                    onClick={() => {
+                      passClassId(sportClass.id)
+                    }}
+                  >
+                    Edit
+                  </SmallButton>
+                  {/* </Link> */}
                   <DeleteClass id={sportClass.id} />
                 </ButtonWrapper>
               </TableField>
