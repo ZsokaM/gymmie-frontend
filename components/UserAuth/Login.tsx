@@ -12,7 +12,7 @@ import {
   LabelStyle,
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
-import ErrorComp from '../Layout/ErrorComp'
+import ErrorMessage from '../Layout/ErrorMessage'
 
 export const LOGIN_MUTATION = gql`
   mutation LOGIN_MUTATION($email: String!, $password: String!) {

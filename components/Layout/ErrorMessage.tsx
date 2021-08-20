@@ -1,4 +1,4 @@
-export default function ErrorComp({ msg }) {
+export default function ErrorMessage({ msg }) {
   return (
     <div>
       <p>Oh no, {msg}</p>

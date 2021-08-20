@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
 import Router from 'next/router'
-import styled from 'styled-components'
+import { NavButton } from '../Layout/Navigation/NavElements'
 import { CURRENT_USER_QUERY } from './User'
 
 const SIGN_OUT_MUTATION = gql`
@@ -22,13 +22,8 @@ export default function LogOut() {
     })
   }
   return (
-    <LogoutButton type="button" onClick={handleSignOut}>
+    <NavButton as="button" type="button" onClick={handleSignOut}>
       Logout
-    </LogoutButton>
+    </NavButton>
   )
 }
-
-const LogoutButton = styled.button`
-  color: ${({ theme }) => theme.text.primary};
-  background-color: transparent;
-`

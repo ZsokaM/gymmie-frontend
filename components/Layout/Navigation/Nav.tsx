@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { FaBars } from 'react-icons/fa'
 import NavElements from './NavElements'
-import { centeredItems } from '../../styles/HelperStyles'
 
 interface NavProp {
   toggle: () => void
@@ -24,39 +23,13 @@ const NavMenu = styled.nav`
   justify-self: end;
   font-size: 2rem;
 
-  a,
-  button {
-    padding: 1rem 3rem;
-    ${centeredItems}
-    position: relative;
-    font-size: 1.2em;
-    font-weight: bold;
-    background-color: none;
-    border: 0;
-    cursor: pointer;
-    ${({ theme }) => theme.mediaQueries.small} {
-      font-size: 1rem;
-      padding: 0 1rem;
-    }
-
-    &:hover,
-    &:focus {
-      outline: none;
-      text-decoration: underline ${({ theme }) => theme.bg.quarternary};
-      text-decoration-thickness: 20%;
-      text-underline-offset: 0.3em;
-    }
-
-    ${({ theme }) => theme.mediaQueries.medium} {
-      display: none;
-    }
-  }
   ${({ theme }) => theme.mediaQueries.large} {
     width: 100%;
     justify-content: center;
     font-size: 1.5rem;
   }
 `
+
 const HamburgerIcon = styled(FaBars)`
   display: none;
   color: ${({ theme }) => theme.text.primary};
