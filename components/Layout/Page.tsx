@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { DefaultTheme } from 'styled-components'
+import styled, {
+  DefaultTheme,
+  createGlobalStyle,
+  ThemeProvider,
+} from 'styled-components'
 import Modal from '../Modals/Modal'
 import Footer from './Footer'
 import Header from './Navigation/Header'

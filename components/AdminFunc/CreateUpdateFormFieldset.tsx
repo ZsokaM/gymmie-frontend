@@ -8,14 +8,14 @@ import { SportClassInterface } from '../../lib/gymmieInterfaces'
 import { teachersArray } from '../../lib/generalHelpers'
 import { FormProps } from '../FormElements/useForm'
 
-interface ComponentProps {
+interface CreateUpdateProps {
   inputs: FormProps
   handleChange: React.FormEventHandler<HTMLInputElement | HTMLSelectElement>
 }
 export default function CreateUpdateFormFieldset({
   inputs,
   handleChange,
-}: ComponentProps) {
+}: CreateUpdateProps) {
   return (
     <>
       <LabelStyle htmlFor="name">
