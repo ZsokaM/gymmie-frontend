@@ -1,8 +1,15 @@
 import { useMutation } from '@apollo/client'
-import { useState } from 'react'
 import gql from 'graphql-tag'
-
+import {
+  FieldSetStyle,
+  FormHeader,
+  FormStyle,
+  InputStyle,
+  LabelStyle,
+} from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
+import DisplayError from '../Layout/DisplayError'
 
 const RESET_PASSWORD_MUTATION = gql`
   mutation RESET_PASSWORD_MUTATION(
@@ -21,8 +28,11 @@ const RESET_PASSWORD_MUTATION = gql`
   }
 `
 
-export default function ResetPassword({ token }) {
-  const { inputs, handleChange, resetForm } = useForm({
+interface ResetPasswordProps {
+  token: string
+}
+export default function ResetPassword({ token }: ResetPasswordProps) {
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
     password: '',
     token,
@@ -35,46 +45,53 @@ export default function ResetPassword({ token }) {
     },
   )
 
-  const handleSubmit = async (event) => {
+  const successfulError = data?.redeemUserPasswordResetToken?.code
+    ? data?.redeemUserPasswordResetToken
+    : undefined
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await passwordReset()
-    resetForm()
+    try {
+      await passwordReset()
+      clearForm()
+      resetForm()
+    } catch (err) {
+      console.error(err)
+    }
   }
 
-  //@TODO: add error handling
   return (
-    <>
-      <h2>Reset your password</h2>
-      <form method="POST" onSubmit={handleSubmit}>
-        <fieldset disabled={loading}>
-          {data?.redeemUserPasswordResetToken === null && (
-            <p>Success! You can Now sign in</p>
-          )}
-          <label htmlFor="email">
-            Email
-            <input
-              type="email"
-              name="email"
-              placeholder="Email address"
-              autoComplete="email"
-              value={inputs.email}
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="password">
-            New password
-            <input
-              type="password"
-              name="password"
-              placeholder="********"
-              autoComplete="password"
-              value={inputs.password}
-              onChange={handleChange}
-            />
-          </label>
-          <button type="submit">Reset Password</button>
-        </fieldset>
-      </form>
-    </>
+    <FormStyle method="POST" onSubmit={handleSubmit}>
+      <FormHeader>Reset your password</FormHeader>
+      <DisplayError error={error || successfulError} />
+      <FieldSetStyle disabled={loading}>
+        {data?.redeemUserPasswordResetToken === null && (
+          <p>Success! You can Now sign in</p>
+        )}
+        <LabelStyle htmlFor="email">
+          <span>Email</span>
+          <InputStyle
+            type="email"
+            name="email"
+            placeholder="Email address"
+            autoComplete="email"
+            value={inputs.email}
+            onChange={handleChange}
+          />
+        </LabelStyle>
+        <LabelStyle htmlFor="password">
+          <span>New password</span>
+          <InputStyle
+            type="password"
+            name="password"
+            placeholder="********"
+            autoComplete="password"
+            value={inputs.password}
+            onChange={handleChange}
+          />
+        </LabelStyle>
+        <FormButton type="submit">Reset Password</FormButton>
+      </FieldSetStyle>
+    </FormStyle>
   )
 }

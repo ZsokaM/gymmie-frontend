@@ -1,11 +1,19 @@
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 import Router from 'next/router'
 import { LOGIN_MUTATION } from './Login'
 import { CURRENT_USER_QUERY } from './User'
 import useForm from '../FormElements/useForm'
+import {
+  FieldSetStyle,
+  FormHeader,
+  FormStyle,
+  InputStyle,
+  LabelStyle,
+} from '../FormElements/formElementsStyle'
+import { FormButton } from '../styles/ButtonStyle'
+import DisplayError from '../Layout/DisplayError'
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -27,12 +35,12 @@ export default function SignUp() {
     password: '',
   })
 
-  const { inputs, handleChange, resetForm } = useForm({
+  const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
     name: '',
     password: '',
   })
-  const [signup, { data, error, loading }] = useMutation(SIGNUP_MUTATION, {
+  const [signup, { error, loading }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
   })
 
@@ -43,30 +51,36 @@ export default function SignUp() {
     },
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    await signup().catch(console.error)
-    resetForm()
-    setIsLoggedIn({
-      email: inputs.email,
-      password: inputs.password,
-    })
-    login()
-    Router.push({
-      pathname: '/schedule',
-    })
+    try {
+      await signup()
+      clearForm()
+      resetForm()
+      if (!error) {
+        setIsLoggedIn({
+          email: inputs.email,
+          password: inputs.password,
+        })
+        login()
+        Router.push({
+          pathname: '/schedule',
+        })
+      }
+    } catch (err) {
+      console.error(err)
+    }
   }
-
-  if (error) return <p>Error: {error}</p>
 
   return (
     <>
-      <h2>Create an account</h2>
-      <form method="POST" onSubmit={handleSubmit}>
-        <fieldset disabled={loading}>
-          <label htmlFor="name">
-            Name
-            <input
+      <FormStyle method="POST" onSubmit={handleSubmit}>
+        <FormHeader>Create an account</FormHeader>
+        <DisplayError error={error} />
+        <FieldSetStyle disabled={loading}>
+          <LabelStyle htmlFor="name">
+            <span>Name</span>
+            <InputStyle
               type="text"
               name="name"
               placeholder="Name"
@@ -74,10 +88,10 @@ export default function SignUp() {
               autoComplete="name"
               onChange={handleChange}
             />
-          </label>
-          <label htmlFor="email">
-            Email
-            <input
+          </LabelStyle>
+          <LabelStyle htmlFor="email">
+            <span>Email</span>
+            <InputStyle
               type="email"
               name="email"
               placeholder="Email address"
@@ -85,23 +99,21 @@ export default function SignUp() {
               value={inputs.email}
               onChange={handleChange}
             />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input
+          </LabelStyle>
+          <LabelStyle htmlFor="password">
+            <span>Password</span>
+            <InputStyle
               type="password"
               name="password"
               placeholder="********"
-              autoComplete="password"
+              autoomplete="password"
               value={inputs.password}
               onChange={handleChange}
             />
-          </label>
-          <button type="submit">Submit</button>
-        </fieldset>
-      </form>
-      <p>Do you already have an account?</p>
-      <Link href="/login">Sign in!</Link>
+          </LabelStyle>
+          <FormButton type="submit">Get sweaty</FormButton>
+        </FieldSetStyle>
+      </FormStyle>
     </>
   )
 }

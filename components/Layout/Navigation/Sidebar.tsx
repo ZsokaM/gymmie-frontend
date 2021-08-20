@@ -1,8 +1,13 @@
 import styled from 'styled-components'
 import { FaTimes } from 'react-icons/fa'
 import NavElements from './NavElements'
+import { centeredItems } from '../../styles/HelperStyles'
 
-export default function Sidebar({ isOpen, toggle }) {
+interface SideBarProps {
+  isOpen: boolean
+  toggle: () => void
+}
+export default function Sidebar({ isOpen, toggle }: SideBarProps) {
   return (
     <SidebarContainer isOpen={isOpen} onClick={toggle}>
       <Icon>
@@ -15,18 +20,17 @@ export default function Sidebar({ isOpen, toggle }) {
   )
 }
 
-const SidebarContainer = styled.aside`
+const SidebarContainer = styled.aside<Pick<SideBarProps, 'isOpen'>>`
   position: fixed;
-  z-index: 999;
+  z-index: 9;
   width: 100%;
   height: 100%;
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
   top: 0;
   left: 0;
   transition: 0.3s ease-in-out;
-  background: ${({ theme }) => theme.bg.primary};
+  background-color: ${({ theme }) => theme.bg.primary};
   opacity: ${({ isOpen }) => (isOpen ? '90%' : '0')};
   top: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
 `
@@ -38,31 +42,29 @@ const Icon = styled.div`
   position: absolute;
   top: 1.2rem;
   right: 1.5rem;
-  background: transparent;
+  background-color: transparent;
   font-size: 2rem;
   cursor: pointer;
   outline: none;
 `
 const SidebarWrapper = styled.div`
   color: ${({ theme }) => theme.text.primary};
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
   align-content: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   text-align: center;
   height: 100%;
   width: 100%;
 
   a,
   button {
-    padding: 1rem 3rem;
-    display: flex;
-    align-items: center;
+    padding: 1rem;
+    ${centeredItems};
     position: relative;
     font-size: 1.2em;
     font-weight: bold;
-    background: none;
+    background-color: none;
     border: 0;
     cursor: pointer;
 

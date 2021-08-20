@@ -8,6 +8,19 @@ export const CURRENT_USER_QUERY = gql`
         id
         name
         email
+        bookings {
+          id
+          sportClass {
+            id
+            name
+            year
+            week
+            day
+            startTime
+            teacher
+            duration
+          }
+        }
       }
     }
   }

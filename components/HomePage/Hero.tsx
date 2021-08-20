@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import { Link as ScrollLink } from 'react-scroll'
 import { Button } from '../styles/ButtonStyle'
+import { centeredItems } from '../styles/HelperStyles'
 
 export default function Hero() {
   return (
@@ -15,42 +15,15 @@ export default function Hero() {
         <Button>
           <Link href="/schedule">BOOK NOW</Link>
         </Button>
-        <ScrollWrapper>
-          <Button>
-            <ScrollLink
-              to="class-types"
-              smooth
-              duration={500}
-              spy
-              exact="true"
-              offset={-80}
-            >
-              Class Types
-            </ScrollLink>
-          </Button>
-          <Button>
-            <ScrollLink
-              to="prices"
-              smooth
-              duration={500}
-              spy
-              exact="true"
-              offset={-80}
-            >
-              Prices
-            </ScrollLink>
-          </Button>
-        </ScrollWrapper>
       </HeroText>
     </HeroContainer>
   )
 }
 
 const HeroContainer = styled.div`
-  background: ${({ theme }) => theme.bg.primary};
-  display: flex;
+  background-color: ${({ theme }) => theme.bg.primary};
+  ${centeredItems};
   justify-content: center;
-  align-items: center;
   padding: 0;
   margin: 0;
   height: 600px;
@@ -69,41 +42,37 @@ const VideoBg = styled.video`
   height: 100%;
   --o-object-fit: cover;
   object-fit: cover;
-  background: ${({ theme }) => theme.bg.secondary};
+  background-color: ${({ theme }) => theme.bg.secondary};
   opacity: 30%;
 `
 const HeroText = styled.div`
   z-index: 2;
-  max-width: 1200px;
+  width: 100%;
   position: absolute;
   padding: 1rem 3rem;
-  display: flex;
+  ${centeredItems}
   flex-direction: column;
-  align-items: center;
 `
 
 const HeroHeader = styled.h1`
   color: ${({ theme }) => theme.text.primary};
-  font-size: 48px;
+  font-size: 3rem;
   text-align: center;
 
-  @media (max-width: 700px) {
-    font-size: 40px;
+  ${({ theme }) => theme.mediaQueries.medium} {
+    font-size: 2.5rem;
   }
 
-  @media (max-width: 700px) {
-    font-size: 32px%;
+  ${({ theme }) => theme.mediaQueries.small} {
+    font-size: 2rem;
   }
 `
 const HeroSubline = styled.p`
   color: ${({ theme }) => theme.text.primary};
-  font-size: 24px;
+  font-size: 1.5rem;
   text-align: center;
 
-  @media (max-width: 700px) {
-    font-size: 18px;
+  ${({ theme }) => theme.mediaQueries.small} {
+    font-size: 1.1rem;
   }
-`
-const ScrollWrapper = styled.div`
-  display: flex;
 `

@@ -1,22 +1,29 @@
 import styled from 'styled-components'
+import { centeredItems } from '../styles/HelperStyles'
 
-//todo: add dynamic content based on database class descriptions
-export default function InfoSection({ id, imgStart }) {
+interface InfoSectionProps {
+  imgStart: boolean
+}
+export default function InfoSection({ imgStart }: InfoSectionProps) {
   return (
     <>
-      <InfoContainer id={id}>
+      <InfoContainer>
         <InfoWrapper>
           <InfoRow imgStart={imgStart}>
-            <Column imgStart={imgStart}>
+            <Column>
               <TextWrapper>
                 <TopLine>topline</TopLine>
                 <Heading>heading</Heading>
                 <Subtitle>subtitle</Subtitle>
               </TextWrapper>
             </Column>
-            <Column imgStart={imgStart}>
-              <ImgWrap imgStart={imgStart}>
-                <Img src="/shoe.jpeg" />
+            <Column>
+              <ImgWrap>
+                <Img
+                  src="/shoe.jpeg"
+                  alt="shoe section image"
+                  title="shoe on yoga mat"
+                />
               </ImgWrap>
             </Column>
           </InfoRow>
@@ -26,41 +33,40 @@ export default function InfoSection({ id, imgStart }) {
   )
 }
 
-const InfoContainer = styled.div`
+const InfoContainer = styled.section`
+  padding: 2rem;
   color: ${({ theme }) => theme.text.primary};
-  background: ${({ theme }) => theme.bg.secondary};
+  background-color: ${({ theme }) => theme.bg.secondary};
 
-  @media (max-width: 700px) {
-    padding: 100px 0;
+  ${({ theme }) => theme.mediaQueries.small} {
+    padding: 1rem;
   }
 `
 const InfoWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 300px;
+  height: 100%;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding: 0 24px;
+  padding: 0 1rem;
 `
-const InfoRow = styled.div`
-  display: flex;
+const InfoRow = styled.section<InfoSectionProps>`
+  ${centeredItems};
   flex-direction: ${({ imgStart }) => (imgStart ? 'row' : 'row-reverse')};
-  align-items: center;
   justify-content: space-between;
   color: ${({ theme }) => theme.text.primary};
 
-  @media (max-width: 700px) {
+  ${({ theme }) => theme.mediaQueries.small} {
     flex-direction: column;
   }
 `
 
-const Column = styled.div`
+const Column = styled.article`
   margin-bottom: 15px;
   padding: 0 15px;
   width: 50%;
-  display: flex;
-  align-items: center;
+  ${centeredItems};
   justify-content: space-around;
 `
 
@@ -81,16 +87,15 @@ const Heading = styled.h2`
   font-size: 4rem;
   line-height: 1.1;
 
-  @media (max-width: 700px) {
+  ${({ theme }) => theme.mediaQueries.small} {
     font-size: 2rem;
   }
 `
 const Subtitle = styled.p`
   color: ${({ theme }) => theme.text.primary};
-  max-width: 440px;
   margin-bottom: 3rem;
   font-size: 2rem;
-  line-height: 24px;
+  line-height: 1.5rem;
 `
 const ImgWrap = styled.div`
   height: 100%;
@@ -99,7 +104,7 @@ const ImgWrap = styled.div`
 `
 
 const Img = styled.img`
-  width: 60%;
-  margin: 0 0 10px 0;
+  width: 100%;
+  margin: 0 0 0.75rem 0;
   padding-right: 0;
 `

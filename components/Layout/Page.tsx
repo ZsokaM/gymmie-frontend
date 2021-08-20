@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
+import styled, {
+  DefaultTheme,
+  createGlobalStyle,
+  ThemeProvider,
+} from 'styled-components'
+import Modal from '../Modals/Modal'
 import Footer from './Footer'
 import Header from './Navigation/Header'
 import Sidebar from './Navigation/Sidebar'
+import { useModal } from '../Modals/ModalContext'
+import { ModalProps } from '../../lib/gymmieInterfaces'
 
-export default function Page({ children }) {
+interface PageProps {
+  children: React.ReactNode
+}
+
+export default function Page({ children }: PageProps) {
+  const modal = useModal()
   const [theme, setTheme] = useState('dark')
   const [isOpen, setIsOpen] = useState(false)
 
-  //theme related
   const themeMode = theme === 'light' ? 'dark' : 'light'
   const toggleTheme = () => {
     localStorage.setItem('theme', themeMode)
@@ -20,14 +31,20 @@ export default function Page({ children }) {
     localTheme && setTheme(localTheme)
   }, [])
 
-  //navigation sidebar related
   const toggleSidebar = () => {
     setIsOpen((prevState) => !prevState)
   }
+
   return (
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
+        {/* <Modal
+          modalIsOpen={modal.modalIsOpen}
+          modalType={modal.modalType}
+          modalText={modal.modalText}
+          closeModal={modal.closeModal}
+        /> */}
         <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
         <Header toggle={toggleSidebar} />
         <InnerStyles>{children}</InnerStyles>
@@ -48,8 +65,7 @@ const GlobalStyles = createGlobalStyle`
         --lightGrey: #f5f5f5;
         --mediumGrey: #aaabb8;
         --offWhite: #ededed;
-        --maxWidth: 1000px;
-        --bs: 0 12px 24px 0 rgba(0,0,0,0,.09)
+        --borderRadius: 5px;
 }
   html {
     box-sizing: border-box;
@@ -67,6 +83,7 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.5rem;
     line-height: 1;
     background-color: ${({ theme }) => theme.bg.primary};
+    height: 100%;
   }
 
   a{
@@ -81,14 +98,24 @@ const GlobalStyles = createGlobalStyle`
   button {
     font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+
+
 `
 
 const InnerStyles = styled.div`
   max-width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `
+const mediaQueries = {
+  small: `@media screen and (max-width: 768px)`,
+  medium: `@media screen and (max-width: 1024px)`,
+  large: `@media screen and (max-width: 1200px)`,
+}
 
-const lightTheme = {
+const lightTheme: DefaultTheme = {
   bg: {
     primary: '#ffffff',
     secondary: '#7ed0e1',
@@ -101,14 +128,15 @@ const lightTheme = {
     tertiary: '#240090',
     quarternary: '#3500d3',
   },
+  mediaQueries: { ...mediaQueries },
 }
 
-const darkTheme = {
+const darkTheme: DefaultTheme = {
   bg: {
     primary: '#0C0032',
     secondary: '#190061',
-    tertiary: '#240090',
-    quarternary: '#3500d3',
+    tertiary: '#3500d3',
+    quarternary: '#240090',
   },
   text: {
     primary: '#ffffff',
@@ -116,4 +144,5 @@ const darkTheme = {
     tertiary: '#7ed0e1',
     quarternary: '#525560',
   },
+  mediaQueries: { ...mediaQueries },
 }

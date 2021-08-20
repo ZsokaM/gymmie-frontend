@@ -1,21 +1,38 @@
 import { useQuery } from '@apollo/client'
 import Link from 'next/link'
-import styled from 'styled-components'
 import DeleteClass from '../AdminFunc/DeleteClass'
 import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import { weekDayNames, decimalToTime } from '../../lib/dateHelpers'
+import DisplayError from '../Layout/DisplayError'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
-export default function AllClasses() {
-  let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
+import {
+  TableContainer,
+  TableHeader,
+  TableRow,
+  TableField,
+  SmallButton,
+  ButtonWrapper,
+  TableTitle,
+} from '../TableElements/ClassTableStyle'
+
+interface AllClassesInterface {
+  allSportClasses: SportClassInterface[]
+}
+
+export default function AllClasses({ passClassId }) {
+  const { data, error, loading } = useQuery<AllClassesInterface>(
+    ALL_CLASSES_QUERY,
+  )
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
+  if (error) return <DisplayError error={error} />
 
   return (
     <>
-      <h2>Class list</h2>
+      <TableTitle>Class list</TableTitle>
       <TableContainer>
         <TableHeader>
-          <tr>
+          <TableRow>
             <th>Year</th>
             <th>Week</th>
             <th>Day</th>
@@ -23,10 +40,10 @@ export default function AllClasses() {
             <th>Class</th>
             <th>Teacher</th>
             <th>Actions</th>
-          </tr>
+          </TableRow>
         </TableHeader>
         <tbody>
-          {data.allSportClasses.map((sportClass) => (
+          {data?.allSportClasses.map((sportClass) => (
             <TableRow key={sportClass.id}>
               <TableField>{sportClass.year}</TableField>
               <TableField>{sportClass.week}</TableField>
@@ -35,17 +52,26 @@ export default function AllClasses() {
               <TableField>{sportClass.name}</TableField>
               <TableField>{sportClass.teacher}</TableField>
               <TableField>
-                <Link
-                  href={{
-                    pathname: 'admin',
-                    query: {
-                      id: sportClass.id,
-                    },
-                  }}
-                >
-                  Edit
-                </Link>
-                <DeleteClass id={sportClass.id}>Delete</DeleteClass>
+                <ButtonWrapper>
+                  {/* <Link
+                    href={{
+                      pathname: 'admin',
+                      query: {
+                        id: sportClass.id,
+                      },
+                    }}
+                  > */}
+                  <SmallButton
+                    type="button"
+                    onClick={() => {
+                      passClassId(sportClass.id)
+                    }}
+                  >
+                    Edit
+                  </SmallButton>
+                  {/* </Link> */}
+                  <DeleteClass id={sportClass.id} />
+                </ButtonWrapper>
               </TableField>
             </TableRow>
           ))}
@@ -54,21 +80,3 @@ export default function AllClasses() {
     </>
   )
 }
-
-const TableContainer = styled.table`
-  margin: 5rem auto;
-`
-
-const TableHeader = styled.thead`
-  height: 30px;
-  background-color: lightblue;
-`
-const TableRow = styled.tr`
-  background-color: blue;
-`
-const TableField = styled.td`
-  height: 20px;
-  width: 100px;
-  background-color: lavender;
-  vertical-align: top;
-`

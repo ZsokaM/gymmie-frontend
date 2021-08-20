@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client'
 import gql from 'graphql-tag'
+import { SmallFormButton } from '../styles/ButtonStyle'
 
 const DELETE_SPORTCLASS_MUTATION = gql`
   mutation DELETE_SPORTCLASS_MUTATION($id: ID!) {
@@ -16,17 +17,17 @@ const update = (cache, payload) => {
   cache.evict(cache.identify(payload.data.deleteSportClass))
 }
 
-export default function DeleteClass({ id, children }) {
-  const [deleteProduct, { data, loading, error }] = useMutation(
-    DELETE_SPORTCLASS_MUTATION,
-    {
-      variables: { id },
-      update: update,
-    },
-  )
+interface DeleteClassProps {
+  id: string
+}
+export default function DeleteClass({ id }: DeleteClassProps) {
+  const [deleteProduct, { loading }] = useMutation(DELETE_SPORTCLASS_MUTATION, {
+    variables: { id },
+    update: update,
+  })
 
   return (
-    <button
+    <SmallFormButton
       type="button"
       disabled={loading}
       onClick={() => {
@@ -36,7 +37,7 @@ export default function DeleteClass({ id, children }) {
         }
       }}
     >
-      {children}
-    </button>
+      Delete
+    </SmallFormButton>
   )
 }

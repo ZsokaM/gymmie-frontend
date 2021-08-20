@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { centeredItems } from '../styles/HelperStyles'
 
 export default function Price() {
   return (
@@ -29,44 +30,41 @@ export default function Price() {
   )
 }
 
-const PriceContainer = styled.div`
+const PriceContainer = styled.section`
   height: 100%;
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  background: ${({ theme }) => theme.bg.primary};
+  background-color: ${({ theme }) => theme.bg.primary};
 `
 const PriceWrapper = styled.div`
-  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
-  display: flex;
+  ${centeredItems};
   justify-content: space-between;
-  align-items: center;
   padding: 0 50px;
 
-  @media (max-width: 700px) {
+  ${({ theme }) => theme.mediaQueries.small} {
     flex-wrap: wrap;
+    justify-content: center;
   }
 `
-const PriceCard = styled.div`
-  background: ${({ theme }) => theme.bg.secondary};
+const PriceCard = styled.article`
+  background-color: ${({ theme }) => theme.bg.secondary};
   color: ${({ theme }) => theme.text.primary};
-  display: flex;
+  ${centeredItems};
   flex-direction: column;
-  align-items: center;
-  border-radius: 3px;
+  border-radius: var(--borderRadius);
   height: 250px;
   width: 250px;
   padding: 30px;
   margin: 5px;
   box-shadow: 0 1px 3px ${({ theme }) => theme.bg.secondary};
-  transition: all 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
+    transform: scale(1.05);
   }
 `
 const PriceIcon = styled.img`
@@ -80,7 +78,7 @@ const PriceHeader = styled.h2`
   margin-top: 3rem;
   margin-bottom: 3rem;
 
-  @media (max-width: 480px) {
+  ${({ theme }) => theme.mediaQueries.medium} {
     font-size: 2rem;
   }
 `
