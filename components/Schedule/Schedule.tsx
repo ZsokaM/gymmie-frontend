@@ -1,28 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
-import gql from 'graphql-tag'
 import styled from 'styled-components'
+import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
 import { SportClassInterface, Direction } from '../../lib/gymmieInterfaces'
-import { centeredItems } from '../styles/HelperStyles'
-
-export const ALL_CLASSES_QUERY = gql`
-  query ALL_CLASSES_QUERY {
-    allSportClasses {
-      id
-      name
-      freeSpots
-      available
-      year
-      week
-      day
-      startTime
-      teacher
-      duration
-    }
-  }
-`
+import { centeredItems, borderRadius } from '../styles/HelperStyles'
+import {
+  FlexHead,
+  FlexTable,
+  Flextd,
+  FlexTh,
+  FlexTr,
+} from '../TableElements/ClassTableStyle'
 
 export default function Schedule() {
   const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
@@ -119,9 +109,8 @@ const TableContainer = styled.table`
   margin: 0 auto;
   height: 100%;
   width: 90%;
-  display: flex;
-  flex-direction: column;
   background-color: ${({ theme }) => theme.bg.quarternary};
+  ${FlexTable}
 `
 
 const TableHeader = styled.thead`
@@ -130,52 +119,27 @@ const TableHeader = styled.thead`
   color: ${({ theme }) => theme.text.primary};
   text-transform: capitalize;
   vertical-align: center;
-
-  ${({ theme }) => theme.mediaQueries.small} {
-    display: none;
-  }
+  ${FlexHead}
 `
 
 const TableH = styled.th`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
+  ${FlexTh}
 `
 const TableRow = styled.tr`
   height: 80%;
   display: flex;
-
-  ${({ theme }) => theme.mediaQueries.small} {
-    flex-direction: column;
-  }
+  ${FlexTr}
 `
 const TableField = styled.td`
   height: 100%;
   width: 100%;
   background-color: ${({ theme }) => theme.bg.quarternary};
   vertical-align: top;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
-  ${({ theme }) => theme.mediaQueries.small} {
-    align-items: center;
-
-    &:before {
-      ${centeredItems}
-      flex-direction: column;
-      text-transform: capitalize;
-      width: 100%;
-      border-bottom: 1px solid ${({ theme }) => theme.bg.secondary};
-      padding: 1rem;
-      content: attr(data-label);
-    }
-  }
+  ${Flextd}
 `
 
 const SmallButton = styled.button`
-  border-radius: var(--borderRadius);
+  ${borderRadius};
   background-color: ${({ theme }) => theme.bg.secondary};
   padding: 1rem;
   color: ${({ theme }) => theme.text.primary};

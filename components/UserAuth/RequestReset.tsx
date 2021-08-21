@@ -1,5 +1,5 @@
 import { useMutation, useLazyQuery } from '@apollo/client'
-import gql from 'graphql-tag'
+import { REQUEST_RESET_MUTATION } from '../../lib/APIs/Auth'
 import {
   FieldSetStyle,
   FormHeader,
@@ -9,15 +9,6 @@ import {
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
-
-const REQUEST_RESET_MUTATION = gql`
-  mutation REQUEST_RESET_MUTATION($email: String!) {
-    sendUserPasswordResetLink(email: $email) {
-      message
-      code
-    }
-  }
-`
 
 //so apparently it's a security issue if someone can test if an email is the database or not,
 //hence keystone is not checking for valid email.

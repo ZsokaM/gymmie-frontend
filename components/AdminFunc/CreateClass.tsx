@@ -1,47 +1,17 @@
 import { useMutation } from '@apollo/client'
-import gql from 'graphql-tag'
 import {
   FieldSetStyle,
   FormHeader,
   FormStyle,
 } from '../FormElements/formElementsStyle'
+import { CREATE_SPORTCLASS_MUTATION } from '../../lib/APIs/SportClassMutations'
+import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
 import { getWeek, currentYear } from '../../lib/dateHelpers'
-import { ALL_CLASSES_QUERY } from '../Schedule/Schedule'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import DisplayError from '../Layout/DisplayError'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
-
-const CREATE_SPORTCLASS_MUTATION = gql`
-  mutation CREATE_SPORTCLASS_MUTATION(
-    $name: String!
-    $freeSpots: Int!
-    $available: Int!
-    $year: Int!
-    $week: Int!
-    $day: Int!
-    $startTime: String!
-    $teacher: String!
-    $duration: Int!
-  ) {
-    createSportClass(
-      data: {
-        name: $name
-        freeSpots: $freeSpots
-        available: $available
-        year: $year
-        week: $week
-        day: $day
-        startTime: $startTime
-        teacher: $teacher
-        duration: $duration
-      }
-    ) {
-      id
-    }
-  }
-`
 
 export default function CreateClass() {
   const { inputs, handleChange, clearForm, resetForm } = useForm({

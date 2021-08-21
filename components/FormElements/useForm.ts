@@ -4,7 +4,7 @@ export interface FormProps {
   [key: string]: string | number
 }
 
-export default function useForm(initial) {
+export default function useForm(initial: FormProps) {
   const [inputs, setInputs] = useState(initial)
   const initialValues = Object.values(initial).join('')
 

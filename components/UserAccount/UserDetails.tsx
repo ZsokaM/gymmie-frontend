@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FormButton } from '../styles/ButtonStyle'
 import { useUser } from '../UserAuth/User'
-import { centeredItems } from '../styles/HelperStyles'
+import { centeredItems, borderRadius } from '../styles/HelperStyles'
 
 export default function UserDetails() {
   const user = useUser()
@@ -66,7 +66,7 @@ const UserParag = styled.section`
 const Membership = styled.div`
   width: 50%;
   height: 100px;
-  border-radius: var(--borderRadius);
+  ${borderRadius};
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
   background-color: ${({ theme }) => theme.bg.primary};
   margin: 1rem;

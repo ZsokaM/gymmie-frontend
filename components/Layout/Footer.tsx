@@ -18,7 +18,7 @@ export default function Footer({ toggleTheme }: FooterProps) {
 
 const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.bg.secondary};
-  height: 30%;
+  height: 10%;
   color: ${({ theme }) => theme.text.primary};
   margin-top: 2rem;
   padding: 3rem;

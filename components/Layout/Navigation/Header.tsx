@@ -32,4 +32,5 @@ const HeaderStyles = styled.header`
   background-color: ${({ theme }) => theme.bg.primary};
   position: sticky;
   top: 0;
+  flex: 1;
 `

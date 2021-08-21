@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { centeredItems } from '../styles/HelperStyles'
+import { centeredItems, borderRadius } from '../styles/HelperStyles'
 
 export default function Price() {
   return (
@@ -54,7 +54,7 @@ const PriceCard = styled.article`
   color: ${({ theme }) => theme.text.primary};
   ${centeredItems};
   flex-direction: column;
-  border-radius: var(--borderRadius);
+  ${borderRadius};
   height: 250px;
   width: 250px;
   padding: 30px;

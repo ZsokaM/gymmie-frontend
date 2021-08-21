@@ -1,9 +1,8 @@
 import { useMutation } from '@apollo/client'
-import gql from 'graphql-tag'
 import Router from 'next/router'
+import { LOGIN_MUTATION, CURRENT_USER_QUERY } from '../../lib/APIs/Auth'
 import useForm from '../FormElements/useForm'
-
-import { CURRENT_USER_QUERY, useUser } from './User'
+import { useUser } from './User'
 import {
   FieldSetStyle,
   FormHeader,
@@ -14,23 +13,6 @@ import {
 import { FormButton } from '../styles/ButtonStyle'
 import ErrorMessage from '../Layout/ErrorMessage'
 
-export const LOGIN_MUTATION = gql`
-  mutation LOGIN_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      ... on UserAuthenticationWithPasswordSuccess {
-        item {
-          id
-          email
-          name
-        }
-      }
-      ... on UserAuthenticationWithPasswordFailure {
-        code
-        message
-      }
-    }
-  }
-`
 export default function Login() {
   const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
