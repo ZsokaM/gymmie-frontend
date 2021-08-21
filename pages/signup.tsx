@@ -16,5 +16,6 @@ export default function SignUpPage() {
 
 const Wrapper = styled.div`
   margin: 0 auto;
+  height: 100%;
   width: 60%;
 `

@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import gql from 'graphql-tag'
+import { RESET_PASSWORD_MUTATION } from '../../lib/APIs/Auth'
 import {
   FieldSetStyle,
   FormHeader,
@@ -10,23 +10,6 @@ import {
 import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
 import DisplayError from '../Layout/DisplayError'
-
-const RESET_PASSWORD_MUTATION = gql`
-  mutation RESET_PASSWORD_MUTATION(
-    $email: String!
-    $token: String!
-    $password: String!
-  ) {
-    redeemUserPasswordResetToken(
-      email: $email
-      token: $token
-      password: $password
-    ) {
-      message
-      code
-    }
-  }
-`
 
 interface ResetPasswordProps {
   token: string

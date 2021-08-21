@@ -1,15 +1,6 @@
 import { useMutation } from '@apollo/client'
-import gql from 'graphql-tag'
 import { SmallFormButton } from '../styles/ButtonStyle'
-
-const DELETE_SPORTCLASS_MUTATION = gql`
-  mutation DELETE_SPORTCLASS_MUTATION($id: ID!) {
-    deleteSportClass(id: $id) {
-      id
-      name
-    }
-  }
-`
+import { DELETE_SPORTCLASS_MUTATION } from '../../lib/APIs/SportClassMutations'
 
 //payload = what gets returned from the update of the mutation, this case id and name
 const update = (cache, payload) => {

@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { centeredItems } from './HelperStyles'
+import { centeredItems, borderRadius } from './HelperStyles'
 
 export const Button = styled.button`
-  border-radius: var(--borderRadius);
+  ${borderRadius};
   background-color: ${({ theme }) => theme.bg.tertiary};
   white-space: nowrap;
   padding: 14px 48px;

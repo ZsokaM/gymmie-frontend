@@ -1,9 +1,11 @@
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
-import gql from 'graphql-tag'
 import Router from 'next/router'
-import { LOGIN_MUTATION } from './Login'
-import { CURRENT_USER_QUERY } from './User'
+import {
+  LOGIN_MUTATION,
+  SIGNUP_MUTATION,
+  CURRENT_USER_QUERY,
+} from '../../lib/APIs/Auth'
 import useForm from '../FormElements/useForm'
 import {
   FieldSetStyle,
@@ -14,20 +16,6 @@ import {
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
-
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
-    $email: String!
-    $name: String!
-    $password: String!
-  ) {
-    createUser(data: { email: $email, name: $name, password: $password }) {
-      id
-      email
-      name
-    }
-  }
-`
 
 export default function SignUp() {
   const [isLoggedIn, setIsLoggedIn] = useState({

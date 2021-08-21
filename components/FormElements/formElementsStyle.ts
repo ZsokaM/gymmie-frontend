@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { centeredItems } from '../styles/HelperStyles'
+import { centeredItems, borderRadius } from '../styles/HelperStyles'
 
 export const FormStyle = styled.form`
   ${centeredItems};
@@ -17,7 +17,7 @@ export const FieldSetStyle = styled.fieldset`
   width: 100%;
   box-shadow: 6px 6px 1px 1px ${({ theme }) => theme.bg.tertiary};
   border: none;
-  border-radius: var(--borderRadius);
+  ${borderRadius};
   ${centeredItems};
   flex-direction: column;
   background-color: ${({ theme }) => theme.bg.quarternary};
@@ -58,6 +58,6 @@ export const FormSelect = styled.select`
   font-size: 1.5rem;
   border: none;
   box-shadow: 1px 1px 1px 1px var(--mediumGrey);
-  border-radius: var(--borderRadius);
+  ${borderRadius};
   color: ${({ theme }) => theme.text.primary};
 `

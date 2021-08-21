@@ -65,7 +65,6 @@ const GlobalStyles = createGlobalStyle`
         --lightGrey: #f5f5f5;
         --mediumGrey: #aaabb8;
         --offWhite: #ededed;
-        --borderRadius: 5px;
 }
   html {
     box-sizing: border-box;
@@ -84,8 +83,11 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1;
     background-color: ${({ theme }) => theme.bg.primary};
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
+ 
   a{
     text-decoration: none;
     color: ${({ theme }) => theme.text.primary};
@@ -107,7 +109,8 @@ const InnerStyles = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  height: 100%;
+  padding: 1rem;
 `
 const mediaQueries = {
   small: `@media screen and (max-width: 768px)`,
@@ -133,16 +136,16 @@ const lightTheme: DefaultTheme = {
 
 const darkTheme: DefaultTheme = {
   bg: {
-    primary: '#0C0032',
-    secondary: '#190061',
-    tertiary: '#3500d3',
-    quarternary: '#240090',
+    primary: '#035397',
+    secondary: '#001E6C',
+    tertiary: '#5089C6',
+    quarternary: '#548CA8',
   },
   text: {
     primary: '#ffffff',
     secondary: '#3500d3',
     tertiary: '#7ed0e1',
-    quarternary: '#525560',
+    quarternary: '#ededed;',
   },
   mediaQueries: { ...mediaQueries },
 }

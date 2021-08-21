@@ -1,14 +1,7 @@
 import { useMutation } from '@apollo/client'
-import gql from 'graphql-tag'
 import Router from 'next/router'
+import { SIGN_OUT_MUTATION, CURRENT_USER_QUERY } from '../../lib/APIs/Auth'
 import { NavButton } from '../Layout/Navigation/NavElements'
-import { CURRENT_USER_QUERY } from './User'
-
-const SIGN_OUT_MUTATION = gql`
-  mutation {
-    endSession
-  }
-`
 
 export default function LogOut() {
   const [signout] = useMutation(SIGN_OUT_MUTATION, {

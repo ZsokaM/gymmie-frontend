@@ -1,5 +1,6 @@
-import gql from 'graphql-tag'
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
+import { SINGLE_SPORTCLASS_QUERY } from '../../lib/APIs/SportClassQueries'
+import { UPDATE_SPORTCLASS_MUTATION } from '../../lib/APIs/SportClassMutations'
 import useForm from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import {
@@ -9,72 +10,29 @@ import {
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
+import { currentYear, getWeek } from '../../lib/dateHelpers'
 
-export const SINGLE_SPORTCLASS_QUERY = gql`
-  query SINGLE_SPORTCLASS_QUERY($id: ID!) {
-    SportClass(where: { id: $id }) {
-      name
-      freeSpots
-      available
-      year
-      week
-      day
-      startTime
-      teacher
-      duration
-    }
-  }
-`
-
-const UPDATE_SPORTCLASS_MUTATION = gql`
-  mutation UPDATE_SPORTCLASS_MUTATION(
-    $id: ID!
-    $name: String!
-    $freeSpots: Int!
-    $available: Int!
-    $year: Int!
-    $week: Int!
-    $day: Int!
-    $startTime: String!
-    $teacher: String!
-    $duration: Int!
-  ) {
-    updateSportClass(
-      id: $id
-      data: {
-        name: $name
-        freeSpots: $freeSpots
-        available: $available
-        year: $year
-        week: $week
-        day: $day
-        startTime: $startTime
-        teacher: $teacher
-        duration: $duration
-      }
-    ) {
-      id
-      name
-      freeSpots
-      available
-      year
-      week
-      day
-      startTime
-      teacher
-      duration
-    }
-  }
-`
 type UpdateClassProps = {
-  id: string
+  id?: string
 }
 export default function UpdateClass({ id }: UpdateClassProps) {
   const { data, loading, error } = useQuery(SINGLE_SPORTCLASS_QUERY, {
     variables: { id },
   })
 
-  const { inputs, handleChange } = useForm(data?.SportClass)
+  const { inputs, handleChange } = useForm(
+    data?.SportClass || {
+      name: '',
+      freeSpots: '',
+      available: 1,
+      year: currentYear,
+      week: getWeek(),
+      day: '',
+      startTime: '',
+      teacher: '',
+      duration: 60,
+    },
+  )
 
   const [
     updateSportClass,
