@@ -82,9 +82,9 @@ const GlobalStyles = createGlobalStyle`
     font-size: 1.5rem;
     line-height: 1;
     background-color: ${({ theme }) => theme.bg.primary};
-    height: 100%;
     display: flex;
     flex-direction: column;
+    height: 100%
   }
 
  

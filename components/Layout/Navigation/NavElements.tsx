@@ -16,6 +16,7 @@ export default function NavElements() {
       <Link href="/schedule" passHref>
         <StyledLink>Class Schedule</StyledLink>
       </Link>
+
       {!user && (
         <>
           <Link href="/login" passHref>
@@ -26,14 +27,15 @@ export default function NavElements() {
           </Link>
         </>
       )}
-
+      {user?.role.canManageUsers && (
+        <Link href="/admin" passHref>
+          <StyledLink>Admin</StyledLink>
+        </Link>
+      )}
       {user && (
         <>
           <Link href="/account" passHref>
             <StyledLink>My account</StyledLink>
-          </Link>
-          <Link href="/admin" passHref>
-            <StyledLink>Admin</StyledLink>
           </Link>
           <LogOut />
         </>

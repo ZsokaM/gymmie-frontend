@@ -6,6 +6,7 @@ import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
 import { SportClassInterface, Direction } from '../../lib/gymmieInterfaces'
 import { centeredItems, borderRadius } from '../styles/HelperStyles'
+import { FormButton } from '../styles/ButtonStyle'
 import {
   FlexHead,
   FlexTable,
@@ -55,23 +56,23 @@ export default function Schedule() {
   return (
     <>
       <Header>
-        <SmallButton
+        <FormButton
           type="button"
           onClick={() => changeWeek(Direction.PREVIOUS)}
           disabled={weekToDisplay < currentWeekOfTheYear - 1}
         >
           Previous Week
-        </SmallButton>
+        </FormButton>
         <h2>
           Week {weekToDisplay} in {currentYear}
         </h2>
-        <SmallButton
+        <FormButton
           type="button"
           onClick={() => changeWeek(Direction.NEXT)}
           disabled={weekToDisplay > currentWeekOfTheYear + 1}
         >
           Next Week
-        </SmallButton>
+        </FormButton>
       </Header>
 
       <TableContainer>
@@ -136,28 +137,4 @@ const TableField = styled.td`
   background-color: ${({ theme }) => theme.bg.quarternary};
   vertical-align: top;
   ${Flextd}
-`
-
-const SmallButton = styled.button`
-  ${borderRadius};
-  background-color: ${({ theme }) => theme.bg.secondary};
-  padding: 1rem;
-  color: ${({ theme }) => theme.text.primary};
-  width: 12rem;
-  font-size: 1.25rem;
-  border: none;
-  cursor: pointer;
-  ${centeredItems};
-  justify-content: center;
-  transition: background-color 0.2s ease-in-out;
-  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
-
-  &:disabled {
-    background-color: grey;
-    color: darkgray;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.bg.tertiary};
-  }
 `

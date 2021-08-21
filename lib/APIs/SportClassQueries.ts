@@ -13,6 +13,9 @@ export const ALL_CLASSES_QUERY = gql`
       startTime
       teacher
       duration
+      users {
+        id
+      }
     }
   }
 `
@@ -29,6 +32,7 @@ export const SINGLE_SPORTCLASS_QUERY = gql`
       startTime
       teacher
       duration
+      users
     }
   }
 `

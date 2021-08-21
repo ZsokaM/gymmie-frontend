@@ -72,30 +72,6 @@ export const TableField = styled.td`
   text-transform: capitalize;
 `
 
-export const SmallButton = styled.button`
-  ${borderRadius};
-  background-color: ${({ theme }) => theme.bg.secondary};
-  padding: 1rem;
-  color: ${({ theme }) => theme.text.primary};
-  width: 30%;
-  font-size: 1.25rem;
-  border: none;
-  cursor: pointer;
-  ${centeredItems};
-  justify-content: center;
-  transition: background-color 0.2s ease-in-out;
-  box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
-
-  &:disabled {
-    background-color: grey;
-    color: darkgray;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.bg.tertiary};
-  }
-`
-
 export const ButtonWrapper = styled.section`
   display: flex;
   justify-content: space-around;

@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
 import { SINGLE_SPORTCLASS_QUERY } from '../../lib/APIs/SportClassQueries'
 import { UPDATE_SPORTCLASS_MUTATION } from '../../lib/APIs/SportClassMutations'
-import useForm from '../FormElements/useForm'
+import useForm, { initValue } from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
 import {
   FormStyle,
@@ -10,7 +10,6 @@ import {
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
-import { currentYear, getWeek } from '../../lib/dateHelpers'
 
 type UpdateClassProps = {
   id?: string
@@ -20,19 +19,7 @@ export default function UpdateClass({ id }: UpdateClassProps) {
     variables: { id },
   })
 
-  const { inputs, handleChange } = useForm(
-    data?.SportClass || {
-      name: '',
-      freeSpots: '',
-      available: 1,
-      year: currentYear,
-      week: getWeek(),
-      day: '',
-      startTime: '',
-      teacher: '',
-      duration: 60,
-    },
-  )
+  const { inputs, handleChange } = useForm(data?.SportClass || initValue)
 
   const [
     updateSportClass,
