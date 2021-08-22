@@ -8,6 +8,11 @@ export const CURRENT_USER_QUERY = gql`
         id
         name
         email
+        role {
+          canManageUsers
+          canManageBookings
+          canManageSportClasses
+        }
         bookings {
           id
           sportClass {

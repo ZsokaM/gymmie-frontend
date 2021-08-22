@@ -5,13 +5,12 @@ import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import { weekDayNames, decimalToTime, getWeek } from '../../lib/dateHelpers'
 import DisplayError from '../Layout/DisplayError'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
-
+import { SmallFormButton } from '../styles/ButtonStyle'
 import {
   TableContainer,
   TableHeader,
   TableRow,
   TableField,
-  SmallButton,
   ButtonWrapper,
   TableTitle,
 } from '../TableElements/ClassTableStyle'
@@ -65,7 +64,7 @@ export default function AllClasses({}) {
                       },
                     }}
                   >
-                    <SmallButton>Edit</SmallButton>
+                    <SmallFormButton>Edit</SmallFormButton>
                   </Link>
                   <DeleteClass id={sportClass.id} />
                 </ButtonWrapper>

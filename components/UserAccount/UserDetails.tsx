@@ -31,11 +31,12 @@ const UserCard = styled.article`
   margin: 1rem auto;
   background-color: ${({ theme }) => theme.bg.secondary};
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
-  padding: 1rem;
+  padding: 2rem;
 `
 
 const Circle = styled.div`
   border-radius: 50%;
+  margin: 1rem;
   width: 150px;
   height: 150px;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);

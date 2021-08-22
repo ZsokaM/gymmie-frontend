@@ -1,4 +1,17 @@
 import { useEffect, useState } from 'react'
+import { currentYear, getWeek } from '../../lib/dateHelpers'
+
+export const initValue = {
+  name: '',
+  freeSpots: '',
+  available: 1,
+  year: currentYear,
+  week: getWeek(),
+  day: '',
+  startTime: '',
+  teacher: '',
+  duration: 60,
+}
 
 export interface FormProps {
   [key: string]: string | number

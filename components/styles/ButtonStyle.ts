@@ -33,7 +33,8 @@ export const FormButton = styled(Button)`
 
 export const SmallFormButton = styled(FormButton)`
   padding: 1rem;
-  width: 70px;
+  margin: 0.25rem;
+  width: 50%;
   font-size: 1.25rem;
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 
