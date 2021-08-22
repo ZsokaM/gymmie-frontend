@@ -39,12 +39,11 @@ export default function Page({ children }: PageProps) {
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-        {/* <Modal
+        <Modal
           modalIsOpen={modal.modalIsOpen}
-          modalType={modal.modalType}
           modalText={modal.modalText}
           closeModal={modal.closeModal}
-        /> */}
+        />
         <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
         <Header toggle={toggleSidebar} />
         <InnerStyles>{children}</InnerStyles>

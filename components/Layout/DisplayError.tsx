@@ -1,19 +1,26 @@
 import styled from 'styled-components'
-import React from 'react'
 
 interface DisplayErrorProps {
-  error: {
-    message: string
-    networkError: {
-      result: {
-        errors: {
-          message: string
-        }[]
-      }
-    }
-  }
+  error: {} | string
 }
-const DisplayError = ({ error }: DisplayErrorProps) => {
+
+// export function createErrorMessage(error) {
+//   const messageToDisplay = []
+//   if (
+//     error.networkError &&
+//     error.networkError.result &&
+//     error.networkError.result.errors.length
+//   ) {
+//     error.networkError.result.errors.map((err) => {
+//       messageToDisplay.push(err.message)
+//     })
+//   }
+//   messageToDisplay.push(error.message)
+//   console.log(messageToDisplay)
+//   return messageToDisplay.toString()
+// }
+
+export default function DisplayError({ error }) {
   if (!error || !error.message) return null
   if (
     error.networkError &&
@@ -53,5 +60,3 @@ const ErrorStyles = styled.div`
     margin-right: 1rem;
   }
 `
-
-export default DisplayError

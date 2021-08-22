@@ -60,6 +60,7 @@ export default function ResetPassword({ token }: ResetPasswordProps) {
             autoComplete="email"
             value={inputs.email}
             onChange={handleChange}
+            required
           />
         </LabelStyle>
         <LabelStyle htmlFor="password">
@@ -71,6 +72,7 @@ export default function ResetPassword({ token }: ResetPasswordProps) {
             autoComplete="password"
             value={inputs.password}
             onChange={handleChange}
+            required
           />
         </LabelStyle>
         <FormButton type="submit">Reset Password</FormButton>

@@ -24,11 +24,11 @@ export default function AllClasses({}) {
     ALL_CLASSES_QUERY,
   )
   if (loading) return <p>Loading...</p>
-  if (error) return <DisplayError error={error} />
 
   return (
     <>
       <TableTitle>Class list</TableTitle>
+      <DisplayError error={error} />
       <TableContainer>
         <TableHeader>
           <TableRow>

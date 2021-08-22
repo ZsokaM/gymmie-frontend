@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { ApolloCache, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { SmallFormButton } from '../styles/ButtonStyle'
 
 const DELETE_BOOKING_MUTATION = gql`

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { centeredItems, borderRadius } from '../styles/HelperStyles'
+import { centeredItems } from '../styles/HelperStyles'
 
 export const FlexTable = css`
   display: flex;

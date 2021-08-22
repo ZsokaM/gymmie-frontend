@@ -8,6 +8,12 @@ import {
   TableField,
   TableTitle,
 } from '../TableElements/ClassTableStyle'
+import { SportClassInterface } from '../../lib/gymmieInterfaces'
+
+interface BookingInterface {
+  id: string
+  sportClass: SportClassInterface
+}
 
 export default function Bookings() {
   const activeUser = useUser()
@@ -30,7 +36,7 @@ export default function Bookings() {
           </TableRow>
         </TableHeader>
         <tbody>
-          {activeUser.bookings.map((bookedClass) => {
+          {activeUser.bookings.map((bookedClass: BookingInterface) => {
             const {
               id,
               year,

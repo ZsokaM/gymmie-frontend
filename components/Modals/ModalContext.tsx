@@ -8,7 +8,6 @@ interface ModalInterface {
 function ModalContextProvider({ children }: ModalInterface) {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalText, setModalText] = useState('')
-  const [modalType, setModalType] = useState('success')
 
   const toggleModal = () => {
     setModalIsOpen((prevState) => !prevState)
@@ -22,6 +21,10 @@ function ModalContextProvider({ children }: ModalInterface) {
     setModalIsOpen(false)
   }
 
+  const catchError = (err: string) => {
+    setModalText(`Something went wrong, ${err}`)
+    showModal()
+  }
   return (
     <ModalStateContext.Provider
       value={{
@@ -29,11 +32,10 @@ function ModalContextProvider({ children }: ModalInterface) {
         setModalIsOpen,
         modalText,
         setModalText,
-        modalType,
-        setModalType,
         toggleModal,
         showModal,
         closeModal,
+        catchError,
       }}
     >
       {children}

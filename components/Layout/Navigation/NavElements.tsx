@@ -10,44 +10,37 @@ export default function NavElements() {
 
   return (
     <>
-      <Link href="/" passHref>
+      <Link href="/">
         <StyledLink>Home</StyledLink>
       </Link>
-      <Link href="/schedule" passHref>
+      <Link href="/schedule">
         <StyledLink>Class Schedule</StyledLink>
       </Link>
 
       {!user && (
         <>
-          <Link href="/login" passHref>
+          <Link href="/login">
             <StyledLink>Login</StyledLink>
           </Link>
-          <Link href="/signup" passHref>
+          <Link href="/signup">
             <StyledLink>Sign up</StyledLink>
           </Link>
         </>
       )}
       {user?.role.canManageUsers && (
-        <Link href="/admin" passHref>
+        <Link href="/admin">
           <StyledLink>Admin</StyledLink>
         </Link>
       )}
       {user && (
         <>
-          <Link href="/account" passHref>
+          <Link href="/account">
             <StyledLink>My account</StyledLink>
           </Link>
           <LogOut />
         </>
       )}
-      <ScrollLink
-        to="contact"
-        smooth
-        duration={500}
-        spy
-        exact="true"
-        offset={-80}
-      >
+      <ScrollLink to="contact" smooth duration={500} spy={true} offset={-80}>
         <StyledLink>Contact us</StyledLink>
       </ScrollLink>
     </>

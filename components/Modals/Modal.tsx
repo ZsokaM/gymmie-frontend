@@ -6,10 +6,9 @@ import { centeredItems } from '../styles/HelperStyles'
 
 export default function Modal({
   modalIsOpen,
-  modalType,
   modalText,
   closeModal,
-}: ModalProps) {
+}: Partial<ModalProps>) {
   const animation = useSpring({
     config: {
       duration: 250,
@@ -21,7 +20,7 @@ export default function Modal({
   return (
     <>
       {modalIsOpen && (
-        <Background modalType={modalType}>
+        <Background>
           <animated.div style={animation}>
             <ModalWrapper>
               <ModalContent>{modalText}</ModalContent>
@@ -34,13 +33,12 @@ export default function Modal({
   )
 }
 
-const Background = styled.div<Pick<ModalProps, 'modalType'>>`
+const Background = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${({ modalType }) =>
-    modalType === 'success' ? '#7ECA9C' : '#EFB7B7'};
+  background-color: '#EFB7B7';
   position: fixed;
-  ${centeredItems}
+  ${centeredItems};
   justify-content: center;
 `
 

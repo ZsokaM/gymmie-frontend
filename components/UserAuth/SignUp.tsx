@@ -75,6 +75,7 @@ export default function SignUp() {
               value={inputs.name}
               autoComplete="name"
               onChange={handleChange}
+              required
             />
           </LabelStyle>
           <LabelStyle htmlFor="email">
@@ -86,6 +87,7 @@ export default function SignUp() {
               autoComplete="email"
               value={inputs.email}
               onChange={handleChange}
+              required
             />
           </LabelStyle>
           <LabelStyle htmlFor="password">
@@ -94,9 +96,10 @@ export default function SignUp() {
               type="password"
               name="password"
               placeholder="********"
-              autoomplete="password"
+              autoComplete="password"
               value={inputs.password}
               onChange={handleChange}
+              required
             />
           </LabelStyle>
           <FormButton type="submit">Get sweaty</FormButton>
