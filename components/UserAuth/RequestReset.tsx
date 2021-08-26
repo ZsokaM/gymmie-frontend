@@ -1,4 +1,4 @@
-import { useMutation, useLazyQuery } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { REQUEST_RESET_MUTATION } from '../../lib/APIs/Auth'
 import {
   FieldSetStyle,

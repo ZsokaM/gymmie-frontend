@@ -27,7 +27,7 @@ export default function NavElements() {
           </Link>
         </>
       )}
-      {user?.role.canManageUsers && (
+      {user?.role?.canManageUsers && (
         <Link href="/admin">
           <StyledLink>Admin</StyledLink>
         </Link>
@@ -41,7 +41,7 @@ export default function NavElements() {
         </>
       )}
       <ScrollLink to="contact" smooth duration={500} spy={true} offset={-80}>
-        <StyledLink>Contact us</StyledLink>
+        <StyledLink as="span">Contact us</StyledLink>
       </ScrollLink>
     </>
   )

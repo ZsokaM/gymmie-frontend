@@ -36,30 +36,31 @@ export default function Bookings() {
           </TableRow>
         </TableHeader>
         <tbody>
-          {activeUser.bookings.map((bookedClass: BookingInterface) => {
-            const {
-              id,
-              year,
-              week,
-              day,
-              startTime,
-              name,
-              teacher,
-            } = bookedClass.sportClass
-            return (
-              <TableRow key={id}>
-                <TableField>{year}</TableField>
-                <TableField>{week}</TableField>
-                <TableField>{weekDayNames[day]}</TableField>
-                <TableField>{name}</TableField>
-                <TableField>{decimalToTime(startTime)}</TableField>
-                <TableField>{teacher}</TableField>
-                <TableField>
-                  <DeleteBooking id={bookedClass.id} />
-                </TableField>
-              </TableRow>
-            )
-          })}
+          {activeUser.bookings &&
+            activeUser.bookings.map((bookedClass: BookingInterface) => {
+              const {
+                id,
+                year,
+                week,
+                day,
+                startTime,
+                name,
+                teacher,
+              } = bookedClass.sportClass
+              return (
+                <TableRow key={id}>
+                  <TableField>{year}</TableField>
+                  <TableField>{week}</TableField>
+                  <TableField>{weekDayNames[day]}</TableField>
+                  <TableField>{name}</TableField>
+                  <TableField>{decimalToTime(startTime)}</TableField>
+                  <TableField>{teacher}</TableField>
+                  <TableField>
+                    <DeleteBooking id={bookedClass.id} />
+                  </TableField>
+                </TableRow>
+              )
+            })}
         </tbody>
       </TableContainer>
     </>

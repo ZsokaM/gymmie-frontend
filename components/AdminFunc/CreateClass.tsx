@@ -9,7 +9,7 @@ import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import { FormButton } from '../styles/ButtonStyle'
 import useForm, { initValue } from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
-// import DisplayError from '../Layout/DisplayError'
+import DisplayError from '../Layout/DisplayError'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
 export default function CreateClass() {
@@ -26,7 +26,7 @@ export default function CreateClass() {
     e.preventDefault()
     try {
       await createSportClass()
-      clearForm()
+      //clearForm()
       resetForm()
     } catch (err) {
       console.error(err)
@@ -35,7 +35,7 @@ export default function CreateClass() {
 
   return (
     <FormStyle onSubmit={onSubmit}>
-      {/* <DisplayError error={error} /> */}
+      <DisplayError error={error} />
       <FieldSetStyle disabled={loading}>
         <FormHeader>Create a Class</FormHeader>
         <CreateUpdateFormFieldset inputs={inputs} handleChange={handleChange} />

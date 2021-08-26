@@ -1,22 +1,12 @@
-import gql from 'graphql-tag'
 import { useMutation } from '@apollo/client'
 import { SmallFormButton } from '../styles/ButtonStyle'
-
-const DELETE_BOOKING_MUTATION = gql`
-  mutation DELETE_BOOKING_MUTATION($id: ID!) {
-    deleteSingleBooking(id: $id) {
-      id
-    }
-  }
-`
+import { DELETE_BOOKING_MUTATION } from '../../lib/APIs/SportClassMutations'
 
 interface DeleteBookingProps {
   id: string
 }
 
-//@TODO: find type for cahce and payload, empty object doesnt do it
-
-function update(cache: unknown, payload: unknown) {
+function update(cache: any, payload: any) {
   cache.evict(cache.identify(payload.data.deleteSingleBooking))
 }
 

@@ -8,6 +8,7 @@ interface ModalInterface {
 function ModalContextProvider({ children }: ModalInterface) {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalText, setModalText] = useState('')
+  //const [modalContinueButton, setModalContinueButton] = useState('')
 
   const toggleModal = () => {
     setModalIsOpen((prevState) => !prevState)
@@ -21,6 +22,11 @@ function ModalContextProvider({ children }: ModalInterface) {
     setModalIsOpen(false)
   }
 
+  const executeModalFn = (cb: () => void) => {
+    console.log('hello')
+    cb()
+    //closeModal()
+  }
   const catchError = (err: string) => {
     setModalText(`Something went wrong, ${err}`)
     showModal()
@@ -36,6 +42,9 @@ function ModalContextProvider({ children }: ModalInterface) {
         showModal,
         closeModal,
         catchError,
+        executeModalFn,
+        // modalContinueButton,
+        // setModalContinueButton,
       }}
     >
       {children}

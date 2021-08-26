@@ -52,7 +52,7 @@ export default function AllClasses({}) {
               <TableField>{sportClass.name}</TableField>
               <TableField>{sportClass.teacher}</TableField>
               <TableField>
-                {sportClass.users ? sportClass.users.length : 0}
+                {sportClass.bookings ? sportClass.bookings.length : 0}
               </TableField>
               <TableField>
                 <ButtonWrapper>

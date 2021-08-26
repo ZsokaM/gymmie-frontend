@@ -1,6 +1,7 @@
 import NProgress from 'nprogress'
 import Router from 'next/router'
 import { ApolloProvider } from '@apollo/client'
+import { AppContext, AppProps } from 'next/app'
 import '../components/styles/nprogress.css'
 import withData from '../lib/withData'
 import Page from '../components/Layout/Page'
@@ -16,7 +17,10 @@ Router.events.on('routeChangeError', () => {
   NProgress.done()
 })
 
-function MyApp({ Component, pageProps, apollo }) {
+interface MyAppProps extends AppProps {
+  apollo: any
+}
+function MyApp({ Component, pageProps, apollo }: MyAppProps) {
   return (
     <ApolloProvider client={apollo}>
       <ModalContextProvider>
@@ -28,10 +32,8 @@ function MyApp({ Component, pageProps, apollo }) {
   )
 }
 
-// if any of the pages have a getInitialProps method on them, which they will because of
-// withData, then we are going to wait and fetch it - this is for Apollo/Nextjs setup
-MyApp.getInitialProps = async function ({ Component, ctx }) {
-  let pageProps = {}
+MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
+  let pageProps: any = {}
   try {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)

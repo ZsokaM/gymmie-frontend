@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import {
   LOGIN_MUTATION,
   SIGNUP_MUTATION,
@@ -18,6 +18,7 @@ import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
 
 export default function SignUp() {
+  const router = useRouter()
   const [isLoggedIn, setIsLoggedIn] = useState({
     email: '',
     password: '',
@@ -42,18 +43,16 @@ export default function SignUp() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      await signup()
-      clearForm()
-      resetForm()
-      if (!error) {
+      const result = await signup()
+      if (result.data.createUser.__typename === 'User') {
         setIsLoggedIn({
           email: inputs.email,
           password: inputs.password,
         })
         login()
-        Router.push({
-          pathname: '/schedule',
-        })
+        clearForm()
+        resetForm()
+        router.push('/schedule')
       }
     } catch (err) {
       console.error(err)

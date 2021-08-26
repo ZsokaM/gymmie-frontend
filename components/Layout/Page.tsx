@@ -16,7 +16,7 @@ interface PageProps {
 }
 
 export default function Page({ children }: PageProps) {
-  const modal = useModal()
+  const modal: Partial<ModalProps> = useModal()
   const [theme, setTheme] = useState('dark')
   const [isOpen, setIsOpen] = useState(false)
 
@@ -108,8 +108,8 @@ const InnerStyles = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 1rem;
+  min-height: 65vh;
 `
 const mediaQueries = {
   small: `@media screen and (max-width: 768px)`,

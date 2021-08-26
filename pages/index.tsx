@@ -10,7 +10,7 @@ export default function IndexPage() {
         <title>gymmie | Home </title>
       </Head>
       <Hero />
-      <InfoSection id="class-types" imgStart={false} />
+      <InfoSection imgStart={false} />
       <InfoSection imgStart={true} />
       <InfoSection imgStart={false} />
       <Price />

@@ -93,10 +93,10 @@ export const RESET_PASSWORD_MUTATION = gql`
     }
   }
 `
-// const FIND_USER_BY_EMAIL_QUERY = gql`
-//   query FIND_USER_BY_EMAIL_QUERY($email: String) {
-//     allUsers(where: { email: $email }) {
-//       id
-//     }
-//   }
-// `
+const FIND_USER_BY_EMAIL_QUERY = gql`
+  query FIND_USER_BY_EMAIL_QUERY($email: String) {
+    allUsers(where: { email: $email }) {
+      id
+    }
+  }
+`

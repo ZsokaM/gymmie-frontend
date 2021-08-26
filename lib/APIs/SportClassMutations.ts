@@ -79,3 +79,19 @@ export const DELETE_SPORTCLASS_MUTATION = gql`
     }
   }
 `
+
+export const ADD_TO_BOOKINGS_MUTATION = gql`
+  mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
+    addToBookings(sportClassId: $id) {
+      id
+    }
+  }
+`
+
+export const DELETE_BOOKING_MUTATION = gql`
+  mutation DELETE_BOOKING_MUTATION($id: ID!) {
+    deleteSingleBooking(id: $id) {
+      id
+    }
+  }
+`

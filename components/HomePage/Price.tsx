@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 import { centeredItems, borderRadius } from '../styles/HelperStyles'
 
 export default function Price() {
@@ -7,19 +8,34 @@ export default function Price() {
       <PriceHeader>Memberships and Prices</PriceHeader>
       <PriceWrapper>
         <PriceCard>
-          <PriceIcon src="/price.jpg" />
+          <Image
+            src="/price.jpg"
+            width={160}
+            height={160}
+            alt="membership type photo"
+          />
           <PriceType>One class</PriceType>
           <PriceDetails>Book one class and have a taste for 13$</PriceDetails>
         </PriceCard>
         <PriceCard>
-          <PriceIcon src="/price.jpg" />
+          <Image
+            src="/price.jpg"
+            width={160}
+            height={160}
+            alt="membership type photo"
+          />
           <PriceType>10 classes</PriceType>
           <PriceDetails>
             Enjoy 10 sweaty classes within 3 months for 110$
           </PriceDetails>
         </PriceCard>
         <PriceCard>
-          <PriceIcon src="/price.jpg" />
+          <Image
+            src="/price.jpg"
+            width={160}
+            height={160}
+            alt="membership type photo"
+          />
           <PriceType>Monthly Unlimited</PriceType>
           <PriceDetails>
             Book as many classes as you want for a month for 60$
@@ -66,11 +82,6 @@ const PriceCard = styled.article`
   &:hover {
     transform: scale(1.05);
   }
-`
-const PriceIcon = styled.img`
-  height: 160px;
-  width: 160px;
-  margin-bottom: 10px;
 `
 const PriceHeader = styled.h2`
   font-size: 2.5rem;

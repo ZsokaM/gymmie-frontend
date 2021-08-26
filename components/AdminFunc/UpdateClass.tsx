@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useLazyQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { SINGLE_SPORTCLASS_QUERY } from '../../lib/APIs/SportClassQueries'
 import { UPDATE_SPORTCLASS_MUTATION } from '../../lib/APIs/SportClassMutations'
 import useForm, { initValue } from '../FormElements/useForm'
@@ -9,7 +9,7 @@ import {
   FieldSetStyle,
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
-// import DisplayError from '../Layout/DisplayError'
+import DisplayError from '../Layout/DisplayError'
 
 type UpdateClassProps = {
   id?: string
@@ -51,7 +51,7 @@ export default function UpdateClass({ id }: UpdateClassProps) {
 
   return (
     <FormStyle onSubmit={onSubmit}>
-      {/* <DisplayError error={error | updateError} /> */}
+      <DisplayError error={error || updateError} />
       <FieldSetStyle disabled={loading}>
         <FormHeader>Update class</FormHeader>
         <CreateUpdateFormFieldset inputs={inputs} handleChange={handleChange} />

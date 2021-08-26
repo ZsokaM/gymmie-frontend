@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import { LOGIN_MUTATION, CURRENT_USER_QUERY } from '../../lib/APIs/Auth'
 import useForm from '../FormElements/useForm'
 import {
@@ -10,10 +10,10 @@ import {
   LabelStyle,
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
-import { useModal } from '../Modals/ModalContext'
 import DisplayError from '../Layout/DisplayError'
 
 export default function Login() {
+  const router = useRouter()
   const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
     password: '',
@@ -28,14 +28,12 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      await login()
+      const result = await login()
       if (
-        data?.authenticateUserWithPassword.__typename ===
+        result.data.authenticateUserWithPassword.__typename ===
         'UserAuthenticationWithPasswordSuccess'
       ) {
-        Router.push({
-          pathname: '/schedule',
-        })
+        router.push('/schedule')
         clearForm()
         resetForm()
       }
