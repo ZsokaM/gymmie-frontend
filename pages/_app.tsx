@@ -5,7 +5,6 @@ import { AppContext, AppProps } from 'next/app'
 import '../components/styles/nprogress.css'
 import withData from '../lib/withData'
 import Page from '../components/Layout/Page'
-import { ModalContextProvider } from '../components/Modals/ModalContext'
 
 Router.events.on('routeChangeStart', () => {
   NProgress.start()
@@ -23,11 +22,9 @@ interface MyAppProps extends AppProps {
 function MyApp({ Component, pageProps, apollo }: MyAppProps) {
   return (
     <ApolloProvider client={apollo}>
-      <ModalContextProvider>
-        <Page>
-          <Component {...pageProps} />
-        </Page>
-      </ModalContextProvider>
+      <Page>
+        <Component {...pageProps} />
+      </Page>
     </ApolloProvider>
   )
 }

@@ -18,7 +18,6 @@ import {
   TableRow,
   TableField,
   ButtonWrapper,
-  TableTitle,
 } from '../TableElements/ClassTableStyle'
 import ChangeWeek from '../TableElements/ChangeWeek'
 

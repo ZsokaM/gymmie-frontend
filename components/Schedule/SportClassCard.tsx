@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import { CURRENT_USER_QUERY } from '../../lib/APIs/Auth'
-import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
+import { WEEKLY_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import { ADD_TO_BOOKINGS_MUTATION } from '../../lib/APIs/SportClassMutations'
 import { decimalToTime } from '../../lib/dateHelpers'
 import { useUser } from '../UserAuth/User'
@@ -19,7 +19,7 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
       variables: { id: classData.id },
       refetchQueries: [
         { query: CURRENT_USER_QUERY },
-        { query: ALL_CLASSES_QUERY },
+        { query: WEEKLY_CLASSES_QUERY },
       ],
     },
   )

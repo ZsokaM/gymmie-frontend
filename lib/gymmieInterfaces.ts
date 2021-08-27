@@ -34,8 +34,8 @@ export interface ModalProps {
   showModal: () => void
   closeModal: () => void
   catchError: () => {}
-  modalContinueButton: () => {}
-  setModalContinueButton: () => {}
+  modalContinueButtonFn: () => {}
+  setModalContinueButtonFn: () => {}
 }
 
 export enum Direction {

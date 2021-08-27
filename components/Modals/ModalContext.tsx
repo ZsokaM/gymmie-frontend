@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
+import Modal from './Modal'
 
 const ModalStateContext = createContext({})
 
@@ -8,7 +9,7 @@ interface ModalInterface {
 function ModalContextProvider({ children }: ModalInterface) {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalText, setModalText] = useState('')
-  const [modalContinueButton, setModalContinueButton] = useState('')
+  const [modalContinueButtonFn, setModalContinueButtonFn] = useState('')
 
   const toggleModal = () => {
     setModalIsOpen((prevState) => !prevState)
@@ -43,10 +44,15 @@ function ModalContextProvider({ children }: ModalInterface) {
         closeModal,
         catchError,
         executeModalFn,
-        modalContinueButton,
-        setModalContinueButton,
+        modalContinueButtonFn,
+        setModalContinueButtonFn,
       }}
     >
+      <Modal
+        modalIsOpen={modalIsOpen}
+        modalText={modalText}
+        closeModal={closeModal}
+      />
       {children}
     </ModalStateContext.Provider>
   )

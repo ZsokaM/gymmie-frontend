@@ -4,7 +4,7 @@ import styled, {
   createGlobalStyle,
   ThemeProvider,
 } from 'styled-components'
-import Modal from '../Modals/Modal'
+import { ModalContextProvider } from '../Modals/ModalContext'
 import Footer from './Footer'
 import Header from './Navigation/Header'
 import Sidebar from './Navigation/Sidebar'
@@ -39,15 +39,12 @@ export default function Page({ children }: PageProps) {
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-        <Modal
-          modalIsOpen={modal.modalIsOpen}
-          modalText={modal.modalText}
-          closeModal={modal.closeModal}
-        />
-        <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
-        <Header toggle={toggleSidebar} />
-        <InnerStyles>{children}</InnerStyles>
-        <Footer toggleTheme={toggleTheme} />
+        <ModalContextProvider>
+          <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
+          <Header toggle={toggleSidebar} />
+          <InnerStyles>{children}</InnerStyles>
+          <Footer toggleTheme={toggleTheme} />
+        </ModalContextProvider>
       </ThemeProvider>
     </>
   )

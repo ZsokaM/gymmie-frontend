@@ -9,7 +9,7 @@ export default function Price() {
       <PriceWrapper>
         <PriceCard>
           <Image
-            src="/price.jpg"
+            src="/gloves.jpg"
             width={160}
             height={160}
             alt="membership type photo"
@@ -19,7 +19,7 @@ export default function Price() {
         </PriceCard>
         <PriceCard>
           <Image
-            src="/price.jpg"
+            src="/gloves.jpg"
             width={160}
             height={160}
             alt="membership type photo"
@@ -31,7 +31,7 @@ export default function Price() {
         </PriceCard>
         <PriceCard>
           <Image
-            src="/price.jpg"
+            src="/gloves.jpg"
             width={160}
             height={160}
             alt="membership type photo"

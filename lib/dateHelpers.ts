@@ -8,7 +8,7 @@ export const weekDayNames = [
   'sunday',
 ]
 
-const firstClass = 8
+const firstClass = 7.5
 const lastClass = 20
 export function classHours() {
   let hoursArray = []

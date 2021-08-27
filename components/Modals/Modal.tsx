@@ -9,7 +9,7 @@ export default function Modal({
   modalIsOpen,
   modalText,
   closeModal,
-  setModalContinueButton,
+  modalContinueButtonFn,
 }: Partial<ModalProps>) {
   const animation = useSpring({
     config: {
@@ -30,7 +30,12 @@ export default function Modal({
                 <ModalButton type="button" onClick={closeModal}>
                   Cancel
                 </ModalButton>
-                <ModalButton type="button" onClick={setModalContinueButton}>
+                <ModalButton
+                  type="button"
+                  onClick={() => {
+                    modalContinueButtonFn
+                  }}
+                >
                   Continue
                 </ModalButton>
                 <CloseModalButton
