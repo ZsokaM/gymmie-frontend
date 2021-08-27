@@ -15,6 +15,10 @@ export interface SportClassInterface {
   bookings?: string[]
 }
 
+export interface AllClassesInterface {
+  allSportClasses: SportClassInterface[]
+}
+
 export interface AuthInterface {
   name?: string
   email: string

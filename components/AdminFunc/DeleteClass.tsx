@@ -52,7 +52,7 @@ export default function DeleteClass({ id }: DeleteClassProps) {
     modal.setModalText('Are you sure you want to delete this item?')
     modal.showModal()
     // modal.executeModalFn(() => combinedDelete())
-    // modal.setModalContinueButton(() => combinedDelete())
+    modal.setModalContinueButton(() => combinedDelete())
     // modal.closeModal()
 
     // if (confirm('Are you sure you want to delete this item?')) {

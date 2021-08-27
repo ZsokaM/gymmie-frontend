@@ -14,7 +14,7 @@ export default function UserDetails() {
 
       <Achievements>
         <UserParag>
-          You have attended {user.bookings.length} classes since you joined
+          You have booked {user.bookings.length} classes since you joined
         </UserParag>
         <Membership>current membership info</Membership>
       </Achievements>

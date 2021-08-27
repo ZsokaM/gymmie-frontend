@@ -19,6 +19,25 @@ export const ALL_CLASSES_QUERY = gql`
     }
   }
 `
+export const WEEKLY_CLASSES_QUERY = gql`
+  query WEEKLY_CLASSES_QUERY($week: Int!, $year: Int!) {
+    allSportClasses(where: { week: $week, year: $year }) {
+      id
+      name
+      freeSpots
+      available
+      year
+      week
+      day
+      startTime
+      teacher
+      duration
+      bookings {
+        id
+      }
+    }
+  }
+`
 
 export const SINGLE_SPORTCLASS_QUERY = gql`
   query SINGLE_SPORTCLASS_QUERY($id: ID!) {

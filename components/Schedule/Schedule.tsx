@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import styled from 'styled-components'
-import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
+import { WEEKLY_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import SportClassCard from './SportClassCard'
 import { getWeek, weekDayNames, currentYear } from '../../lib/dateHelpers'
-import { SportClassInterface, Direction } from '../../lib/gymmieInterfaces'
-import { centeredItems, borderRadius } from '../styles/HelperStyles'
-import { FormButton } from '../styles/ButtonStyle'
+import {
+  SportClassInterface,
+  Direction,
+  AllClassesInterface,
+} from '../../lib/gymmieInterfaces'
+import { centeredItems } from '../styles/HelperStyles'
 import {
   FlexHead,
   FlexTable,
@@ -14,6 +17,7 @@ import {
   FlexTh,
   FlexTr,
 } from '../TableElements/ClassTableStyle'
+import ChangeWeek from '../TableElements/ChangeWeek'
 
 export default function Schedule() {
   const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
@@ -23,7 +27,11 @@ export default function Schedule() {
     setCurrentWeekOfTheYear(getWeek())
   }, [])
 
-  let { data, error, loading } = useQuery(ALL_CLASSES_QUERY)
+  const { data, error, loading } = useQuery<AllClassesInterface>(
+    WEEKLY_CLASSES_QUERY,
+    { variables: { week: weekToDisplay, year: currentYear } },
+  )
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error: {error.message}</p>
 
@@ -33,13 +41,8 @@ export default function Schedule() {
       : setWeekToDisplay((prevState) => prevState + 1)
   }
   const FilterClassToDay = (dayNumber: number) => {
-    return data.allSportClasses
-      .filter(
-        (sportClass: SportClassInterface) =>
-          sportClass.year === currentYear &&
-          sportClass.week === weekToDisplay &&
-          sportClass.day === dayNumber,
-      )
+    return data?.allSportClasses
+      .filter((sportClass: SportClassInterface) => sportClass.day === dayNumber)
       .sort(
         (
           sportClass1: SportClassInterface,
@@ -55,26 +58,17 @@ export default function Schedule() {
 
   return (
     <>
-      <Header>
-        <FormButton
-          type="button"
-          onClick={() => changeWeek(Direction.PREVIOUS)}
-          disabled={weekToDisplay < currentWeekOfTheYear - 1}
-        >
-          Previous Week
-        </FormButton>
-        <h2>
-          Week {weekToDisplay} in {currentYear}
-        </h2>
-        <FormButton
-          type="button"
-          onClick={() => changeWeek(Direction.NEXT)}
-          disabled={weekToDisplay > currentWeekOfTheYear + 1}
-        >
-          Next Week
-        </FormButton>
-      </Header>
-
+      <ChangeWeek
+        handleClickPrev={() => changeWeek(Direction.PREVIOUS)}
+        handleClickNext={() => changeWeek(Direction.NEXT)}
+        disabledConditionPrev={weekToDisplay < currentWeekOfTheYear - 1}
+        disabledConditionNext={weekToDisplay > currentWeekOfTheYear + 1}
+        text={
+          <p>
+            Week {weekToDisplay} in {currentYear}
+          </p>
+        }
+      />
       <TableContainer>
         <TableHeader>
           <TableRow>

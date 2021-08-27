@@ -1,10 +1,16 @@
 import { useQuery } from '@apollo/client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import DeleteClass from '../AdminFunc/DeleteClass'
-import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
-import { weekDayNames, decimalToTime, getWeek } from '../../lib/dateHelpers'
+import { WEEKLY_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
+import {
+  weekDayNames,
+  decimalToTime,
+  getWeek,
+  currentYear,
+} from '../../lib/dateHelpers'
 import DisplayError from '../Layout/DisplayError'
-import { SportClassInterface } from '../../lib/gymmieInterfaces'
+import { AllClassesInterface, Direction } from '../../lib/gymmieInterfaces'
 import { SmallFormButton } from '../styles/ButtonStyle'
 import {
   TableContainer,
@@ -14,20 +20,36 @@ import {
   ButtonWrapper,
   TableTitle,
 } from '../TableElements/ClassTableStyle'
-
-interface AllClassesInterface {
-  allSportClasses: SportClassInterface[]
-}
+import ChangeWeek from '../TableElements/ChangeWeek'
 
 export default function AllClasses({}) {
+  const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
+  const [weekToDisplay, setWeekToDisplay] = useState(currentWeekOfTheYear)
+
+  useEffect(() => {
+    setCurrentWeekOfTheYear(getWeek())
+  }, [])
+
   const { data, error, loading } = useQuery<AllClassesInterface>(
-    ALL_CLASSES_QUERY,
+    WEEKLY_CLASSES_QUERY,
+    { variables: { week: weekToDisplay, year: currentYear } },
   )
+
   if (loading) return <p>Loading...</p>
+
+  const changeWeek = (direction: Direction) => {
+    direction === Direction.PREVIOUS
+      ? setWeekToDisplay((prevState) => prevState - 1)
+      : setWeekToDisplay((prevState) => prevState + 1)
+  }
 
   return (
     <>
-      <TableTitle>Class list</TableTitle>
+      <ChangeWeek
+        handleClickPrev={() => changeWeek(Direction.PREVIOUS)}
+        handleClickNext={() => changeWeek(Direction.NEXT)}
+        text={<p>Class List</p>}
+      />
       <DisplayError error={error} />
       <TableContainer>
         <TableHeader>

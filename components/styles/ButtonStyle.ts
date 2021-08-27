@@ -3,7 +3,7 @@ import { centeredItems, borderRadius } from './HelperStyles'
 
 export const Button = styled.button`
   ${borderRadius};
-  background-color: ${({ theme }) => theme.bg.tertiary};
+  background-color: #ff777a;
   white-space: nowrap;
   padding: 14px 48px;
   color: ${({ theme }) => theme.text.tertiary};
