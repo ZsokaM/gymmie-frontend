@@ -53,7 +53,7 @@ export default function DeleteClass({ id }: DeleteClassProps) {
     // modal.showModal()
 
     if (confirm('Are you sure you want to delete this item?')) {
-      arrayOfBookings.forEach((bk) => {
+      arrayOfBookings.forEach((bk: any) => {
         deleteBooking({ variables: { id: bk.id } })
       })
       deleteSportClass().catch((err) => alert(err.message))
