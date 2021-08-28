@@ -7,10 +7,10 @@ import Document, {
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
-export default class MyDocument extends Document {
-  static getInitialProps({ renderPage }: DocumentContext) {
+export default class MyDocument {
+  static getInitialProps({ renderPage }: any) {
     const sheet = new ServerStyleSheet()
-    const page = renderPage((App) => (props: any) =>
+    const page = renderPage((App: any) => (props: any) =>
       sheet.collectStyles(<App {...props} />),
     )
     const styleTags = sheet.getStyleElement()

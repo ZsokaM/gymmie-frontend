@@ -19,7 +19,7 @@ Router.events.on('routeChangeError', () => {
 interface MyAppProps extends AppProps {
   apollo: any
 }
-function MyApp({ Component, pageProps, apollo }: MyAppProps) {
+function MyApp({ Component, pageProps, apollo }: any) {
   return (
     <ApolloProvider client={apollo}>
       <Page>
@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps, apollo }: MyAppProps) {
   )
 }
 
-MyApp.getInitialProps = async function ({ Component, ctx }: AppContext) {
+MyApp.getInitialProps = async function ({ Component, ctx }: any) {
   let pageProps: any = {}
   try {
     if (Component.getInitialProps) {

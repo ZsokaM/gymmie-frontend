@@ -10,7 +10,7 @@ interface clientProps {
   initialState?: any
 }
 
-function createClient({ headers, initialState }: clientProps) {
+function createClient({ headers, initialState }: any) {
   return new ApolloClient({
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
