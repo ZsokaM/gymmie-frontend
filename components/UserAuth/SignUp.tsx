@@ -17,9 +17,13 @@ import {
 import { FormButton } from '../styles/ButtonStyle'
 import DisplayError from '../Layout/DisplayError'
 
+interface isLoggedInProps {
+  email: string | number
+  password: string | number
+}
 export default function SignUp() {
   const router = useRouter()
-  const [isLoggedIn, setIsLoggedIn] = useState({
+  const [isLoggedIn, setIsLoggedIn] = useState<isLoggedInProps>({
     email: '',
     password: '',
   })
