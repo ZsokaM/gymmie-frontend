@@ -30,6 +30,7 @@ function createClient({ headers, initialState }: any) {
         fetchOptions: {
           credentials: 'include',
         },
+        headers,
         // headers: {
         //   ...headers,
         //   'Access-Control-Allow-Origin': '*',
