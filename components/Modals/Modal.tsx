@@ -9,7 +9,6 @@ export default function Modal({
   modalIsOpen,
   modalText,
   closeModal,
-  modalContinueButtonFn,
 }: Partial<ModalProps>) {
   const animation = useSpring({
     config: {
@@ -18,6 +17,10 @@ export default function Modal({
     opacity: 1,
     transform: modalIsOpen ? `translateY(0%)` : `translateY(-100%)`,
   })
+
+  // const handleClick = () => {
+  //   setClicked(true)
+  // }
 
   return (
     <>
@@ -32,9 +35,7 @@ export default function Modal({
                 </ModalButton>
                 <ModalButton
                   type="button"
-                  onClick={() => {
-                    modalContinueButtonFn
-                  }}
+                  onClick={() => console.log('bananas')}
                 >
                   Continue
                 </ModalButton>

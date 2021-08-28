@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
+import { FaNapster } from 'react-icons/fa'
 import Modal from './Modal'
 
 const ModalStateContext = createContext({})
@@ -9,7 +10,8 @@ interface ModalInterface {
 function ModalContextProvider({ children }: ModalInterface) {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalText, setModalText] = useState('')
-  const [modalContinueButtonFn, setModalContinueButtonFn] = useState('')
+  //const [functionToExecute, setFunctionToExecute] = useState(null)
+  //const [clicked, setClicked] = useState(false)
 
   const toggleModal = () => {
     setModalIsOpen((prevState) => !prevState)
@@ -23,15 +25,15 @@ function ModalContextProvider({ children }: ModalInterface) {
     setModalIsOpen(false)
   }
 
-  const executeModalFn = (cb: () => void) => {
-    console.log('hello')
-    cb()
-    //closeModal()
-  }
   const catchError = (err: string) => {
     setModalText(`Something went wrong, ${err}`)
     showModal()
   }
+
+  // const changeFnToExecute = (fn) => {
+  //   setFunctionToExecute(fn)
+  // }
+
   return (
     <ModalStateContext.Provider
       value={{
@@ -43,9 +45,11 @@ function ModalContextProvider({ children }: ModalInterface) {
         showModal,
         closeModal,
         catchError,
-        executeModalFn,
-        modalContinueButtonFn,
-        setModalContinueButtonFn,
+        //clicked,
+        //setClicked,
+        // functionToExecute,
+        // setFunctionToExecute,
+        // changeFnToExecute,
       }}
     >
       <Modal

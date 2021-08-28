@@ -39,31 +39,25 @@ export default function DeleteClass({ id }: DeleteClassProps) {
     update,
   })
 
-  const combinedDelete = () => {
-    console.log('hello why caant you waaaaait')
-    // arrayOfBookings.forEach((booking) => {
-    //   deleteBooking({ variables: { id: booking.id } })
-    // })
+  //const combinedDelete = () => {
+  // console.log('hello why caant you waaaaait')
+  // arrayOfBookings.forEach((booking) => {
+  //   deleteBooking({ variables: { id: booking.id } })
+  // })
 
-    // deleteSportClass().catch((err) => alert(err.message))
-  }
+  // deleteSportClass().catch((err) => alert(err.message))
+  // }
 
   function handleDeleteModal() {
-    modal.setModalText('Are you sure you want to delete this item?')
-    modal.showModal()
-    modal.setModalContinueButtonFn(() => combinedDelete())
+    // modal.setModalText('Are you sure you want to delete this item?')
+    // modal.showModal()
 
-    // modal.executeModalFn(() => combinedDelete())
-    //modal.setModalContinueButton(() => combinedDelete())
-    // modal.closeModal()
-
-    // if (confirm('Are you sure you want to delete this item?')) {
-    //   arrayOfBookings.forEach((bk) => {
-    //     deleteBooking({ variables: { id: bk.id } })
-    //   })
-
-    //   deleteSportClass().catch((err) => alert(err.message))
-    // }
+    if (confirm('Are you sure you want to delete this item?')) {
+      arrayOfBookings.forEach((bk) => {
+        deleteBooking({ variables: { id: bk.id } })
+      })
+      deleteSportClass().catch((err) => alert(err.message))
+    }
   }
 
   return (

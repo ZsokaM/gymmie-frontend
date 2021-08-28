@@ -10,7 +10,7 @@ export default function admin() {
   const router = useRouter()
   const user = useUser()
   useEffect(() => {
-    if (!user.role?.canManageUsers) {
+    if (!user?.role?.canManageUsers) {
       router.push('/login')
     }
   }, [user])

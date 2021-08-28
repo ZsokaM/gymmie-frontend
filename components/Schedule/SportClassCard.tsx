@@ -34,7 +34,7 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
 
   return (
     <ClassCardContainer onClick={handleClick}>
-      <div>{classData.name}</div>
+      <SportClassName>{classData.name}</SportClassName>
       <div>{decimalToTime(classData.startTime)}</div>
       <div>{classData.teacher}</div>
       <div>{classData.duration} min</div>
@@ -60,4 +60,8 @@ const ClassCardContainer = styled.article`
     transform: scale(1.05);
     cursor: pointer;
   }
+`
+const SportClassName = styled.div`
+  font-weight: bold;
+  font-size: 1.5rem;
 `
