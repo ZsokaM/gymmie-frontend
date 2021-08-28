@@ -29,9 +29,11 @@ function createClient({ headers, initialState }: any) {
         uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
           credentials: 'include',
-          origin: 'https://gymmie-backend-hgkt5.ondigitalocean.app/',
         },
-        headers,
+        headers: {
+          ...headers,
+          'Access-Control-Allow-Origin': 'true',
+        },
       }),
     ]),
     cache: new InMemoryCache({
