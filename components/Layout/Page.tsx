@@ -4,7 +4,7 @@ import styled, {
   createGlobalStyle,
   ThemeProvider,
 } from 'styled-components'
-import Modal from '../Modals/Modal'
+import { ModalContextProvider } from '../Modals/ModalContext'
 import Footer from './Footer'
 import Header from './Navigation/Header'
 import Sidebar from './Navigation/Sidebar'
@@ -16,7 +16,7 @@ interface PageProps {
 }
 
 export default function Page({ children }: PageProps) {
-  const modal = useModal()
+  const modal: Partial<ModalProps> = useModal()
   const [theme, setTheme] = useState('dark')
   const [isOpen, setIsOpen] = useState(false)
 
@@ -39,16 +39,12 @@ export default function Page({ children }: PageProps) {
     <>
       <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
         <GlobalStyles />
-        {/* <Modal
-          modalIsOpen={modal.modalIsOpen}
-          modalType={modal.modalType}
-          modalText={modal.modalText}
-          closeModal={modal.closeModal}
-        /> */}
-        <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
-        <Header toggle={toggleSidebar} />
-        <InnerStyles>{children}</InnerStyles>
-        <Footer toggleTheme={toggleTheme} />
+        <ModalContextProvider>
+          <Sidebar isOpen={isOpen} toggle={toggleSidebar} />
+          <Header toggle={toggleSidebar} />
+          <InnerStyles>{children}</InnerStyles>
+          <Footer toggleTheme={toggleTheme} />
+        </ModalContextProvider>
       </ThemeProvider>
     </>
   )
@@ -109,8 +105,8 @@ const InnerStyles = styled.div`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding: 1rem;
+  min-height: 65vh;
 `
 const mediaQueries = {
   small: `@media screen and (max-width: 768px)`,

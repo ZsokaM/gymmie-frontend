@@ -2,30 +2,48 @@ import styled, { ThemeContext } from 'styled-components'
 import { useSpring, animated } from 'react-spring'
 import { MdClose } from 'react-icons/md'
 import { ModalProps } from '../../lib/gymmieInterfaces'
-import { centeredItems } from '../styles/HelperStyles'
+import { borderRadius, centeredItems } from '../styles/HelperStyles'
+import { SmallFormButton } from '../styles/ButtonStyle'
 
 export default function Modal({
   modalIsOpen,
-  modalType,
   modalText,
   closeModal,
-}: ModalProps) {
+}: Partial<ModalProps>) {
   const animation = useSpring({
     config: {
       duration: 250,
     },
-    opacity: modalIsOpen ? 1 : 0,
+    opacity: 1,
     transform: modalIsOpen ? `translateY(0%)` : `translateY(-100%)`,
   })
+
+  // const handleClick = () => {
+  //   setClicked(true)
+  // }
 
   return (
     <>
       {modalIsOpen && (
-        <Background modalType={modalType}>
+        <Background>
           <animated.div style={animation}>
             <ModalWrapper>
               <ModalContent>{modalText}</ModalContent>
-              <CloseModalButton aria-label="Close modal" onClick={closeModal} />
+              <ModalButtonWrapper>
+                <ModalButton type="button" onClick={closeModal}>
+                  Cancel
+                </ModalButton>
+                <ModalButton
+                  type="button"
+                  onClick={() => console.log('bananas')}
+                >
+                  Continue
+                </ModalButton>
+                <CloseModalButton
+                  aria-label="Close modal"
+                  onClick={closeModal}
+                />
+              </ModalButtonWrapper>
             </ModalWrapper>
           </animated.div>
         </Background>
@@ -34,25 +52,26 @@ export default function Modal({
   )
 }
 
-const Background = styled.div<Pick<ModalProps, 'modalType'>>`
+const Background = styled.div`
   width: 100%;
   height: 100%;
-  background-color: ${({ modalType }) =>
-    modalType === 'success' ? '#7ECA9C' : '#EFB7B7'};
+  background-color: #efb7b7;
   position: fixed;
-  ${centeredItems}
+  ${centeredItems};
   justify-content: center;
 `
 
 const ModalWrapper = styled.div`
-  width: 300px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   background-color: ${({ theme }) => theme.bg.secondary};
   ${centeredItems};
+  ${borderRadius}
+  flex-direction: column;
   justify-content: center;
   position: relative;
   z-index: 10;
-  border-radius: 10px;
+  padding: 5rem;
 `
 
 const ModalContent = styled.div`
@@ -61,15 +80,7 @@ const ModalContent = styled.div`
   justify-content: center;
   line-height: 1.8;
   color: ${({ theme }) => theme.text.primary};
-  p {
-    margin-bottom: 1rem;
-  }
-  button {
-    padding: 10px 24px;
-    background-color: ${({ theme }) => theme.bg.quarternary};
-    color: ${({ theme }) => theme.text.primary};
-    border: none;
-  }
+  margin: 1rem;
 `
 
 const CloseModalButton = styled(MdClose)`
@@ -81,4 +92,11 @@ const CloseModalButton = styled(MdClose)`
   height: 32px;
   padding: 0;
   z-index: 10;
+`
+
+const ModalButton = styled(SmallFormButton)`
+  background-color: #efb7b7;
+`
+const ModalButtonWrapper = styled.div`
+  ${centeredItems}
 `

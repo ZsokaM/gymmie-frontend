@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 export const CURRENT_USER_QUERY = gql`
   query {
     authenticatedItem {
-      # when the authenticated item returns a user, then we will return its data on the user
       ... on User {
         id
         name
@@ -91,6 +90,13 @@ export const RESET_PASSWORD_MUTATION = gql`
     ) {
       message
       code
+    }
+  }
+`
+const FIND_USER_BY_EMAIL_QUERY = gql`
+  query FIND_USER_BY_EMAIL_QUERY($email: String) {
+    allUsers(where: { email: $email }) {
+      id
     }
   }
 `

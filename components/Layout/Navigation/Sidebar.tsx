@@ -58,7 +58,8 @@ const SidebarWrapper = styled.div`
   width: 100%;
 
   a,
-  button {
+  button,
+  span {
     padding: 1rem;
     ${centeredItems};
     position: relative;

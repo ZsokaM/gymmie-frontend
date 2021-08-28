@@ -1,19 +1,12 @@
 import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
 import { CURRENT_USER_QUERY } from '../../lib/APIs/Auth'
+import { WEEKLY_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
+import { ADD_TO_BOOKINGS_MUTATION } from '../../lib/APIs/SportClassMutations'
 import { decimalToTime } from '../../lib/dateHelpers'
 import { useUser } from '../UserAuth/User'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
 import { centeredItems } from '../styles/HelperStyles'
-
-const ADD_TO_BOOKINGS_MUTATION = gql`
-  mutation ADD_TO_BOOKINGS_MUTATION($id: ID!) {
-    addToBookings(sportClassId: $id) {
-      id
-    }
-  }
-`
 
 interface SportClassCardProp {
   classData: SportClassInterface
@@ -24,7 +17,10 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
     ADD_TO_BOOKINGS_MUTATION,
     {
       variables: { id: classData.id },
-      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+      refetchQueries: [
+        { query: CURRENT_USER_QUERY },
+        { query: WEEKLY_CLASSES_QUERY },
+      ],
     },
   )
   //@TODO: replace with nice modals
@@ -33,13 +29,12 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
     if (classData.freeSpots === 0) return alert('This class is full')
     if (confirm('Confirm booking')) {
       addToBookings()
-      alert('Booking was a success')
     }
   }
 
   return (
     <ClassCardContainer onClick={handleClick}>
-      <div>{classData.name}</div>
+      <SportClassName>{classData.name}</SportClassName>
       <div>{decimalToTime(classData.startTime)}</div>
       <div>{classData.teacher}</div>
       <div>{classData.duration} min</div>
@@ -65,4 +60,8 @@ const ClassCardContainer = styled.article`
     transform: scale(1.05);
     cursor: pointer;
   }
+`
+const SportClassName = styled.div`
+  font-weight: bold;
+  font-size: 1.5rem;
 `

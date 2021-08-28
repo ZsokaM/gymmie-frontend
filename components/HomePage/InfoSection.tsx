@@ -12,9 +12,25 @@ export default function InfoSection({ imgStart }: InfoSectionProps) {
           <InfoRow imgStart={imgStart}>
             <Column>
               <TextWrapper>
-                <TopLine>topline</TopLine>
-                <Heading>heading</Heading>
-                <Subtitle>subtitle</Subtitle>
+                <TopLine>Full Body Workouts</TopLine>
+                <Heading>A CATCHY TITLE</Heading>
+                <SubText>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Praesent sagittis facilisis libero sed malesuada. Sed
+                  imperdiet id tortor ut euismod. Nam porttitor vestibulum
+                  euismod. Integer quis tellus euismod, elementum felis non,
+                  dictum augue. Vestibulum ut turpis quis turpis semper
+                  tincidunt interdum non est. Morbi aliquet libero et nulla
+                  vehicula imperdiet. Nam auctor porta suscipit. Fusce vel
+                  tellus auctor, iaculis ligula viverra, volutpat nibh. Duis
+                  malesuada quam eu ipsum porttitor pretium. Nunc sit amet
+                  ligula eleifend, tempor lorem ut, dignissim mi. Praesent
+                  congue orci et egestas pretium. Donec vehicula felis et arcu
+                  tristique ullamcorper. Curabitur nisl urna, volutpat in ante
+                  nec, interdum fringilla diam. Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit. Quisque tempus tempor tortor eget
+                  posuere. Mauris hendrerit purus a metus sollicitudin congue.
+                </SubText>
               </TextWrapper>
             </Column>
             <Column>
@@ -91,11 +107,12 @@ const Heading = styled.h2`
     font-size: 2rem;
   }
 `
-const Subtitle = styled.p`
+const SubText = styled.p`
   color: ${({ theme }) => theme.text.primary};
   margin-bottom: 3rem;
   font-size: 2rem;
-  line-height: 1.5rem;
+  line-height: 2rem;
+  text-align: justify;
 `
 const ImgWrap = styled.div`
   height: 100%;

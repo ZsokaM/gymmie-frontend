@@ -4,7 +4,6 @@ import {
   FormSelect,
 } from '../FormElements/formElementsStyle'
 import { weekDayNames, classHours } from '../../lib/dateHelpers'
-import { SportClassInterface } from '../../lib/gymmieInterfaces'
 import { teachersArray } from '../../lib/generalHelpers'
 import { FormProps } from '../FormElements/useForm'
 

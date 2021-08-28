@@ -5,7 +5,7 @@ import {
   FormStyle,
 } from '../FormElements/formElementsStyle'
 import { CREATE_SPORTCLASS_MUTATION } from '../../lib/APIs/SportClassMutations'
-import { ALL_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
+import { WEEKLY_CLASSES_QUERY } from '../../lib/APIs/SportClassQueries'
 import { FormButton } from '../styles/ButtonStyle'
 import useForm, { initValue } from '../FormElements/useForm'
 import CreateUpdateFormFieldset from './CreateUpdateFormFieldset'
@@ -19,7 +19,7 @@ export default function CreateClass() {
     SportClassInterface
   >(CREATE_SPORTCLASS_MUTATION, {
     variables: inputs,
-    refetchQueries: [{ query: ALL_CLASSES_QUERY }],
+    refetchQueries: [{ query: WEEKLY_CLASSES_QUERY }],
   })
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
