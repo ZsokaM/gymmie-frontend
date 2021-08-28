@@ -30,11 +30,11 @@ function createClient({ headers, initialState }: any) {
         fetchOptions: {
           credentials: 'include',
         },
-        headers: {
-          ...headers,
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Credentials': 'true',
-        },
+        // headers: {
+        //   ...headers,
+        //   'Access-Control-Allow-Origin': '*',
+        //   'Access-Control-Allow-Credentials': 'true',
+        // },
       }),
     ]),
     cache: new InMemoryCache({
