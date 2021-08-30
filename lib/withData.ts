@@ -46,8 +46,7 @@ function createClient({ headers, initialState }: any) {
           },
         },
       },
-    }),
-    // .restore(initialState || {}),
+    }).restore(initialState || {}),
   })
 }
 
