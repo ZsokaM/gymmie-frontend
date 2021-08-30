@@ -27,11 +27,13 @@ function createClient({ headers, initialState }: any) {
       }),
       createUploadLink({
         uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
-        credentials: 'include',
-        // fetchOptions: {
-        //   credentials: 'include',
-        // },
-        headers,
+
+        fetchOptions: {
+          credentials: 'include',
+        },
+        headers: {
+          ...headers,
+        },
         // headers: {
         //   ...headers,
         //   'Access-Control-Allow-Origin': '*',
