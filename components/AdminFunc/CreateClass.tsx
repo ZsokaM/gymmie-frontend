@@ -26,7 +26,7 @@ export default function CreateClass() {
     e.preventDefault()
     try {
       await createSportClass()
-      clearForm()
+      //clearForm()
       resetForm()
     } catch (err) {
       console.error(err)
