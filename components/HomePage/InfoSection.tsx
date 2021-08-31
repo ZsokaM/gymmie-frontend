@@ -11,7 +11,7 @@ export default function InfoSection({ imgStart }: InfoSectionProps) {
         <InfoWrapper>
           <InfoRow imgStart={imgStart}>
             <Column>
-              <TextWrapper>
+              <div>
                 <TopLine>Full Body Workouts</TopLine>
                 <Heading>A CATCHY TITLE</Heading>
                 <SubText>
@@ -31,7 +31,7 @@ export default function InfoSection({ imgStart }: InfoSectionProps) {
                   consectetur adipiscing elit. Quisque tempus tempor tortor eget
                   posuere. Mauris hendrerit purus a metus sollicitudin congue.
                 </SubText>
-              </TextWrapper>
+              </div>
             </Column>
             <Column>
               <ImgWrap>
@@ -50,9 +50,9 @@ export default function InfoSection({ imgStart }: InfoSectionProps) {
 }
 
 const InfoContainer = styled.section`
-  padding: 2rem;
   color: ${({ theme }) => theme.text.primary};
   background-color: ${({ theme }) => theme.bg.secondary};
+  padding: 3rem 0;
 
   ${({ theme }) => theme.mediaQueries.small} {
     padding: 1rem;
@@ -63,9 +63,11 @@ const InfoWrapper = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding: 0 1rem;
+  padding: 1rem 11rem;
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    padding: 1rem 1rem;
+  }
 `
 const InfoRow = styled.section<InfoSectionProps>`
   ${centeredItems};
@@ -79,17 +81,17 @@ const InfoRow = styled.section<InfoSectionProps>`
 `
 
 const Column = styled.article`
-  margin-bottom: 15px;
-  padding: 0 15px;
+  padding: 1rem;
+  margin: 1 rem;
   width: 50%;
   ${centeredItems};
   justify-content: space-around;
+
+  ${({ theme }) => theme.mediaQueries.small} {
+    width: 100%;
+  }
 `
 
-const TextWrapper = styled.div`
-  padding-top: 0%;
-  padding-bottom: 60px;
-`
 const TopLine = styled.p`
   font-size: 2rem;
   line-height: 2rem;
@@ -110,8 +112,8 @@ const Heading = styled.h2`
 const SubText = styled.p`
   color: ${({ theme }) => theme.text.primary};
   margin-bottom: 3rem;
-  font-size: 2rem;
-  line-height: 2rem;
+  font-size: 1.75rem;
+  line-height: 3rem;
   text-align: justify;
 `
 const ImgWrap = styled.div`
@@ -123,5 +125,4 @@ const ImgWrap = styled.div`
 const Img = styled.img`
   width: 100%;
   margin: 0 0 0.75rem 0;
-  padding-right: 0;
 `

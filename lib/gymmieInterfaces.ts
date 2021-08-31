@@ -26,14 +26,14 @@ export interface AuthInterface {
 }
 
 export interface ModalProps {
-  modalIsOpen?: boolean
-  setModalIsOpen?: () => void
-  modalText?: string
-  setModalText?: React.Dispatch<React.SetStateAction<string>>
-  toggleModal?: () => void
-  showModal?: () => void
-  closeModal?: () => void
-  catchError?: () => {}
+  modalIsOpen: boolean
+  setModalIsOpen: () => void
+  modalText: string
+  setModalText: React.Dispatch<React.SetStateAction<string>>
+  toggleModal: () => void
+  showModal: () => void
+  closeModal: () => void
+  catchError: () => {}
 }
 
 export enum Direction {

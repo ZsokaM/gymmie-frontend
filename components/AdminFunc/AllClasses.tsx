@@ -25,10 +25,6 @@ export default function AllClasses({}) {
   const [currentWeekOfTheYear, setCurrentWeekOfTheYear] = useState(getWeek())
   const [weekToDisplay, setWeekToDisplay] = useState(currentWeekOfTheYear)
 
-  useEffect(() => {
-    setCurrentWeekOfTheYear(getWeek())
-  }, [])
-
   const { data, error, loading } = useQuery<AllClassesInterface>(
     WEEKLY_CLASSES_QUERY,
     { variables: { week: weekToDisplay, year: currentYear } },
@@ -47,8 +43,9 @@ export default function AllClasses({}) {
       <ChangeWeek
         handleClickPrev={() => changeWeek(Direction.PREVIOUS)}
         handleClickNext={() => changeWeek(Direction.NEXT)}
-        text={<p>Class List</p>}
-      />
+      >
+        <h2>Class List</h2>
+      </ChangeWeek>
       <DisplayError error={error} />
       <TableContainer>
         <TableHeader>

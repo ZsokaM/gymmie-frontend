@@ -132,15 +132,15 @@ const lightTheme: DefaultTheme = {
 
 const darkTheme: DefaultTheme = {
   bg: {
-    primary: '#035397',
-    secondary: '#001E6C',
-    tertiary: '#5089C6',
-    quarternary: '#548CA8',
+    primary: '#001E6C',
+    secondary: '#240090',
+    tertiary: '#3500d3',
+    quarternary: '#3500d3',
   },
   text: {
     primary: '#ffffff',
-    secondary: '#3500d3',
-    tertiary: '#7ed0e1',
+    secondary: '#7ed0e1',
+    tertiary: '#aaabb8',
     quarternary: '#ededed;',
   },
   mediaQueries: { ...mediaQueries },

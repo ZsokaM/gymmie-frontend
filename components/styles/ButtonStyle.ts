@@ -3,10 +3,10 @@ import { centeredItems, borderRadius } from './HelperStyles'
 
 export const Button = styled.button`
   ${borderRadius};
-  background-color: #ff777a;
+  background-color: ${({ theme }) => theme.bg.quarternary};
   white-space: nowrap;
   padding: 14px 48px;
-  color: ${({ theme }) => theme.text.tertiary};
+  color: ${({ theme }) => theme.text.primary};
   border: none;
   cursor: pointer;
   ${centeredItems};
@@ -15,7 +15,7 @@ export const Button = styled.button`
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
 
   &:hover {
-    background-color: ${({ theme }) => theme.bg.quarternary};
+    background-color: ${({ theme }) => theme.bg.secondary};
   }
 `
 

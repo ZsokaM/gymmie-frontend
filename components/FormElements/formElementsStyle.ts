@@ -7,13 +7,13 @@ export const FormStyle = styled.form`
   width: 100%;
 `
 export const FormHeader = styled.h2`
-  font-size: 2rem;
+  font-size: 2.75rem;
   color: ${({ theme }) => theme.text.primary};
 `
 
 export const FieldSetStyle = styled.fieldset`
   margin: 0 auto;
-  padding: 1rem;
+  padding: 3rem;
   width: 100%;
   box-shadow: 6px 6px 1px 1px ${({ theme }) => theme.bg.tertiary};
   border: none;
@@ -39,6 +39,10 @@ export const LabelStyle = styled.label`
       margin-left: 2px;
     }
   }
+
+  &:last-of-type {
+    margin-bottom: 2rem;
+  }
 `
 export const InputStyle = styled.input`
   border: none;
@@ -46,14 +50,14 @@ export const InputStyle = styled.input`
   border-bottom: 1px solid var(--mediumGrey);
   color: ${({ theme }) => theme.text.primary};
   padding: 1rem;
-  width: 70%;
+  width: 80%;
   height: 50px;
   font-size: 1.5rem;
 `
 
 export const FormSelect = styled.select`
   background-color: transparent;
-  width: 70%;
+  width: 80%;
   padding: 1rem;
   font-size: 1.5rem;
   border: none;

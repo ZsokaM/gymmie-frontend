@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { centeredItems } from '../styles/HelperStyles'
+import { borderRadius, centeredItems } from '../styles/HelperStyles'
 
 export const FlexTable = css`
   display: flex;
@@ -52,6 +52,11 @@ export const TableContainer = styled.table`
   margin: 0 auto;
   height: 100%;
   width: 95%;
+
+  ${({ theme }) => theme.mediaQueries.medium} {
+    display: block;
+    overflow-x: auto;
+  }
 `
 
 export const TableHeader = styled.thead`
@@ -67,9 +72,15 @@ export const TableRow = styled.tr`
 export const TableField = styled.td`
   height: 50px;
   width: 200px;
-  background-color: ${({ theme }) => theme.bg.quarternary};
+  border-bottom: 1px solid ${({ theme }) => theme.bg.quarternary};
   vertical-align: center;
   text-transform: capitalize;
+  color: ${({ theme }) => theme.text.secondary};
+
+  &:last-of-type {
+    display: flex;
+    justify-content: center;
+  }
 `
 
 export const ButtonWrapper = styled.section`

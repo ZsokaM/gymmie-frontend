@@ -18,10 +18,6 @@ export default function Modal({
     transform: modalIsOpen ? `translateY(0%)` : `translateY(-100%)`,
   })
 
-  // const handleClick = () => {
-  //   setClicked(true)
-  // }
-
   return (
     <>
       {modalIsOpen && (

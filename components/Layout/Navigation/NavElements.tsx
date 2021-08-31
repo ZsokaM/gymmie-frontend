@@ -51,7 +51,7 @@ const StyledLink = styled.a`
   padding: 1rem 3rem;
   ${centeredItems}
   position: relative;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   background-color: none;
   border: 0;
@@ -77,4 +77,5 @@ const StyledLink = styled.a`
 export const NavButton = styled(StyledLink)`
   color: ${({ theme }) => theme.text.primary};
   background-color: transparent;
+  padding: 0 1rem;
 `

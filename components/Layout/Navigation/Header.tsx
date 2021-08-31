@@ -33,4 +33,5 @@ const HeaderStyles = styled.header`
   position: sticky;
   top: 0;
   flex: 1;
+  z-index: 10;
 `

@@ -10,8 +10,8 @@ export default function Price() {
         <PriceCard>
           <Image
             src="/gloves.jpg"
-            width={160}
-            height={160}
+            width={256}
+            height={192}
             alt="membership type photo"
           />
           <PriceType>One class</PriceType>
@@ -20,11 +20,11 @@ export default function Price() {
         <PriceCard>
           <Image
             src="/gloves.jpg"
-            width={160}
-            height={160}
+            width={256}
+            height={192}
             alt="membership type photo"
           />
-          <PriceType>10 classes</PriceType>
+          <PriceType>10 class pass</PriceType>
           <PriceDetails>
             Enjoy 10 sweaty classes within 3 months for 110$
           </PriceDetails>
@@ -32,8 +32,8 @@ export default function Price() {
         <PriceCard>
           <Image
             src="/gloves.jpg"
-            width={160}
-            height={160}
+            width={256}
+            height={192}
             alt="membership type photo"
           />
           <PriceType>Monthly Unlimited</PriceType>
@@ -52,13 +52,14 @@ const PriceContainer = styled.section`
   flex-direction: column;
   justify-content: center;
   background-color: ${({ theme }) => theme.bg.primary};
+  padding: 2rem;
 `
 const PriceWrapper = styled.div`
   width: 100%;
   margin: 0 auto;
   ${centeredItems};
-  justify-content: space-between;
-  padding: 0 50px;
+  justify-content: space-around;
+  padding: 0 3.15rem;
 
   ${({ theme }) => theme.mediaQueries.small} {
     flex-wrap: wrap;
@@ -71,8 +72,8 @@ const PriceCard = styled.article`
   ${centeredItems};
   flex-direction: column;
   ${borderRadius};
-  height: 250px;
-  width: 250px;
+  height: 350px;
+  width: 350px;
   padding: 30px;
   margin: 5px;
   box-shadow: 0 1px 3px ${({ theme }) => theme.bg.secondary};
@@ -84,7 +85,7 @@ const PriceCard = styled.article`
   }
 `
 const PriceHeader = styled.h2`
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: ${({ theme }) => theme.text.primary};
   margin-top: 3rem;
   margin-bottom: 3rem;
@@ -95,9 +96,9 @@ const PriceHeader = styled.h2`
 `
 const PriceType = styled.h3`
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin: 1.5rem;
 `
 const PriceDetails = styled.p`
-  font-size: 1rem;
+  font-size: 1.5rem;
   text-align: center;
 `
