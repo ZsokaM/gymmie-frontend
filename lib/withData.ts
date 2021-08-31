@@ -27,18 +27,10 @@ function createClient({ headers, initialState }: any) {
       }),
       createUploadLink({
         uri: process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
-
         fetchOptions: {
           credentials: 'include',
         },
-        headers: {
-          ...headers,
-        },
-        // headers: {
-        //   ...headers,
-        //   'Access-Control-Allow-Origin': '*',
-        //   'Access-Control-Allow-Credentials': 'true',
-        // },
+        headers,
       }),
     ]),
     cache: new InMemoryCache({
