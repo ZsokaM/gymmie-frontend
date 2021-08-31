@@ -10,5 +10,3 @@ node_modules/
 
 config.ts
 next-env.d.ts
-
-_static 
