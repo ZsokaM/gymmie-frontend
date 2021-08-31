@@ -8,20 +8,32 @@ export default function Price() {
       <PriceHeader>Memberships and Prices</PriceHeader>
       <PriceWrapper>
         <PriceCard>
-          <Image
+          {/* <Image
             src="/gloves.jpg"
             width={160}
             height={160}
+            alt="membership type photo"
+          /> */}
+          <img
+            src="/gloves.jpg"
+            width="160px"
+            height="160px"
             alt="membership type photo"
           />
           <PriceType>One class</PriceType>
           <PriceDetails>Book one class and have a taste for 13$</PriceDetails>
         </PriceCard>
         <PriceCard>
-          <Image
+          {/* <Image
             src="/gloves.jpg"
             width={160}
             height={160}
+            alt="membership type photo"
+          /> */}
+          <img
+            src="/gloves.jpg"
+            width="160px"
+            height="160px"
             alt="membership type photo"
           />
           <PriceType>10 classes</PriceType>
@@ -30,12 +42,18 @@ export default function Price() {
           </PriceDetails>
         </PriceCard>
         <PriceCard>
-          <Image
+          <img
+            src="/gloves.jpg"
+            width="160px"
+            height="160px"
+            alt="membership type photo"
+          />
+          {/* <Image
             src="/gloves.jpg"
             width={160}
             height={160}
             alt="membership type photo"
-          />
+          /> */}
           <PriceType>Monthly Unlimited</PriceType>
           <PriceDetails>
             Book as many classes as you want for a month for 60$
