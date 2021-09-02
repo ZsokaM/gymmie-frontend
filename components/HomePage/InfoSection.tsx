@@ -71,7 +71,7 @@ const InfoWrapper = styled.div`
 const InfoRow = styled.section<InfoSectionProps>`
   ${centeredItems};
   flex-direction: ${({ imgStart }) => (imgStart ? 'row' : 'row-reverse')};
-  justify-content: space-between;
+  justify-content: space-evenly;
   color: ${({ theme }) => theme.text.primary};
 
   ${({ theme }) => theme.mediaQueries.small} {
@@ -82,13 +82,9 @@ const InfoRow = styled.section<InfoSectionProps>`
 const Column = styled.article`
   padding: 1rem;
   margin: 1rem;
-  width: 50%;
+  width: 100%;
   ${centeredItems};
   justify-content: space-around;
-
-  ${({ theme }) => theme.mediaQueries.small} {
-    width: 100%;
-  }
 `
 
 const TopLine = styled.p`
