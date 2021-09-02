@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { currentYear } from '../../lib/dateHelpers'
 import { Button } from '../styles/ButtonStyle'
 import { centeredItems } from '../styles/HelperStyles'
 
@@ -32,7 +33,10 @@ export default function Footer({ toggleTheme }: FooterProps) {
             Unsplash
           </a>
         </p>
-        <p>Do not try to contact gymmie, gymmie doesn't exist!</p>
+        <p>
+          Do not try to contact gymmie, gymmie doesn't exist! &copy;{' '}
+          {currentYear}
+        </p>
       </FooterWrapper>
     </FooterContainer>
   )
@@ -41,15 +45,15 @@ export default function Footer({ toggleTheme }: FooterProps) {
 const FooterContainer = styled.footer`
   background-color: ${({ theme }) => theme.bg.secondary};
   margin-top: 3rem;
-  opacity: 0.75;
   height: 10%;
   color: ${({ theme }) => theme.text.primary};
-  padding: 3rem;
+  padding: 5rem;
   ${centeredItems};
   flex-direction: column;
   justify-content: center;
 `
 const FooterWrapper = styled.section`
   ${centeredItems}
-  flex-direction: column
+  justify-content: center;
+  flex-direction: column;
 `

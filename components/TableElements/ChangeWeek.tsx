@@ -8,7 +8,7 @@ interface ChangeWeekProps {
   handleClickNext: React.MouseEventHandler<HTMLButtonElement>
   disabledConditionPrev?: boolean
   disabledConditionNext?: boolean
-  text?: any
+  children?: React.ReactNode
 }
 
 export default function ChangeWeek({
@@ -16,7 +16,7 @@ export default function ChangeWeek({
   handleClickNext,
   disabledConditionPrev,
   disabledConditionNext,
-  text,
+  children,
 }: ChangeWeekProps) {
   return (
     <Header>
@@ -27,7 +27,7 @@ export default function ChangeWeek({
       >
         Previous Week
       </FormButton>
-      <h2>{text}</h2>
+      {children}
       <FormButton
         type="button"
         onClick={handleClickNext}

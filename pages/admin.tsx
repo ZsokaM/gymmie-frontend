@@ -40,12 +40,10 @@ const Wrapper = styled.section`
   }
 `
 const ItemContainer = styled.article`
-  width: 100%;
-  &:not(:last-child) {
-    margin-right: 3rem;
-  }
-
+  margin: 0 auto;
+  width: 70%;
   ${({ theme }) => theme.mediaQueries.medium} {
     margin-top: 2rem;
+    width: 100%;
   }
 `

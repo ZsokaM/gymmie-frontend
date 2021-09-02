@@ -63,12 +63,11 @@ export default function Schedule() {
         handleClickNext={() => changeWeek(Direction.NEXT)}
         disabledConditionPrev={weekToDisplay < currentWeekOfTheYear - 1}
         disabledConditionNext={weekToDisplay > currentWeekOfTheYear + 1}
-        text={
-          <p>
-            Week {weekToDisplay} in {currentYear}
-          </p>
-        }
-      />
+      >
+        <h2>
+          Week {weekToDisplay} in {currentYear}
+        </h2>
+      </ChangeWeek>
       <TableContainer>
         <TableHeader>
           <TableRow>
