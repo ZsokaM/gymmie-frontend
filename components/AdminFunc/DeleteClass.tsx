@@ -22,7 +22,6 @@ function bookingUpdate(cache: any, payload: any) {
 }
 
 export default function DeleteClass({ id }: DeleteClassProps) {
-  const modal: ModalProps = useModal()
   const [arrayOfBookings, setArrayOfBookings] = useState([])
 
   const { data, loading, error } = useQuery(SINGLE_SPORTCLASS_QUERY, {
@@ -39,19 +38,7 @@ export default function DeleteClass({ id }: DeleteClassProps) {
     update,
   })
 
-  //const combinedDelete = () => {
-  // console.log('hello why caant you waaaaait')
-  // arrayOfBookings.forEach((booking) => {
-  //   deleteBooking({ variables: { id: booking.id } })
-  // })
-
-  // deleteSportClass().catch((err) => alert(err.message))
-  // }
-
   function handleDeleteModal() {
-    // modal.setModalText('Are you sure you want to delete this item?')
-    // modal.showModal()
-
     if (confirm('Are you sure you want to delete this item?')) {
       arrayOfBookings.forEach((bk: any) => {
         deleteBooking({ variables: { id: bk.id } })

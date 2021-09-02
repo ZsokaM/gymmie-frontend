@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState } from 'react'
-import { FaNapster } from 'react-icons/fa'
 import Modal from './Modal'
 
 const ModalStateContext = createContext({})

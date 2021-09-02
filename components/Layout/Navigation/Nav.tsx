@@ -22,6 +22,7 @@ const NavMenu = styled.nav`
   display: flex;
   justify-self: end;
   font-size: 2rem;
+  z-index: 5;
 
   ${({ theme }) => theme.mediaQueries.large} {
     width: 100%;

@@ -23,7 +23,7 @@ export default function SportClassCard({ classData }: SportClassCardProp) {
       ],
     },
   )
-  //@TODO: replace with nice modals
+
   const handleClick = () => {
     if (!user) return null
     if (classData.freeSpots === 0) return alert('This class is full')

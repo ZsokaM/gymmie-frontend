@@ -24,17 +24,17 @@ const UserCard = styled.article`
   flex-direction: column;
   width: 70%;
   height: 100%;
-  margin: 1rem auto;
+  margin: 3rem auto;
   background-color: ${({ theme }) => theme.bg.secondary};
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
-  padding: 2rem;
+  padding: 3rem;
 `
 
 const Circle = styled.div`
   border-radius: 50%;
   margin: 1rem;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   box-shadow: 3px 3px 2px 1px rgba(0, 0, 255, 0.2);
   background-color: ${({ theme }) => theme.bg.primary};
   ${centeredItems};
@@ -42,7 +42,7 @@ const Circle = styled.div`
 `
 const UserName = styled.h2`
   color: ${({ theme }) => theme.text.primary};
-  font-size: 2rem;
+  font-size: 3rem;
 `
 
 const Achievements = styled.article`

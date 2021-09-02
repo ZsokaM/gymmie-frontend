@@ -9,8 +9,7 @@
     "start": "next start -p 7676",
     "test": "NODE_ENV=test jest --watch",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "export": "npm run build && next export -o _static"
+    "lint:fix": "eslint . --fix"
   },
   "author": "",
   "license": "ISC",

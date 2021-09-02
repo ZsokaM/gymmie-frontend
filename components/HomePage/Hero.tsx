@@ -28,7 +28,6 @@ const HeroContainer = styled.div`
   margin: 0;
   height: 600px;
   position: relative;
-  z-index: 1;
 `
 const HeroBackground = styled.div`
   position: absolute;
@@ -46,33 +45,33 @@ const VideoBg = styled.video`
   opacity: 30%;
 `
 const HeroText = styled.div`
-  z-index: 2;
   width: 100%;
   position: absolute;
   padding: 1rem 3rem;
   ${centeredItems}
   flex-direction: column;
+  font-size: 2rem;
 `
 
 const HeroHeader = styled.h1`
   color: ${({ theme }) => theme.text.primary};
-  font-size: 3rem;
+  font-size: 7rem;
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.medium} {
-    font-size: 2.5rem;
+    font-size: 4rem;
   }
 
   ${({ theme }) => theme.mediaQueries.small} {
-    font-size: 2rem;
+    font-size: 3.5rem;
   }
 `
 const HeroSubline = styled.p`
   color: ${({ theme }) => theme.text.primary};
-  font-size: 1.5rem;
+  font-size: 3rem;
   text-align: center;
 
   ${({ theme }) => theme.mediaQueries.small} {
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
 `
