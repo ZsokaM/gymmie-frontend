@@ -51,7 +51,7 @@ const StyledLink = styled.a`
   padding: 1rem 3rem;
   ${centeredItems}
   position: relative;
-  font-size: 1em;
+  font-size: 1.5rem;
   font-weight: bold;
   background-color: none;
   border: 0;

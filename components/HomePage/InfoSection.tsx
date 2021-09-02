@@ -11,7 +11,7 @@ export default function InfoSection({ imgStart }: InfoSectionProps) {
         <InfoWrapper>
           <InfoRow imgStart={imgStart}>
             <Column>
-              <div>
+              <ArticleWrap imgStart={imgStart}>
                 <TopLine>Full Body Workouts</TopLine>
                 <Heading>A CATCHY TITLE</Heading>
                 <SubText>
@@ -31,7 +31,7 @@ export default function InfoSection({ imgStart }: InfoSectionProps) {
                   consectetur adipiscing elit. Quisque tempus tempor tortor eget
                   posuere. Mauris hendrerit purus a metus sollicitudin congue.
                 </SubText>
-              </div>
+              </ArticleWrap>
             </Column>
             <Column>
               <ImgWrap>
@@ -63,10 +63,9 @@ const InfoWrapper = styled.div`
   justify-content: center;
   height: 100%;
   width: 100%;
-  padding: 1rem 11rem;
 
   ${({ theme }) => theme.mediaQueries.small} {
-    padding: 1rem 1rem;
+    padding: 1rem;
   }
 `
 const InfoRow = styled.section<InfoSectionProps>`
@@ -82,7 +81,7 @@ const InfoRow = styled.section<InfoSectionProps>`
 
 const Column = styled.article`
   padding: 1rem;
-  margin: 1 rem;
+  margin: 1rem;
   width: 50%;
   ${centeredItems};
   justify-content: space-around;
@@ -124,5 +123,12 @@ const ImgWrap = styled.div`
 
 const Img = styled.img`
   width: 100%;
-  margin: 0 0 0.75rem 0;
+`
+
+const ArticleWrap = styled.article<InfoSectionProps>`
+  margin: ${({ imgStart }) => (imgStart ? '0 0 0 20%' : '0 20% 0 0')};
+
+  ${({ theme }) => theme.mediaQueries.medium} {
+    margin: 0;
+  }
 `

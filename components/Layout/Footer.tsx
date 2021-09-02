@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { currentYear } from '../../lib/dateHelpers'
 import { Button } from '../styles/ButtonStyle'
 import { centeredItems } from '../styles/HelperStyles'
 
@@ -32,7 +33,10 @@ export default function Footer({ toggleTheme }: FooterProps) {
             Unsplash
           </a>
         </p>
-        <p>Do not try to contact gymmie, gymmie doesn't exist! &copy; 2021</p>
+        <p>
+          Do not try to contact gymmie, gymmie doesn't exist! &copy;{' '}
+          {currentYear}
+        </p>
       </FooterWrapper>
     </FooterContainer>
   )
