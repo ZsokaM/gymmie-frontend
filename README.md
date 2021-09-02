@@ -15,6 +15,7 @@ You can see the full list of dependencies in the json.package but here is a list
 * [**GraphQL**](https://graphql.org/) a query language for APIs and a runtime for fulfilling those queries with your existing data. It's a replacement for/addition to REST API
 * [**Apollo Client**](https://www.apollographql.com/apollo-client) for data management; serves as a gateway between the backend and frontend. Enables communication with the GraphQL server; facilitates queries to fetch data and the use of mutations to create, update, delete and also helps caching GraphQL data. Apollo's React Hooks make this interaction possible.
 * [**TypeScript**](https://www.typescriptlang.org/) a strongly typed programming language that builds on JavaScript giving you better tooling
+* [**Ethereal**](https://ethereal.email/) for dummy emailing
 
 If you are interesting in learning more about __gymmie's backend__, which database I used and what Keystone does etc, visit this repo: https://github.com/ZsokaM/gymmie-backend
 
@@ -38,6 +39,7 @@ In the next version of gymmie:
 * gymmie is more or less responsive already but I'd love to expand on this and work on accessibility as well. 
 * For the user account page, I'd like to give more control to the user (edit profile, delete profile).
 * Integrating Stripe or PayPal for payment.
+* Hooking up email service provider
 
 ## Acknowledgments
 gymmie would like to thank Michael, Sam for their continous support and Wes Bos' Advanced React tutorial for introducing me to GraphQL and Keystone. 
