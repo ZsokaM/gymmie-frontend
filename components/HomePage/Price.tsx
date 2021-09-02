@@ -15,7 +15,9 @@ export default function Price() {
             alt="membership type photo"
           />
           <PriceType>One class</PriceType>
-          <PriceDetails>Book one class and have a taste for 13$</PriceDetails>
+          <PriceDetails>
+            Book one class and have a taste for &euro;13
+          </PriceDetails>
         </PriceCard>
         <PriceCard>
           <Image
@@ -26,7 +28,7 @@ export default function Price() {
           />
           <PriceType>10 class pass</PriceType>
           <PriceDetails>
-            Enjoy 10 sweaty classes within 3 months for 110$
+            Enjoy 10 sweaty classes within 3 months for &euro;110
           </PriceDetails>
         </PriceCard>
         <PriceCard>
@@ -38,7 +40,7 @@ export default function Price() {
           />
           <PriceType>Monthly Unlimited</PriceType>
           <PriceDetails>
-            Book as many classes as you want for a month for 60$
+            Book as many classes as you want for a month for &euro;60
           </PriceDetails>
         </PriceCard>
       </PriceWrapper>
