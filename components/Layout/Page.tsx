@@ -37,7 +37,7 @@ export default function Page({ children }: PageProps) {
 
   return (
     <>
-      <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+      <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
         <GlobalStyles />
         <ModalContextProvider>
           <Sidebar isOpen={isOpen} toggle={toggleSidebar} />

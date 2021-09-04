@@ -12,8 +12,7 @@ export default function Footer({ toggleTheme }: FooterProps) {
       <Button onClick={toggleTheme}>Light/Dark</Button>
       <FooterWrapper>
         <h3>
-          Special thanks to Michael, Sam for their patience and support and to
-          Wes Bos' Advanced React Tutorial
+          Special thanks to Michael, Sam for their patience and support &hearts;
         </h3>
         <p>
           Video by Ron Lach from Pexels. Photos by{' '}
@@ -56,4 +55,5 @@ const FooterWrapper = styled.section`
   ${centeredItems}
   justify-content: center;
   flex-direction: column;
+  text-align: center;
 `
