@@ -9,13 +9,14 @@ import {
 } from '../FormElements/formElementsStyle'
 import { FormButton } from '../styles/ButtonStyle'
 import useForm from '../FormElements/useForm'
+import DisplayError from '../Layout/DisplayError'
 
 export default function RequestReset() {
   const { inputs, handleChange, resetForm, clearForm } = useForm({
     email: '',
   })
 
-  const [requestReset, { data, loading }] = useMutation(
+  const [requestReset, { data, loading, error }] = useMutation(
     REQUEST_RESET_MUTATION,
     {
       variables: inputs,
@@ -36,6 +37,7 @@ export default function RequestReset() {
   return (
     <FormStyle method="POST" onSubmit={handleSubmit}>
       <FormHeader>Request password reset</FormHeader>
+      <DisplayError error={error} />
       <FieldSetStyle disabled={loading}>
         {data?.sendUserPasswordResetLink === null && (
           <p>Success! Check your email for a link!</p>

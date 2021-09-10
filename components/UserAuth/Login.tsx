@@ -23,7 +23,10 @@ export default function Login() {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
 
-  const error = data?.authenticateUserWithPassword.message
+  const error =
+    data?.authenticateUserWithPassword.__typename ===
+      'UserAuthenticationWithPasswordFailure' &&
+    data.authenticateUserWithPassword
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

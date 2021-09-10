@@ -13,7 +13,7 @@ import DisplayError from '../Layout/DisplayError'
 import { SportClassInterface } from '../../lib/gymmieInterfaces'
 
 export default function CreateClass() {
-  const { inputs, handleChange, clearForm, resetForm } = useForm(initValue)
+  const { inputs, handleChange, resetForm } = useForm(initValue)
 
   const [createSportClass, { loading, error }] = useMutation<
     SportClassInterface
