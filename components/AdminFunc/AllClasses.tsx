@@ -9,7 +9,6 @@ import {
   getWeek,
   currentYear,
 } from '../../lib/dateHelpers'
-import DisplayError from '../Layout/DisplayError'
 import { AllClassesInterface, Direction } from '../../lib/gymmieInterfaces'
 import { SmallFormButton } from '../styles/ButtonStyle'
 import {
@@ -31,6 +30,9 @@ export default function AllClasses({}) {
   )
 
   if (loading) return <p>Loading...</p>
+  if (error) {
+    return <p>Error: {error.message}</p>
+  }
 
   const changeWeek = (direction: Direction) => {
     direction === Direction.PREVIOUS
@@ -46,7 +48,6 @@ export default function AllClasses({}) {
       >
         <h2>Class List</h2>
       </ChangeWeek>
-      <DisplayError error={error} />
       <TableContainer>
         <TableHeader>
           <TableRow>

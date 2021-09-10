@@ -19,6 +19,7 @@ Router.events.on('routeChangeError', () => {
 interface MyAppProps extends AppProps {
   apollo: any
 }
+
 function MyApp({ Component, pageProps, apollo }: any) {
   return (
     <ApolloProvider client={apollo}>

@@ -28,9 +28,9 @@ export default function ResetPassword({ token }: ResetPasswordProps) {
     },
   )
 
-  const successfulError = data?.redeemUserPasswordResetToken?.code
-    ? data?.redeemUserPasswordResetToken
-    : undefined
+  const successfulError =
+    data?.redeemUserPasswordResetToken?.code &&
+    data.redeemUserPasswordResetToken
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
