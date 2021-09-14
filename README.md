@@ -3,6 +3,8 @@
 ## Who is gymmie? Why does he exist?
 gymmie was built to provide an appointment/class booking platform for gyms and sport clubs. gymmie was born in the realms of a part-time full-stack webdevelopment bootcamp and is meant to demonstrate what I've learned the past 6 months. gymmie is the prototype of the app I'd like to develop for my brother, so he can upgrade the booking system at his tennis centre.
 
+***Demo:*** https://zsokamontvai.dev (for now)
+
 ## What are you reading now?
 Welcome to gymmie's frontend repo.  
 
@@ -42,7 +44,7 @@ In the next version of gymmie:
 * Hooking up email service provider
 
 ## Acknowledgments
-gymmie would like to thank Michael, Sam for their continous support and Wes Bos' Advanced React tutorial for introducing me to GraphQL and Keystone. 
+gymmie would like to thank Michael, Sam for their continous support. 
 
 ## Contact information
 https://github.com/ZsokaM
